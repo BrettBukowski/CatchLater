@@ -9,6 +9,10 @@ var CatchLater = CatchLater || (function() {
         {
           name: "vimeo",
           domain: "vimeo.com"
+        },
+        {
+          name: "adultswim",
+          domain: "adultswim.com"
         }
       ];    
   $.define('setStyle', function(styles) {
@@ -67,26 +71,82 @@ var CatchLater = CatchLater || (function() {
   }
   
   function highlightVideo() {
-    var styleElement,
-        padding = 10;
     if (videos.length) {
       $(videos).each(function(element) {
-        styleElement = (element.offsetHeight) ? element : element.parentNode;
-        var d = document.createElement("div");
-        $(d).setStyle({
-          position: "absolute",
-          border: "10px dashed blue",
-          width: styleElement.offsetWidth + "px",
-          height: styleElement.offsetHeight + "px",
-          top: styleElement.offsetTop - padding + "px",
-          left: styleElement.offsetLeft - padding + "px",
-          bottom: styleElement.offsetTop + styleElement.offsetHeight + "px",
-          right: styleElement.offsetLeft + styleElement.offsetWidth + "px",
-          zIndex: 9999
-        });
-        document.body.appendChild(d);
+        drawPrompt(element);
       });
     }
+  }
+  
+  function drawPrompt(element) {
+    var styleElement = (element.offsetHeight) ? element : element.parentNode,
+      border, prompt, close, add,
+      padding = 3;
+    border = document.createElement("div");
+    $(border).setStyle({
+      position: "absolute",
+      padding: padding + "px",
+      border: "3px dotted red",
+      width: styleElement.offsetWidth + "px",
+      height: styleElement.offsetHeight + "px",
+      top: styleElement.offsetTop - padding + "px",
+      left: styleElement.offsetLeft - padding + "px",
+      bottom: styleElement.offsetTop + styleElement.offsetHeight + "px",
+      right: styleElement.offsetLeft + styleElement.offsetWidth + "px",
+      zIndex: 9999
+    });
+    prompt = document.createElement("div");
+    $(prompt).setStyle({
+      background: "red",
+      fontFamily: "'Lucida Grande', 'Lucida Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      opacity: "0.9",
+      position: "absolute",
+      height: "50px",
+      width: styleElement.offsetWidth + padding + "px",
+      left: border.style.left,
+      top: parseInt(border.style.top, 10) - 50 + "px",
+      zIndex: 10000
+    });
+    if (parseInt(prompt.style.top, 0) < 0) {
+      prompt.style.top = border.style.bottom;
+    }
+    close = document.createElement("a");
+    $(close).setStyle({
+      color: "#FFF",
+      textDecoration: "none",
+      position: "absolute",
+      top: "4px",
+      right: "4px"
+    });
+    close.innerHTML = "Close";
+    close.href = "#";
+    snack.listener({
+      node: close,
+      event: "click"
+    }, function(e) {
+        snack.preventDefault(e);
+        border.parentNode.removeChild(border);
+        prompt.parentNode.removeChild(prompt);
+    });
+    add = document.createElement("a");
+    $(add).setStyle({
+      color: "#FFF",
+      textDecoration: "none",
+      position: "absolute",
+      top: "35%",
+      left: "8px"
+    });
+    add.innerHTML = "Add to Queue";
+    add.href = "#";
+    snack.listener({
+      node: add,
+      event: "click"
+    }, function(e) {
+        snack.preventDefault(e);
+    });
+    document.body.appendChild(border);
+    document.body.appendChild(prompt);
+    prompt.appendChild(close), prompt.appendChild(add);
   }
   
   return function() {

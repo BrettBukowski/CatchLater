@@ -1,16 +1,22 @@
 class User
   include MongoMapper::Document
   
-  key :firstName, String, :required => true
-  key :lastName, String, :required => true
   key :email, String, :required => true
   key :passwordHash, String
   key :resetPasswordCode, String
   key :resetPasswordCodeExpires, Time
   
   # Validation
-  validates_presence_of :firstName, :lastName, :email
+  validates_presence_of :email
   
+  def self.logIn(email, password)
+    user = User.first(:conditions => {:email => email.downcase})
+    user && user.loggedIn?(password) ? user : nil
+  end
+  
+  def loggedIn?(pass)
+    password == pass
+  end
   
   def password
     if passwordHash.present?
@@ -32,6 +38,8 @@ class User
   
   def resetPassword!
     self.resetPasswordCodeExpires = 1.day.from_now
+    seed = "#{email}#{Time.now.to_s.split(//).sort_by {rand}.join}"
     self.resetPasswordCode = Digest::SHA1.hexdigest(seed)
+    save!
   end
 end

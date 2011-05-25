@@ -1,8 +1,12 @@
 class Video
   include MongoMapper::Document
   
-  key :url,     String
+  key :id, String
+  key :url, String
   key :content, String
+  key :added, Time
+  
+  key :userId, ObjectId
   
   # Relationships
   belongs_to :user
@@ -12,4 +16,7 @@ class Video
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
   validates_format_of :url, :with => URL_REGEX
   
+  def self.find_by_id(id)
+    first(:conditions => {:id => id})
+  end
 end

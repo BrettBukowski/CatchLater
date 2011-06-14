@@ -1,6 +1,9 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.7'
+gem 'mongo'
+gem 'bson_ext'
+gem 'SystemTimer'
 gem 'mongo_mapper'
 
 # Bundle edge Rails instead:

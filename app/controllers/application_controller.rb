@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
+  include Authentication
   protect_from_forgery
+  before_filter :storeLocation
+  filter_parameter_logging :password
   
   protected
   

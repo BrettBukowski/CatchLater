@@ -12,7 +12,7 @@ class SessionController < ApplicationController
     signOut!
     if @user = User.logIn(params[:email], params[:password])
       session[:userId] = @user.id
-      redirect_back_or_default root_url
+      redirectBackOrDefault root_url
     else
       redirect_to :action => :new
     end

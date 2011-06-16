@@ -1,4 +1,4 @@
-class VideoController < ApplicationController
+class VideosController < ApplicationController
   before_filter :loginRequired
   
   def new
@@ -8,7 +8,7 @@ class VideoController < ApplicationController
   def add
     @video = Video.new
     @video.user = currentUser
-    if @story.save
+    @video.save
   end
   
   def remove
@@ -17,7 +17,7 @@ class VideoController < ApplicationController
   end
   
   def index
-    
+    @page = (params[:page] || 1).to_i
+    @videos = Video.paginate(:page => @page, :per_page => 20)
   end
-  
 end

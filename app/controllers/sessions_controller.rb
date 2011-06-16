@@ -1,10 +1,10 @@
-class SessionController < ApplicationController
+class SessionsController < ApplicationController
   layout 'session'
   
   def new
     signOut!
     @user = User.new
-    render 'new'
+    render :action => 'new'
   end
   
   def create
@@ -12,7 +12,8 @@ class SessionController < ApplicationController
     signOut!
     if @user = User.logIn(params[:email], params[:password])
       session[:userId] = @user.id
-      redirectBackOrDefault root_url
+      redirect_to videos_url
+      # redirectBackOrDefault root_url
     else
       redirect_to :action => :new
     end

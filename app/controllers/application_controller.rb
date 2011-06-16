@@ -1,7 +1,6 @@
-require 'lib/authentication.rb'
-
 class ApplicationController < ActionController::Base
   include Authentication
+  helper :all
   protect_from_forgery
   before_filter :storeLocation
   

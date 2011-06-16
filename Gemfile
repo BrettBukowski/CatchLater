@@ -5,6 +5,7 @@ gem 'mongo'
 gem 'bson_ext'
 gem 'SystemTimer'
 gem 'mongo_mapper'
+gem 'bcrypt-ruby'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

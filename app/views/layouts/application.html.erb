@@ -6,6 +6,10 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+	<% if currentUser %>
+	Hello, <%= currentUser.email %>.
+	<%= link_to "Sign out", signout_url %>
+	<% end %>
 	<div id="main">
 		<%= yield %>
 	</div>

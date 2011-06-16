@@ -1,5 +1,9 @@
+require 'digest/sha1'
+require 'bcrypt'
+
 class User
   include MongoMapper::Document
+  include BCrypt
   
   key :email, String, :required => true
   key :passwordHash, String
@@ -7,7 +11,10 @@ class User
   key :resetPasswordCodeExpires, Time
   
   # Validation
+  emailRegex = /\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i
   validates_presence_of :email
+  validates_length_of   :email, :within => 6..100
+  validates_format_of   :email, :with => emailRegex
   
   def self.logIn(email, password)
     user = User.first(:conditions => {:email => email.downcase})
@@ -20,7 +27,7 @@ class User
   
   def password
     if passwordHash.present?
-      @password ||= Bcrypt::Password.new(passwordHash)
+      @password ||= Password.new(passwordHash)
     else
       nil
     end
@@ -28,11 +35,11 @@ class User
   
   def password=(newValue='')
     @password = newValue
-    self.passwordHash = Bcrypt::Password.create(newValue)
+    self.passwordHash = Password.create(newValue)
   end
   
   def email=(newEmail)
-    newEmail.downcase! unless newEmail.nil
+    newEmail.downcase!
     write_attribute(:email, newEmail)
   end
   

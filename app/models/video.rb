@@ -3,6 +3,7 @@ class Video
   
   key :id, String
   key :url, String
+  key :title, String
   key :content, String
   key :added, Time
   

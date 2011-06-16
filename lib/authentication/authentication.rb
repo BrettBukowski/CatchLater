@@ -1,10 +1,10 @@
 # included in application controller
 module Authentication
-  protected
-    # Inclusion hook to make #current_user and #signed_in?
+  # protected
+    # Inclusion hook to make #currentUser and #loggedIn?
     # available as ActionView helper methods.
     def self.included(base)
-      base.send :helper_method, :current_user, :signed_in?, :authorized? if base.respond_to? :helper_method
+      base.send :helper_method, :currentUser, :loggedIn? if base.respond_to? :helper_method
     end
     
     # Returns true or false if the user is logged in.
@@ -74,7 +74,7 @@ module Authentication
     #
     # We can return to this location by calling #redirectBackOrDefault.
     def storeLocation
-      session[:returnTo] = request.request_uri
+      session[:returnTo] = request.fullpath
     end
  
     # Redirect to the URI stored by the most recent storeLocation call or
@@ -87,16 +87,16 @@ module Authentication
     end
     
     # Called from #currentUser. First attempt to sign_in by the user id stored in the session.
-    def sign_in_from_session
+    def logInFromSession
       if session[:userId]
         self.currentUser = User.find_by_id(session[:userId])
       end
     end
  
     # Called from #currentUser. Now, attempt to sign_in by basic authentication information.
-    def sign_in_from_basic_auth
+    def logInFromBasicAuth
       authenticate_with_http_basic do |email, password|
-        self.current_user = User.authenticate(email, password)
+        self.currentUser = User.authenticate(email, password)
       end
     end
     

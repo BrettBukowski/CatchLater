@@ -1,0 +1,14 @@
+<h1>Your queue</h1>
+<% @videos.each do |video| %>
+	<div class="video">
+		<span class="title">
+			<%= video.title %>
+		</span>
+		<span class="content">
+			<%= video.content %>
+		</span>
+		<span class="aux">
+			<%= link_to "Delete", destroy_video_path %>
+		</span>
+	</div>
+<% end %>

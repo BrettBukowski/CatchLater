@@ -1,3 +1,25 @@
-#main {
-  padding: 10px;
-}
+html {
+  background: url(/images/bg.png); }
+
+body {
+  font-family: 'News Cycle';
+  font-size: 14px;
+  text-align: center; }
+
+h1 {
+  font-family: 'Raleway';
+  font-size: 200px; }
+
+.teaser {
+  font-size: 28px; }
+
+.signup {
+  background-color: #5ADCD3;
+  border-radius: 8px;
+  color: #FFF;
+  display: inline-block;
+  font-size: 30px;
+  margin-top: 20px;
+  padding: 20px 34px 24px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #000; }

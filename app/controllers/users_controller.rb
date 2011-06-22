@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  layout 'session'
   
   def new
     @user = User.new
@@ -12,7 +11,7 @@ class UsersController < ApplicationController
       self.currentUser = @user
       redirect_to root_path
     else
-      render '/session/new', :layout => 'session'
+      render '/session/new'
     end
   end
 end

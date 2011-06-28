@@ -1,26 +1,105 @@
+@mixin nopad {
+  padding:0;
+}
+@mixin nomargin {
+  margin:0;
+}
+@mixin boxshadow {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+@mixin homepad {
+  padding:10px 16% 50px;
+}
+
 html {
-  background:url(/images/bg.png);
+  background-color:#FFF;
 }
 body {
   font-family:'News Cycle';
-  font-size:14px;
-  text-align:center;
+  font-size:16px;
+  -webkit-font-smoothing: antialiased;
+  @include nomargin;
+  text-shadow:0 1px 0 #FFF;
 }
 h1 {
-  font-family:'Raleway';
-  font-size:200px;
+  color:#a6734b;
+  font-family:'Molengo';
+  font-size:148px;
+  letter-spacing:.5px;
+  text-shadow:0 4px 0 #FFF;
+  @include nomargin;
+  width:80%;
+}
+h2 {
+  color:#469B98;
+  font-size:32px;
+  font-weight:normal;
+  em {
+    color:#47639d;
+    font-style:normal;
+  }
+}
+#top {
+  background:url(/images/bg.png);
+  position:relative;
+  @include boxshadow;
+  @include homepad;
+}
+#bottom {
+  @include homepad;
+  min-height:400px;
+  section {
+    float:left;
+    padding:0 14px;
+    text-align:center;
+    width:30%;
+    img {
+      border:3px solid #FFF;
+      border-radius:10px;
+      display:block;
+    }
+  }
 }
 .teaser {
   font-size:28px;
 }
 .signup {
-  background-color:#5ADCD3;
+  background: #5adcd3; /* Old browsers */
+  background: -moz-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5adcd3), color-stop(50%,#55dbd0), color-stop(51%,#5adcd3), color-stop(100%,#dbdbdb)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* Chrome10+,Safari5.1+ */
+  background: -ms-linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* IE10+ */
+  background: linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* W3C */
   border-radius:8px;
+  border:1px solid #FFF;
+  @include boxshadow;
   color:#FFF;
   display:inline-block;
   font-size:30px;
   margin-top:20px;
-  padding:20px 34px 24px;
+  padding:20px 34px 26px;
   text-decoration:none;
   text-shadow:0 1px 0 #000;
+  -webkit-transition:background, box-shadow, text-shadow .6s, .6s, .6s;
+  &:hover {
+    background: #90dbd5; /* Old browsers */
+    background: -moz-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#90dbd5), color-stop(50%,#55dbd0), color-stop(51%,#5adcd3), color-stop(100%,#dbdbdb)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #90dbd5 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* Chrome10+,Safari5.1+ */
+    background: -ms-linear-gradient(top, #90dbd5 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* IE10+ */
+    background: linear-gradient(top, #90dbd5 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* W3C */
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    text-shadow:0 1px 0 rgba(0, 0, 0, 0.2);
+  }
+}
+.existingSignin {
+  position:absolute;
+  right:0;
+  top:0;
+  @include homepad;
+  a {
+    font-weight:bold;
+    text-decoration:none;
+  }
 }

@@ -3,6 +3,6 @@ Catchlater::Application.routes.draw do
   root :to => "home#index"
   resources :users, :videos
   resource :session
-  match "signin" => "session#new", :as => :signin
-  match "signout" => "session#destroy", :as => :signout
+  match "signin" => "sessions#new", :as => :signin
+  match "signout" => "sessions#destroy", :as => :signout
 end

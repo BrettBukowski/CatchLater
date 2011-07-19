@@ -3,23 +3,22 @@ html {
 
 body {
   font-family: 'News Cycle';
-  font-size: 16px;
+  font-size: 20px;
   -webkit-font-smoothing: antialiased;
-  margin: 0;
-  text-shadow: 0 1px 0 #FFF; }
+  margin: 0; }
 
 h1 {
   color: #a6734b;
   font-family: 'Molengo';
   font-size: 148px;
   letter-spacing: .5px;
-  text-shadow: 0 4px 0 #FFF;
+  text-shadow: 0 2px 0 #FFF;
   margin: 0;
   width: 80%; }
 
 h2 {
   color: #469B98;
-  font-size: 32px;
+  font-size: 34px;
   font-weight: normal; }
   h2 em {
     color: #47639d;
@@ -28,8 +27,10 @@ h2 {
 #top {
   background: url(/images/bg.png);
   position: relative;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 0 #FFF;
+  -webkit-box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
   padding: 10px 16% 50px; }
 
 #bottom {
@@ -37,13 +38,17 @@ h2 {
   min-height: 400px; }
   #bottom section {
     float: left;
-    padding: 0 14px;
+    padding: 0 20px;
     text-align: center;
-    width: 30%; }
+    width: 29%; }
     #bottom section img {
-      border: 3px solid #FFF;
+      border: 6px solid #FFF;
+      -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
       border-radius: 10px;
-      display: block; }
+      display: block;
+      margin: 26px auto 0; }
 
 .teaser {
   font-size: 28px; }
@@ -63,8 +68,9 @@ h2 {
   /* W3C */
   border-radius: 8px;
   border: 1px solid #FFF;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
   color: #FFF;
   display: inline-block;
   font-size: 30px;

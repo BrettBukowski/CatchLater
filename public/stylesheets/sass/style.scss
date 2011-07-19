@@ -5,11 +5,20 @@
   margin:0;
 }
 @mixin boxshadow {
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+@mixin boxshadowDeep {
+  -webkit-box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
 }
 @mixin homepad {
   padding:10px 16% 50px;
+}
+@mixin textShadow {
+  text-shadow:0 2px 0 #FFF;
 }
 
 html {
@@ -17,23 +26,22 @@ html {
 }
 body {
   font-family:'News Cycle';
-  font-size:16px;
+  font-size:20px;
   -webkit-font-smoothing: antialiased;
   @include nomargin;
-  text-shadow:0 1px 0 #FFF;
 }
 h1 {
   color:#a6734b;
   font-family:'Molengo';
   font-size:148px;
   letter-spacing:.5px;
-  text-shadow:0 4px 0 #FFF;
+  @include textShadow;
   @include nomargin;
   width:80%;
 }
 h2 {
   color:#469B98;
-  font-size:32px;
+  font-size:34px;
   font-weight:normal;
   em {
     color:#47639d;
@@ -43,7 +51,8 @@ h2 {
 #top {
   background:url(/images/bg.png);
   position:relative;
-  @include boxshadow;
+  @include textShadow;
+  @include boxshadowDeep;
   @include homepad;
 }
 #bottom {
@@ -51,13 +60,15 @@ h2 {
   min-height:400px;
   section {
     float:left;
-    padding:0 14px;
+    padding:0 20px;
     text-align:center;
-    width:30%;
+    width:29%;
     img {
-      border:3px solid #FFF;
+      border:6px solid #FFF;
+      @include boxshadow;
       border-radius:10px;
       display:block;
+      margin:26px auto 0;
     }
   }
 }

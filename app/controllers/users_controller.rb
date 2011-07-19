@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
-    render '/session/new'
+    render '/sessions/new'
   end
   
   def create
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       self.currentUser = @user
       redirect_to root_path
     else
-      render '/session/new'
+      render '/sessions/new'
     end
   end
 end

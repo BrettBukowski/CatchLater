@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       redirect_to videos_url
       # redirectBackOrDefault root_url
     else
-      redirect_to :action => :new
+      redirect_to :action => 'new'
     end
   end
   

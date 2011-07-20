@@ -1,30 +1,9 @@
-@mixin nopad {
-  padding:0;
-}
-@mixin nomargin {
-  margin:0;
-}
-@mixin boxshadow {
-  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-}
-@mixin boxshadowDeep {
-  -webkit-box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
-}
-@mixin homepad {
-  padding:10px 16% 50px;
-}
-@mixin textShadow {
-  text-shadow:0 2px 0 #FFF;
-}
+@import "mixins";
 
 html {
-  background-color:#FFF;
+  background: url(/images/grayBg.png);
 }
-body {
+body {  
   font-family:'News Cycle';
   font-size:20px;
   -webkit-font-smoothing: antialiased;
@@ -33,9 +12,8 @@ body {
 h1 {
   color:#a6734b;
   font-family:'Molengo';
-  font-size:148px;
+  font-size:46px;
   letter-spacing:.5px;
-  @include textShadow;
   @include nomargin;
   width:80%;
 }
@@ -48,69 +26,22 @@ h2 {
     font-style:normal;
   }
 }
-#top {
-  background:url(/images/bg.png);
-  position:relative;
-  @include textShadow;
-  @include boxshadowDeep;
-  @include homepad;
-}
-#bottom {
-  @include homepad;
-  min-height:400px;
-  section {
-    float:left;
-    padding:0 20px;
-    text-align:center;
-    width:29%;
-    img {
-      border:6px solid #FFF;
-      @include boxshadow;
-      border-radius:10px;
-      display:block;
-      margin:26px auto 0;
+header {
+  border-bottom:1px solid #FFF;
+  background-color:#006c6d;
+  padding:0 10%;
+  h1 {
+    display:inline;
+    a {
+      color:#a6734b;
+      text-decoration:none;
     }
   }
-}
-.teaser {
-  font-size:28px;
-}
-.signup {
-  background: #5adcd3; /* Old browsers */
-  background: -moz-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5adcd3), color-stop(50%,#55dbd0), color-stop(51%,#5adcd3), color-stop(100%,#dbdbdb)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* Chrome10+,Safari5.1+ */
-  background: -ms-linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* IE10+ */
-  background: linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* W3C */
-  border-radius:8px;
-  border:1px solid #FFF;
-  @include boxshadow;
-  color:#FFF;
-  display:inline-block;
-  font-size:30px;
-  margin-top:20px;
-  padding:20px 34px 26px;
-  text-decoration:none;
-  text-shadow:0 1px 0 #000;
-  -webkit-transition:background, box-shadow, text-shadow .6s, .6s, .6s;
-  &:hover {
-    background: #90dbd5; /* Old browsers */
-    background: -moz-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#90dbd5), color-stop(50%,#55dbd0), color-stop(51%,#5adcd3), color-stop(100%,#dbdbdb)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #90dbd5 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* Chrome10+,Safari5.1+ */
-    background: -ms-linear-gradient(top, #90dbd5 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* IE10+ */
-    background: linear-gradient(top, #90dbd5 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* W3C */
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-    text-shadow:0 1px 0 rgba(0, 0, 0, 0.2);
+  #helloAgain {
+    float:right;
+    padding-top:24px;
+    @include textShadow(1px, rgba(255, 255, 255, .3));
   }
 }
-.existingSignin {
-  position:absolute;
-  right:0;
-  top:0;
-  @include homepad;
-  a {
-    font-weight:bold;
-    text-decoration:none;
-  }
-}
+
+@import "home";

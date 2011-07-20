@@ -7,11 +7,15 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-	<h1>CatchLater</h1>
-	<% if currentUser %>
-	Hello, <%= currentUser.email %>.
-	<%= link_to "Sign out", signout_url %>
-	<% end %>
+	<header>
+		<h1><a href="/">CatchLater</a></h1>
+		<span id="helloAgain">
+			<% if currentUser %>
+			Hello, <%= currentUser.email %>.
+			<%= link_to "Sign out", signout_url %>
+			<% end %>
+		</span>
+	</header>
 	<div id="main">
 		<%= yield %>
 	</div>

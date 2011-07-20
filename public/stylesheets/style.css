@@ -1,5 +1,8 @@
+/**
+* Mixins
+*/
 html {
-  background-color: #FFF; }
+  background: url(/images/grayBg.png); }
 
 body {
   font-family: 'News Cycle';
@@ -10,9 +13,8 @@ body {
 h1 {
   color: #a6734b;
   font-family: 'Molengo';
-  font-size: 148px;
+  font-size: 46px;
   letter-spacing: .5px;
-  text-shadow: 0 2px 0 #FFF;
   margin: 0;
   width: 80%; }
 
@@ -24,14 +26,37 @@ h2 {
     color: #47639d;
     font-style: normal; }
 
+header {
+  border-bottom: 1px solid #FFF;
+  background-color: #006c6d;
+  padding: 0 10%; }
+  header h1 {
+    display: inline; }
+    header h1 a {
+      color: #a6734b;
+      text-decoration: none; }
+  header #helloAgain {
+    float: right;
+    padding-top: 24px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3); }
+
+/**
+* Home Page
+*/
+#home {
+  background: #FFF; }
+  #home h1 {
+    font-size: 148px;
+    text-shadow: 0 2px 0 white; }
+
 #top {
   background: url(/images/bg.png);
   position: relative;
-  text-shadow: 0 2px 0 #FFF;
-  -webkit-box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.3);
-  padding: 10px 16% 50px; }
+  text-shadow: 0 2px 0 white;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
+  padding: 10px 16% 70px; }
 
 #bottom {
   padding: 10px 16% 50px;

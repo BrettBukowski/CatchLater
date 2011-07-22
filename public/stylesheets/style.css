@@ -8,7 +8,8 @@ body {
   font-family: 'News Cycle';
   font-size: 20px;
   -webkit-font-smoothing: antialiased;
-  margin: 0; }
+  margin: 0;
+  text-shadow: 0 1px 0 white; }
 
 h1 {
   color: #a6734b;
@@ -39,6 +40,9 @@ header {
     float: right;
     padding-top: 24px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3); }
+
+#main {
+  padding: 0 10%; }
 
 /**
 * Home Page
@@ -128,3 +132,24 @@ header {
   .existingSignin a {
     font-weight: bold;
     text-decoration: none; }
+
+form input {
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 20px;
+  background: none;
+  left: 0;
+  padding: 8px 10px 6px;
+  position: absolute;
+  width: 200px; }
+form input[type="submit"] {
+  position: static; }
+form label {
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 20px;
+  color: #DDD;
+  padding: 14px 10px 8px; }
+form .inputWrapper {
+  float: left;
+  height: 60px;
+  position: relative;
+  width: 250px; }

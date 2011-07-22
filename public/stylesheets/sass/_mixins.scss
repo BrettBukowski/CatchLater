@@ -7,6 +7,9 @@
 @mixin nomargin {
   margin:0;
 }
+@mixin wrapping {
+  padding:0 10%;
+}
 @mixin boxShadow($down: 3px, $blur: 5px) {
   -webkit-box-shadow: 0 $down $blur rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 $down $blur rgba(0, 0, 0, 0.3);

@@ -1,18 +1,26 @@
 <h2>Sign in</h2>
 <%- form_tag session_path do -%>
-	<%= label_tag 'email', 'Email' %>
-	<%= text_field_tag :email %>
-	<%= label_tag 'password', 'Password' %>
-	<%= password_field_tag :password %>
+	<div class="inputWrapper">
+		<%= label_tag 'email', 'Email' %>
+		<%= text_field_tag :email %>
+	</div>
+	<div class="inputWrapper">
+		<%= label_tag 'password', 'Password' %>
+		<%= password_field_tag :password %>
+	</div>
 	<%= submit_tag 'Sign In', :disable_with => 'Signing you in...' %>
 <%- end -%>
 
 <h2>Sign up</h2>
 <%- form_for @user do |form| -%>
   <%= form.error_messages %>
-	<%= form.label :email %>
-	<%= form.text_field :email %>
-	<%= form.label :password %>
-	<%= form.password_field :password %>
+	<div class="inputWrapper">
+		<%= form.label :email %>
+		<%= form.text_field :email %>
+	</div>
+	<div class="inputWrapper">
+		<%= form.label :password %>
+		<%= form.password_field :password %>
+	</div>
 	<%= submit_tag 'Sign Up', :disable_with => 'Signing you up...' %>
 <%- end -%>

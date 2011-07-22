@@ -8,6 +8,7 @@ body {
   font-size:20px;
   -webkit-font-smoothing: antialiased;
   @include nomargin;
+  @include textShadow(1px);
 }
 h1 {
   color:#a6734b;
@@ -29,7 +30,7 @@ h2 {
 header {
   border-bottom:1px solid #FFF;
   background-color:#006c6d;
-  padding:0 10%;
+  @include wrapping;
   h1 {
     display:inline;
     a {
@@ -43,5 +44,9 @@ header {
     @include textShadow(1px, rgba(255, 255, 255, .3));
   }
 }
+#main {
+  @include wrapping;
+}
 
 @import "home";
+@import "forms";

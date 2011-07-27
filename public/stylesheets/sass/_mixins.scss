@@ -15,9 +15,6 @@
   -moz-box-shadow: 0 $down $blur rgba(0, 0, 0, 0.3);
   box-shadow: 0 $down $blur rgba(0, 0, 0, 0.3);
 }
-@mixin homepad($bottom: 50px) {
-  padding:10px 16% $bottom;
-}
 @mixin textShadow($down: 2px, $color: #FFF) {
   text-shadow:0 $down 0 $color;
 }

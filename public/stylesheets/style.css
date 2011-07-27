@@ -60,16 +60,16 @@ header {
   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
-  padding: 10px 16% 70px; }
+  padding: 10px 12% 70px; }
 
 #bottom {
-  padding: 10px 16% 50px;
+  padding: 10px 12% 50px;
   min-height: 400px; }
   #bottom section {
     float: left;
     padding: 0 20px;
     text-align: center;
-    width: 29%; }
+    width: 370px; }
     #bottom section img {
       border: 6px solid #FFF;
       -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
@@ -128,26 +128,76 @@ header {
   position: absolute;
   right: 0;
   top: 0;
-  padding: 10px 16% 50px; }
+  padding: 10px 12% 50px; }
   .existingSignin a {
     font-weight: bold;
     text-decoration: none; }
 
+@media only screen and (max-width: 1618px) {
+  #bottom section:nth-child(3) {
+    padding-left: 200px; } }
+@media only screen and (max-width: 1080px) {
+  #home h1 {
+    font-size: 100px; }
+
+  #bottom {
+    padding-right: 10px;
+    padding-left: 10px; } }
+@media only screen and (max-width: 838px) {
+  #bottom section:nth-child(3) {
+    padding-left: 20px; } }
+@media only screen and (max-width: 800px) {
+  #home h1 {
+    font-size: 60px;
+    margin-top: 20px;
+    padding: 6px; }
+
+  #bottom section {
+    float: none;
+    width: 90%; } }
+@media only screen and (max-width: 400px),
+       only screen and (min-device-pixel-ratio: 2),
+       only screen and (-webkit-min-device-pixel-ratio: 2) {
+  #home h1 {
+    margin-left: -20px;
+    font-size: 54px; }
+
+  .signup {
+    margin: auto;
+    display: block;
+    text-align: center;
+    font-size: 40px; }
+
+  .existingSignin {
+    top: -5px;
+    padding-right: 5px;
+    font-size: smaller; } }
 form input {
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 20px;
-  background: none;
+  background: rgba(255, 255, 255, 0.6);
   left: 0;
   padding: 8px 10px 6px;
   position: absolute;
-  width: 200px; }
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid #BBB;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  outline: none;
+  -webkit-transition: all .5s linear;
+  -moz-transition: all .5s linear; }
+  form input:focus {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
+    border-color: #AAA; }
 form input[type="submit"] {
   position: static; }
 form label {
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 20px;
-  color: #DDD;
-  padding: 14px 10px 8px; }
+  color: #999;
+  padding: 11px 10px 4px;
+  position: absolute; }
 form .inputWrapper {
   float: left;
   height: 60px;

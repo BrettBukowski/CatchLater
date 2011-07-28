@@ -10,11 +10,32 @@
 @mixin wrapping {
   padding:0 10%;
 }
-@mixin boxShadow($down: 3px, $blur: 5px) {
-  -webkit-box-shadow: 0 $down $blur rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 $down $blur rgba(0, 0, 0, 0.3);
-  box-shadow: 0 $down $blur rgba(0, 0, 0, 0.3);
+@mixin boxShadow($down: 3px, $blur: 5px, $opacity: 0.3) {
+  -webkit-box-shadow: 0 $down $blur rgba(0, 0, 0, $opacity);
+  -moz-box-shadow: 0 $down $blur rgba(0, 0, 0, $opacity);
+  box-shadow: 0 $down $blur rgba(0, 0, 0, $opacity);
 }
 @mixin textShadow($down: 2px, $color: #FFF) {
   text-shadow:0 $down 0 $color;
+}
+@mixin button {
+  color:#FFF;
+  cursor:pointer;
+  background: #5adcd3; /* Old browsers */
+  background: -moz-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5adcd3), color-stop(50%,#55dbd0), color-stop(51%,#5adcd3), color-stop(100%,#dbdbdb)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* Chrome10+,Safari5.1+ */
+  background: -ms-linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* IE10+ */
+  background: linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* W3C */
+  -webkit-transition:all .6s, .6s, .6s;
+  &:hover {
+    background: #90dbd5; /* Old browsers */
+    background: -moz-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#90dbd5), color-stop(50%,#55dbd0), color-stop(51%,#5adcd3), color-stop(100%,#dbdbdb)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #90dbd5 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* Chrome10+,Safari5.1+ */
+    background: -ms-linear-gradient(top, #90dbd5 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* IE10+ */
+    background: linear-gradient(top, #90dbd5 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* W3C */
+    @include boxShadow(1px, 6px, 0.2);
+    @include textShadow(1px, rgba(0, 0, 0, 0.2));
+  }
 }

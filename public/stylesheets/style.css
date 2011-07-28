@@ -83,6 +83,13 @@ header {
   font-size: 28px; }
 
 .signup {
+  border-radius: 8px;
+  border: 1px solid #FFF;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  color: #FFF;
+  cursor: pointer;
   background: #5adcd3;
   /* Old browsers */
   background: -moz-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
@@ -95,19 +102,13 @@ header {
   /* IE10+ */
   background: linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
   /* W3C */
-  border-radius: 8px;
-  border: 1px solid #FFF;
-  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-  color: #FFF;
+  -webkit-transition: all .6s, .6s, .6s;
   display: inline-block;
   font-size: 30px;
   margin-top: 20px;
   padding: 20px 34px 26px;
   text-decoration: none;
-  text-shadow: 0 1px 0 #000;
-  -webkit-transition: background, box-shadow, text-shadow .6s, .6s, .6s; }
+  text-shadow: 0 1px 0 black; }
   .signup:hover {
     background: #90dbd5;
     /* Old browsers */
@@ -121,6 +122,8 @@ header {
     /* IE10+ */
     background: linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
     /* W3C */
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2); }
 
@@ -191,11 +194,43 @@ form input {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
     border-color: #AAA; }
 form input[type="submit"] {
-  position: static; }
+  position: static;
+  color: #FFF;
+  cursor: pointer;
+  background: #5adcd3;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5adcd3), color-stop(50%, #55dbd0), color-stop(51%, #5adcd3), color-stop(100%, #dbdbdb));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -ms-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+  /* IE10+ */
+  background: linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+  /* W3C */
+  -webkit-transition: all .6s, .6s, .6s; }
+  form input[type="submit"]:hover {
+    background: #90dbd5;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #90dbd5), color-stop(50%, #55dbd0), color-stop(51%, #5adcd3), color-stop(100%, #dbdbdb));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -ms-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+    /* IE10+ */
+    background: linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+    /* W3C */
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2); }
 form label {
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 20px;
-  color: #999;
+  color: #666;
   padding: 11px 10px 4px;
   position: absolute; }
 form .inputWrapper {
@@ -203,3 +238,16 @@ form .inputWrapper {
   height: 60px;
   position: relative;
   width: 250px; }
+
+#errorExplanation {
+  background: rgba(255, 255, 194, 0.8);
+  border: 1px solid #FFF;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  max-width: 700px;
+  padding: 8px; }
+  #errorExplanation h2 {
+    margin: 10px 0; }

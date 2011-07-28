@@ -13,8 +13,13 @@ var CatchLater = CatchLater || (function() {
         {
           name: "adultswim",
           domain: "adultswim.com"
+        },
+        {
+          name: "ted",
+          domain: "ted.com"
         }
       ];    
+
   $.define('setStyle', function(styles) {
     return this.each(function(element) {
       for (var i in styles) {
@@ -24,6 +29,12 @@ var CatchLater = CatchLater || (function() {
       }
     });
   });
+  $.define('html', function(html) {
+    return this.each(function(element) {
+      element.innerHTML = html;
+    });
+  });
+
   function parseURL(url) {
     var regex = /^((?:ht|f|nn)tps?)\:\/\/(?:([^\:\@]*)(?:\:([^\@]*))?\@)?([^\/]*)([^\?\#]*)(?:\?([^\#]*))?(?:\#(.*))?$/,
         pieces = [null, 'scheme', 'user', 'pass', 'host', 'path', 'query', 'fragment'],
@@ -99,7 +110,7 @@ var CatchLater = CatchLater || (function() {
     $(prompt).setStyle({
       background: "red",
       fontFamily: "'Lucida Grande', 'Lucida Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-      opacity: "0.9",
+      opacity: "0.96",
       position: "absolute",
       height: "50px",
       width: styleElement.offsetWidth + padding + "px",
@@ -117,8 +128,7 @@ var CatchLater = CatchLater || (function() {
       position: "absolute",
       top: "4px",
       right: "4px"
-    });
-    close.innerHTML = "Close";
+    }).html("Close");
     close.href = "#";
     snack.listener({
       node: close,
@@ -133,10 +143,13 @@ var CatchLater = CatchLater || (function() {
       color: "#FFF",
       textDecoration: "none",
       position: "absolute",
-      top: "35%",
-      left: "8px"
-    });
-    add.innerHTML = "Add to Queue";
+      top: "18%",
+      left: "8px",
+      borderRadius: "2px",
+      padding: "6px 8px",
+      boxShadow: "0 3px 3px rgba(0,0,0,.4)",
+      background: "#5CCCCC"
+    }).html("Add to Queue +");
     add.href = "#";
     snack.listener({
       node: add,
@@ -148,6 +161,8 @@ var CatchLater = CatchLater || (function() {
     document.body.appendChild(prompt);
     prompt.appendChild(close), prompt.appendChild(add);
   }
+  
+  var instance;
   
   return function() {
     if (typeof instance === "undefined") {

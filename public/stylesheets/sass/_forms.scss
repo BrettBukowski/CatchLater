@@ -24,10 +24,11 @@ form {
   }
   input[type="submit"] {
     position:static;
+    @include button;
   }
   label {
     @include font;
-    color:#999;
+    color:#666;
     padding:11px 10px 4px;
     position:absolute;
   }
@@ -36,5 +37,17 @@ form {
     height:60px;
     position:relative;
     width:250px;
+  }
+}
+#errorExplanation {
+  background:rgba(255, 255, 194, .8);
+  border:1px solid #FFF;
+  border-radius:6px;
+  @include boxShadow(1px, 6px, 0.2);
+  margin-bottom:20px;
+  max-width:700px;
+  padding:8px;
+  h2 {
+    margin:10px 0;
   }
 }

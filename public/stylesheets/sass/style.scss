@@ -10,6 +10,9 @@ body {
   @include nomargin;
   @include textShadow(1px);
 }
+a {
+  color:#041B4F;
+}
 h1 {
   color:#a6734b;
   font-family:'Molengo';

@@ -1,4 +1,8 @@
 <h2>Your queue</h2>
+<% if @videos.empty? %>
+	<h3>There's nothing here :|</h3>
+<% end %>
+
 <% @videos.each do |video| %>
 	<div class="video">
 		<span class="title">

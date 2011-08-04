@@ -1,0 +1,23 @@
+<h2>Add a new video</h2>
+<% if @video.errors.any? %>
+  <ul>
+    <% @video.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_tag videos_path do %>
+	<div class="inputWrapper">
+		<%= label_tag 'url', 'URL' %>
+		<%= text_field_tag :url %>
+	</div>
+	<div class="inputWrapper">
+		<%= label_tag 'type', 'Type' %>
+		<%= text_field_tag :type %>
+	</div>
+	<div class="inputWrapper">
+		<%= label_tag 'source', 'Source' %>
+		<%= text_field_tag :source %>
+	</div>
+	<%= submit_tag 'Add', :disable_with => 'Adding...' %>
+<% end %>

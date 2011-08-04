@@ -12,7 +12,6 @@ class SessionsController < ApplicationController
     if @user = User.logIn(params[:email], params[:password])
       session[:userId] = @user.id
       redirect_to videos_url
-      # redirectBackOrDefault root_url
     else
       redirect_to :action => 'new'
     end

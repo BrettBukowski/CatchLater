@@ -5,10 +5,14 @@ class VideosController < ApplicationController
     @video = Video.new
   end
   
-  def add
+  def create
     @video = Video.new
     @video.user = currentUser
-    @video.save
+    if @video.save
+      redirect_to root_path
+    else
+      render :action => :new
+    end
   end
   
   def remove

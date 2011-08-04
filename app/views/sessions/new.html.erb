@@ -1,5 +1,5 @@
 <h2>Sign in</h2>
-<%- form_tag session_path do -%>
+<%= form_tag session_path do %>
 	<div class="inputWrapper">
 		<%= label_tag 'email', 'Email' %>
 		<%= text_field_tag :email %>
@@ -9,10 +9,10 @@
 		<%= password_field_tag :password %>
 	</div>
 	<%= submit_tag 'Sign In', :disable_with => 'Signing you in...' %>
-<%- end -%>
+<% end %>
 
 <h2>Sign up</h2>
-<%- form_for @user do |form| -%>
+<%= form_for @user do |form| %>
   <%= form.error_messages %>
 	<div class="inputWrapper">
 		<%= form.label :email %>
@@ -23,4 +23,4 @@
 		<%= form.password_field :password %>
 	</div>
 	<%= submit_tag 'Sign Up', :disable_with => 'Signing you up...' %>
-<%- end -%>
+<% end %>

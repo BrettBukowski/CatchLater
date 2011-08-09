@@ -1,12 +1,14 @@
+require 'pp'
+
 class Video
   include MongoMapper::Document
   
-  key :url,     String, :required => true
-  key :title,   String
-  key :type,    String
-  key :source,  String
-  
-  key :userId,  ObjectId
+  key :url,         String, :required => true
+  key :webpageUrl,  String, :required => true
+  key :title,       String
+  key :type,        String, :required => true
+  key :source,      String, :required => true
+  key :user_id,     ObjectId
   
   timestamps!
   
@@ -22,8 +24,9 @@ class Video
     'blip',
     'adultswim'
   ]
-  validates_presence_of :url, :type, :source
+  validates_presence_of :url, :webpageUrl, :type, :source
   validates_format_of :url, :with => URL_REGEX
+  validates_format_of :webpageUrl, :with => URL_REGEX
   validates_inclusion_of :source, :in => SUPPORTED_SOURCES, :message => "Sorry, your source %{value} isn't supported"
   
   def self.find_by_id(id)

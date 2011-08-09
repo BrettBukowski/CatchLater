@@ -7,17 +7,23 @@ class VideosController < ApplicationController
   
   def create
     @video = Video.new
+    @video.url = params[:url]
+    @video.type = params[:type]
+    @video.source = params[:source]
+    @video.webpageUrl = params[:webpageUrl]
     @video.user = currentUser
     if @video.save
       redirect_to root_path
     else
+      # puts :params
       render :action => :new
     end
   end
   
-  def remove
+  def destroy
     @video = Video.find_by_id(params[:id])
     @video.destroy
+    redirect_to videos_path
   end
   
   def index

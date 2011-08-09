@@ -3,16 +3,18 @@
 	<h3>There's nothing here :|</h3>
 <% end %>
 
+<section class="queue">
 <% @videos.each do |video| %>
 	<div class="video">
 		<span class="title">
 			<%= video.title %>
 		</span>
-		<span class="content">
-			<%= video.content %>
-		</span>
+		<div class="content">
+			<iframe src="<%= video.url %>" width="560" height="349" frameborder="0" allowfullscreen></iframe>
+		</div>
 		<span class="aux">
-			<%= link_to "Delete", destroy_video_path %>
+			<%= link_to "Delete", video_path(video), :confirm => "Are you sure?", :method => :delete %>
 		</span>
 	</div>
 <% end %>
+</section>

@@ -17,7 +17,7 @@ form {
     -webkit-transition: all .5s linear;
     -moz-transition: all .5s linear;
     &:focus { 
-      background:rgba(255, 255, 255, .9);
+      background:#FFF;
       box-shadow:0 1px 3px rgba(0, 0, 0, .3) inset;
       border-color:#AAA;
     }

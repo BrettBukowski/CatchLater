@@ -44,6 +44,14 @@ header {
     padding-top: 24px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3); }
 
+.queue {
+  text-align: center; }
+  .queue .video {
+    border-bottom: 2px solid #EEE;
+    margin: 40px 0 100px; }
+    .queue .video .aux {
+      padding-bottom: 20px; }
+
 #main {
   padding: 0 10%; }
 
@@ -54,6 +62,7 @@ header {
   background: #FFF; }
   #home h1 {
     font-size: 148px;
+    letter-spacing: -3px;
     text-shadow: 0 2px 0 white; }
 
 #top {
@@ -193,7 +202,7 @@ form input {
   -webkit-transition: all .5s linear;
   -moz-transition: all .5s linear; }
   form input:focus {
-    background: rgba(255, 255, 255, 0.9);
+    background: #FFF;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
     border-color: #AAA; }
 form input[type="submit"] {

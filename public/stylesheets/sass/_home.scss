@@ -9,6 +9,7 @@
   background:#FFF;
   h1 {
     font-size:148px;
+    letter-spacing:-3px;
     @include textShadow;
   }
 }

@@ -47,6 +47,16 @@ header {
     @include textShadow(1px, rgba(255, 255, 255, .3));
   }
 }
+.queue {
+  text-align:center;
+  .video {
+    border-bottom:2px solid #EEE;
+    margin:40px 0 100px;
+    .aux {
+      padding-bottom:20px;
+    }
+  }
+}
 #main {
   @include wrapping;
 }

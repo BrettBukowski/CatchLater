@@ -14,4 +14,16 @@ class ApplicationController < ActionController::Base
       return true
     end
   end
+
+  def renderJSON(json, options={}) format
+    callback = params[:callback]
+    response = begin
+      if callback
+        "#{callback}(#{json});"
+      else
+        json
+      end
+    end
+    render({:content_type => :js, :text => response}.merge(options))
+  end
 end

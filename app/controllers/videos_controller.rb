@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_filter :loginRequired
+  before_filter :loginRequired, :except => :addToQueue
   
   def new
     @video = Video.new
@@ -15,7 +15,6 @@ class VideosController < ApplicationController
     if @video.save
       redirect_to root_path
     else
-      # puts :params
       render :action => :new
     end
   end
@@ -29,5 +28,20 @@ class VideosController < ApplicationController
   def index
     @page = (params[:page] || 1).to_i
     @videos = Video.paginate(:page => @page, :per_page => 20)
+  end
+  
+  def addToQueue
+    if currentUser
+      @video = Video.new
+      @video.url = params[:url]
+      @video.type = params[:type]
+      @video.source = params[:source]
+      @video.webpageUrl = params[:webpageUrl]
+      @video.user = currentUser
+      @video.save
+      renderJSON @video.to_json
+    else
+      header :not_acceptable
+    end
   end
 end

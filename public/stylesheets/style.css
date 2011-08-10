@@ -47,10 +47,13 @@ header {
 .queue {
   text-align: center; }
   .queue .video {
-    border-bottom: 2px solid #EEE;
+    border-bottom: 2px solid #FFF;
     margin: 40px 0 100px; }
     .queue .video .aux {
-      padding-bottom: 20px; }
+      border-bottom: 1px solid #E2E2E2;
+      display: block;
+      padding-bottom: 35px;
+      text-align: right; }
 
 #main {
   padding: 0 10%; }

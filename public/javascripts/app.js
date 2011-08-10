@@ -63,9 +63,7 @@ var CatchLater = CatchLater || (function() {
     var url, tagName, parsedUrl, host;
     $('video, embed, iframe').each(function(item, index, all) {
       tagName = item.tagName.toLowerCase();
-      if (tagName === 'iframe' || tagName === 'embed') {
-        url = item.src;
-      }
+      url = item.src;
       parsedUrl = parseURL(url);
       if (parsedUrl.host) {
         host = parsedUrl.host;
@@ -156,6 +154,18 @@ var CatchLater = CatchLater || (function() {
       event: "click"
     }, function(e) {
         snack.preventDefault(e);
+        snack.JSONP({
+          url: 'http://0.0.0.0:3000/queue/push/',
+          key: 'addVideoResponse',
+          data: {
+            webpageUrl: window.top.location.href,
+            url: element.src,
+            type: element.tagName.toLowerCase(),
+            source: parseURL(element.src).source
+          }
+        }, function(resp) {
+          console.log(resp);
+        })
     });
     document.body.appendChild(border);
     document.body.appendChild(prompt);

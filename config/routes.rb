@@ -5,4 +5,5 @@ Catchlater::Application.routes.draw do
   resource :session
   match "signin" => "sessions#new", :as => :signin
   match "signout" => "sessions#destroy", :as => :signout
+  match "queue/push" => "videos#addToQueue", :via => :get
 end

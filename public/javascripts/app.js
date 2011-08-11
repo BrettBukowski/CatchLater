@@ -161,7 +161,7 @@ var CatchLater = CatchLater || (function() {
             webpageUrl: window.top.location.href,
             url: element.src,
             type: element.tagName.toLowerCase(),
-            source: parseURL(element.src).source
+            source: parseURL(element.src).host
           }
         }, function(resp) {
           console.log(resp);

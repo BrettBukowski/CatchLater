@@ -1,4 +1,4 @@
-<h2>Your queue</h2>
+<h2>Your list</h2>
 <% if @videos.empty? %>
 	<h3>There's nothing here :|</h3>
 <% end %>
@@ -13,7 +13,9 @@
 			<iframe src="<%= video.url %>" width="560" height="349" frameborder="0" allowfullscreen></iframe>
 		</div>
 		<span class="aux">
-			<%= link_to "Delete", video_path(video), :confirm => "Are you sure?", :method => :delete %>
+			<span class="date"><%= video.created_at.strftime("%b %e")%></span>
+			<%= link_to "Source", video.webpageUrl, :class => "source" %>
+			<%= link_to "Delete", video_path(video), :confirm => "Are you sure?", :method => :delete, :class => "delete" %>
 		</span>
 	</div>
 <% end %>

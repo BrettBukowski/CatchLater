@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def renderJSON(json, options={}) format
+  def renderJSON(json, options={})
     callback = params[:callback]
     response = begin
       if callback

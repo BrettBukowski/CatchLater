@@ -6,12 +6,13 @@ class VideosController < ApplicationController
   end
   
   def create
-    @video = Video.new
-    @video.url = params[:url]
-    @video.type = params[:type]
-    @video.source = params[:source]
-    @video.webpageUrl = params[:webpageUrl]
-    @video.user = currentUser
+    @video = Video.new do |v|
+      v.url = params[:url]
+      v.type = params[:type]
+      v.source = params[:source]
+      v.webpageUrl = params[:webpageUrl]
+      v.user = currentUser
+    end
     if @video.save
       redirect_to root_path
     else
@@ -27,21 +28,25 @@ class VideosController < ApplicationController
   
   def index
     @page = (params[:page] || 1).to_i
-    @videos = Video.paginate(:page => @page, :per_page => 20)
+    @videos = Video.paginate(:page => @page, :order => 'created_at DESC')
   end
   
   def addToQueue
     if currentUser
-      @video = Video.new
-      @video.url = params[:url]
-      @video.type = params[:type]
-      @video.source = params[:source]
-      @video.webpageUrl = params[:webpageUrl]
-      @video.user = currentUser
-      @video.save
-      renderJSON @video.to_json
+      @video = Video.new do |v|
+        v.url = params[:url]
+        v.type = params[:type]
+        v.source = params[:source]
+        v.webpageUrl = params[:webpageUrl]
+        v.user = currentUser
+      end
+      if @video.save
+        renderJSON @video.to_json
+      else
+        renderJSON @video.errors
+      end
     else
-      header :not_acceptable
+      renderJSON [:error => "login required"]
     end
   end
 end

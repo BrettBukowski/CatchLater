@@ -44,6 +44,10 @@ header {
   #helloAgain {
     float:right;
     padding-top:24px;
+    a {
+      color:#A2A2A2;
+      padding-left:10px;
+    }
     @include textShadow(1px, rgba(255, 255, 255, .3));
   }
 }
@@ -55,8 +59,15 @@ header {
     .aux {
       border-bottom:1px solid #E2E2E2;
       display:block;
-      padding-bottom:35px;
+      padding:0 386px 35px;
       text-align:right;
+      a {
+        color:#000;
+        padding-left:7px;
+      }
+      .date {
+        float:left;
+      }
     }
   }
 }

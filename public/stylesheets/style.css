@@ -43,6 +43,9 @@ header {
     float: right;
     padding-top: 24px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3); }
+    header #helloAgain a {
+      color: #A2A2A2;
+      padding-left: 10px; }
 
 .queue {
   text-align: center; }
@@ -52,8 +55,13 @@ header {
     .queue .video .aux {
       border-bottom: 1px solid #E2E2E2;
       display: block;
-      padding-bottom: 35px;
+      padding: 0 386px 35px;
       text-align: right; }
+      .queue .video .aux a {
+        color: #000;
+        padding-left: 7px; }
+      .queue .video .aux .date {
+        float: left; }
 
 #main {
   padding: 0 10%; }

@@ -10,7 +10,7 @@
 			<%= video.title %>
 		</span>
 		<div class="content">
-			<iframe src="<%= video.url %>" width="560" height="349" frameborder="0" allowfullscreen></iframe>
+			<%= raw video.embed %>
 		</div>
 		<span class="aux">
 			<span class="date"><%= video.created_at.strftime("%b %e")%></span>

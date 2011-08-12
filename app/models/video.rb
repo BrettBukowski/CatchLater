@@ -32,4 +32,10 @@ class Video
   def self.find_by_id(id)
     first(:conditions => {:id => id})
   end
+  
+  def embed
+    if self.type == "iframe"
+      "<iframe src='#{url}' width='560' height='349' frameborder='0' allowfullscreen></iframe>"
+    end
+  end
 end

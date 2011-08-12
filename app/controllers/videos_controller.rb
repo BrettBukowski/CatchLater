@@ -6,13 +6,8 @@ class VideosController < ApplicationController
   end
   
   def create
-    @video = Video.new do |v|
-      v.url = params[:url]
-      v.type = params[:type]
-      v.source = params[:source]
-      v.webpageUrl = params[:webpageUrl]
-      v.user = currentUser
-    end
+    @video = newVideoFromParams
+    @video.user = currentUser
     if @video.save
       redirect_to root_path
     else
@@ -33,13 +28,8 @@ class VideosController < ApplicationController
   
   def addToQueue
     if currentUser
-      @video = Video.new do |v|
-        v.url = params[:url]
-        v.type = params[:type]
-        v.source = params[:source]
-        v.webpageUrl = params[:webpageUrl]
-        v.user = currentUser
-      end
+      @video = newVideoFromParams
+      @video.user = currentUser
       if @video.save
         renderJSON @video.to_json
       else
@@ -47,6 +37,16 @@ class VideosController < ApplicationController
       end
     else
       renderJSON [:error => "login required"]
+    end
+  end
+  
+  private
+  def newVideoFromParams
+    Video.new do |v|
+      v.url = params[:url]
+      v.type = params[:type]
+      v.source = params[:source]
+      v.webpageUrl = params[:webpageUrl]
     end
   end
 end

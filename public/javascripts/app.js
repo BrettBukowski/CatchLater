@@ -1,24 +1,6 @@
 var CatchLater = CatchLater || (function() {
   var $ = snack.wrap,
-      videos = [],
-      sources = [
-        {
-          name: "youtube",
-          domain: "youtube.com"
-        }, 
-        {
-          name: "vimeo",
-          domain: "vimeo.com"
-        },
-        {
-          name: "adultswim",
-          domain: "adultswim.com"
-        },
-        {
-          name: "ted",
-          domain: "ted.com"
-        }
-      ];    
+      videos = [];    
 
   $.define('setStyle', function(styles) {
     return this.each(function(element) {
@@ -34,6 +16,42 @@ var CatchLater = CatchLater || (function() {
       element.innerHTML = html;
     });
   });
+  
+  var Parser = (function() {
+    var _sources = {
+      iframe: [
+        { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?]+)/ },
+        { name: 'vimeo', regex: /player\.vimeo\.com\/video\/([0-9]+)/ }
+      ],
+      object: [
+      
+      ],
+      embed: [
+        { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?]+)/ },
+        { name: 'vimeo', regex: /vimeo\.com\/[^0-9]+([0-9]+)/ }
+      ]
+    },
+    _check: function(sources, element) {
+      for (var i = 0, src = element.src, match; i < sources.length; i++) {
+        if (match = sources[i].regex.exec(src)) {
+          foundVideo(element, {source: sources[i].name, id: match[match.length - 1]});
+          return true;
+        }
+      }
+      return false;
+    };
+    return {
+      iframe: function(el) {
+        return _check(_sources.iframe, el);
+      },
+      object: function(el) {
+        return _check(_sources.object, el);
+      },
+      embed: function(el) {
+        return _check(_sources.embed, el);
+      }
+    };
+  })();
 
   function parseURL(url) {
     var regex = /^((?:ht|f|nn)tps?)\:\/\/(?:([^\:\@]*)(?:\:([^\@]*))?\@)?([^\/]*)([^\?\#]*)(?:\?([^\#]*))?(?:\#(.*))?$/,
@@ -54,28 +72,16 @@ var CatchLater = CatchLater || (function() {
     return parsed;
   }
   
-  function run() {
-    findVideo();
-    highlightVideo();
+  function foundVideo(video, details) {
+    
   }
   
   function findVideo() {
-    var url, tagName, parsedUrl, host;
-    $('video, embed, iframe').each(function(item, index, all) {
-      tagName = item.tagName.toLowerCase();
-      url = item.src;
-      parsedUrl = parseURL(url);
-      if (parsedUrl.host) {
-        host = parsedUrl.host;
-        $(sources).each(function(source) {
-          if (host.indexOf(source.domain) > -1) {
-            videos.push(item);
-          }
-        });
-      }
+    $('object, embed, iframe').each(function(item, index, all) {
+      Parser[item.tagName.toLowerCase()](item);
     });
     if (!videos.length) {
-      alert("no video");
+      alert("no supported video found :(");
     }
   }
   
@@ -86,6 +92,21 @@ var CatchLater = CatchLater || (function() {
       });
     }
   }
+  
+  function addVideo(url, type, source) {
+      snack.JSONP({
+        url: 'http://0.0.0.0:3000/queue/push/',
+        key: 'addVideoResponse',
+        data: {
+          webpageUrl: window.top.location.href,
+          url: url,
+          type: type,
+          source: source
+        }
+      }, function(resp) {
+        console.log(resp);
+      });
+    }
   
   function drawPrompt(element) {
     var styleElement = (element.offsetHeight) ? element : element.parentNode,
@@ -154,22 +175,16 @@ var CatchLater = CatchLater || (function() {
       event: "click"
     }, function(e) {
         snack.preventDefault(e);
-        snack.JSONP({
-          url: 'http://0.0.0.0:3000/queue/push/',
-          key: 'addVideoResponse',
-          data: {
-            webpageUrl: window.top.location.href,
-            url: element.src,
-            type: element.tagName.toLowerCase(),
-            source: parseURL(element.src).host
-          }
-        }, function(resp) {
-          console.log(resp);
-        })
+        addVideo(element.src, element.tagName.toLowerCase(), parseURL(element.src).host);
     });
     document.body.appendChild(border);
     document.body.appendChild(prompt);
     prompt.appendChild(close), prompt.appendChild(add);
+  }
+  
+  function run() {
+    findVideo();
+    highlightVideo();
   }
   
   var instance;

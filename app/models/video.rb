@@ -1,5 +1,3 @@
-require 'pp'
-
 class Video
   include MongoMapper::Document
   
@@ -23,6 +21,12 @@ class Video
     'ted',
     'blip',
     'adultswim'
+  ]
+  TYPES = [
+    'iframe',
+    'video',
+    'object',
+    'embed'
   ]
   validates_presence_of :url, :webpageUrl, :type, :source
   validates_format_of :url, :with => URL_REGEX

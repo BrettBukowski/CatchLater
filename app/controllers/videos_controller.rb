@@ -46,6 +46,7 @@ class VideosController < ApplicationController
       v.url = params[:url]
       v.type = params[:type]
       v.source = params[:source]
+      v.videoID = params[:videoID]
       v.webpageUrl = params[:webpageUrl]
     end
   end

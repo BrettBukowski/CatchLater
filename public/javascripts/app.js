@@ -21,34 +21,46 @@ var CatchLater = CatchLater || (function() {
     var _sources = {
       iframe: [
         { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?]+)/ },
-        { name: 'vimeo', regex: /player\.vimeo\.com\/video\/([0-9]+)/ }
+        { name: 'vimeo', regex: /player\.vimeo\.com\/video\/([0-9]+)/ },
+        { name: 'blip', regex: /blip\.tv\/play\/([^.]+)\.html/ }
       ],
       object: [
-      
+        { vimeo: /player\.vimeo\.com\/video\/([0-9]+)/ },
+        { ted: /video\.ted\.com/ }
       ],
       embed: [
         { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?]+)/ },
         { name: 'vimeo', regex: /vimeo\.com\/[^0-9]+([0-9]+)/ }
       ]
     },
-    _check: function(sources, element) {
+    _checkSrc = function(sources, element) {
       for (var i = 0, src = element.src, match; i < sources.length; i++) {
         if (match = sources[i].regex.exec(src)) {
-          foundVideo(element, {source: sources[i].name, id: match[match.length - 1]});
-          return true;
+          return foundVideo(element, {source: sources[i].name, id: match[match.length - 1]});
         }
       }
-      return false;
     };
     return {
       iframe: function(el) {
-        return _check(_sources.iframe, el);
+        return _checkSrc(_sources.iframe, el);
       },
       object: function(el) {
-        return _check(_sources.object, el);
+        var data = el.data, match;
+        
+        if (match = _sources.object.ted.regex.exec(data)) {
+          var paramData = $.wrap('#' + el.id + 'param[name="flashvars"]')[0];
+          paramData = decodeURIComponent(paramData.value);
+          if (match = /mp4:([^.]+\.mp4)/) {
+            return found(el, {source: 'ted', id: match[1]});
+          }
+        }
+        
+        if (match = _sources.object.vimeo.regex.exec(data)) {
+          
+        }
       },
       embed: function(el) {
-        return _check(_sources.embed, el);
+        return _checkSrc(_sources.embed, el);
       }
     };
   })();
@@ -73,7 +85,7 @@ var CatchLater = CatchLater || (function() {
   }
   
   function foundVideo(video, details) {
-    
+    videos.push({video: video, details: details});
   }
   
   function findVideo() {
@@ -87,28 +99,29 @@ var CatchLater = CatchLater || (function() {
   
   function highlightVideo() {
     if (videos.length) {
-      $(videos).each(function(element) {
-        drawPrompt(element);
+      $(videos).each(function(item) {
+        drawPrompt(item.element, item.details);
       });
     }
   }
   
-  function addVideo(url, type, source) {
+  function addVideo(url, type, details) {
       snack.JSONP({
         url: 'http://0.0.0.0:3000/queue/push/',
         key: 'addVideoResponse',
         data: {
-          webpageUrl: window.top.location.href,
           url: url,
           type: type,
-          source: source
+          source: details.source,
+          videoID: details.id,
+          webpageUrl: window.top.location.href
         }
       }, function(resp) {
         console.log(resp);
       });
     }
   
-  function drawPrompt(element) {
+  function drawPrompt(element, details) {
     var styleElement = (element.offsetHeight) ? element : element.parentNode,
       border, prompt, close, add,
       padding = 3;
@@ -175,11 +188,11 @@ var CatchLater = CatchLater || (function() {
       event: "click"
     }, function(e) {
         snack.preventDefault(e);
-        addVideo(element.src, element.tagName.toLowerCase(), parseURL(element.src).host);
+        addVideo(element.src, element.tagName.toLowerCase(), details);
     });
     document.body.appendChild(border);
     document.body.appendChild(prompt);
-    prompt.appendChild(close), prompt.appendChild(add);
+    prompt.appendChild(close); prompt.appendChild(add);
   }
   
   function run() {

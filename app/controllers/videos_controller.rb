@@ -42,12 +42,11 @@ class VideosController < ApplicationController
   
   private
   def newVideoFromParams
-    Video.new do |v|
-      v.url = params[:url]
-      v.type = params[:type]
-      v.source = params[:source]
-      v.videoID = params[:videoID]
-      v.webpageUrl = params[:webpageUrl]
-    end
+    video = Video.new
+    video.type = params[:type]
+    video.source = params[:source]
+    video.videoID = params[:videoID]
+    video.webpageUrl = params[:webpageUrl]
+    return video
   end
 end

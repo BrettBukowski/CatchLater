@@ -56,10 +56,17 @@ header {
   .video {
     border-bottom:2px solid #FFF;
     margin:40px 0 100px;
+    iframe {
+      border: 0;
+      height: 349px;
+      width: 560px;
+    }
     .aux {
       border-bottom:1px solid #E2E2E2;
       display:block;
-      padding:0 392px 35px;
+      margin: auto;
+      width: 560px;
+      padding-bottom: 35px;
       text-align:right;
       a {
         color:#000;

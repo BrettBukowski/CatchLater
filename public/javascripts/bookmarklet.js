@@ -9,7 +9,7 @@
         s.src = 'http://0.0.0.0:3000/javascripts/' + scripts[i] + '.js';
         head.appendChild(s);
     }
-    // Rather to readystatechange / onload, do an interval check, since there's multiple scripts
+    // Rather than readystatechange / onload, do an interval check, since there's multiple scripts
     interval = setInterval(function(){
       if (window.snack && window.CatchLater) {
         clearInterval(interval);

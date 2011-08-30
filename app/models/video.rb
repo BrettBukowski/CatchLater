@@ -1,12 +1,12 @@
 class Video
   include MongoMapper::Document
   
-  # key :url,         String, :required => true
   key :videoID,     String, :required => true
   key :webpageUrl,  String, :required => true
   key :type,        String, :required => true
   key :source,      String, :required => true
   key :title,       String
+  key :url,         String
   key :user_id,     ObjectId
   
   timestamps!
@@ -29,8 +29,8 @@ class Video
     'object',
     'embed'
   ]
-  validates_presence_of :webpageUrl, :type, :source, :videoID # :url
-  # validates_format_of :url, :with => URL_REGEX
+  validates_presence_of :webpageUrl, :type, :source, :videoID
+  validates_format_of :url, :with => URL_REGEX, :allow_blank => true
   validates_format_of :webpageUrl, :with => URL_REGEX
   validates_inclusion_of :source, :in => SUPPORTED_SOURCES, :message => "Sorry, your source %{value} isn't supported"
   
@@ -39,10 +39,13 @@ class Video
   end
   
   def embed
-    if self.type == "iframe"
-      "<iframe src='#{url}' width='560' height='349' frameborder='0' allowfullscreen></iframe>"
+    if self.url
+      url = self.url
+    elsif self.source == 'vimeo'
+      url = "http://player.vimeo.com/video/#{videoID}"
     elsif self.source == 'ted'
-      "<iframe src='http://video.ted.com/#{id}' width='520' height='300' frameborder='0' allowfullscreen></iframe>"
+      url = "http://video.ted.com/#{videoID}"
     end
+    return "<iframe src='#{url}' allowfullscreen></iframe>"
   end
 end

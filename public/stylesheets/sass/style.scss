@@ -54,19 +54,19 @@ header {
 .queue {
   text-align:center;
   .video {
-    border-bottom:2px solid #FFF;
-    margin:40px 0 100px;
+    border-bottom:1px solid #E2E2E2;
+    border-top:2px solid #FFF;
+    padding:70px 0;
+    &:first-child { border-top:0; }
     iframe {
       border: 0;
       height: 349px;
       width: 560px;
     }
     .aux {
-      border-bottom:1px solid #E2E2E2;
       display:block;
       margin: auto;
       width: 560px;
-      padding-bottom: 35px;
       text-align:right;
       a {
         color:#000;
@@ -75,6 +75,18 @@ header {
       .date {
         float:left;
       }
+    }
+  }
+  .pagination {
+    padding:20px 0;
+    .disabled {
+      display:none;
+    }
+    .current {
+      font-style:normal;
+    }
+    a {
+      padding:0 5px;
     }
   }
 }

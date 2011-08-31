@@ -7,6 +7,7 @@ gem 'SystemTimer'
 gem 'mongo_mapper'
 gem 'bcrypt-ruby'
 gem 'sass'
+gem 'will_paginate'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

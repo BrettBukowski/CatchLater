@@ -50,24 +50,33 @@ header {
 .queue {
   text-align: center; }
   .queue .video {
-    border-bottom: 2px solid #FFF;
-    margin: 40px 0 100px; }
+    border-bottom: 1px solid #E2E2E2;
+    border-top: 2px solid #FFF;
+    padding: 70px 0; }
+    .queue .video:first-child {
+      border-top: 0; }
     .queue .video iframe {
       border: 0;
       height: 349px;
       width: 560px; }
     .queue .video .aux {
-      border-bottom: 1px solid #E2E2E2;
       display: block;
       margin: auto;
       width: 560px;
-      padding-bottom: 35px;
       text-align: right; }
       .queue .video .aux a {
         color: #000;
         padding-left: 7px; }
       .queue .video .aux .date {
         float: left; }
+  .queue .pagination {
+    padding: 20px 0; }
+    .queue .pagination .disabled {
+      display: none; }
+    .queue .pagination .current {
+      font-style: normal; }
+    .queue .pagination a {
+      padding: 0 5px; }
 
 #main {
   padding: 0 10%; }

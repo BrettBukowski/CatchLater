@@ -23,7 +23,7 @@ class VideosController < ApplicationController
   
   def index
     @page = (params[:page] || 1).to_i
-    @videos = Video.paginate(:page => @page, :order => 'created_at DESC')
+    @videos = Video.paginate(:page => @page, :order => 'created_at DESC', :per_page => 6)
   end
   
   def addToQueue

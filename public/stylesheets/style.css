@@ -30,6 +30,14 @@ h2 {
     color: #47639d;
     font-style: normal; }
 
+h3 {
+  color: #555;
+  text-shadow: 0 1px 0 white; }
+
+h3.rule {
+  border-bottom: 1px solid #BBB;
+  padding-bottom: 8px; }
+
 header {
   border-bottom: 1px solid #FFF;
   background-color: #006c6d;
@@ -43,9 +51,18 @@ header {
     float: right;
     padding-top: 24px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3); }
-    header #helloAgain a {
+    header #helloAgain a.signout {
       color: #A2A2A2;
       padding-left: 10px; }
+    header #helloAgain a.userLink {
+      color: #010101;
+      text-decoration: none;
+      -webkit-transition: all .5s linear;
+      -moz-transition: all .5s linear; }
+    header #helloAgain a.userLink:hover,
+    header #helloAgain a.userLink:focus {
+      color: #A2A2A2;
+      text-decoration: underline; }
 
 .queue {
   text-align: center; }
@@ -213,69 +230,71 @@ header {
     top: -5px;
     padding-right: 5px;
     font-size: smaller; } }
-form input {
-  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  font-size: 20px;
-  background: rgba(255, 255, 255, 0.6);
-  left: 0;
-  padding: 8px 10px 6px;
-  position: absolute;
-  width: 200px;
-  border-radius: 5px;
-  border: 1px solid #BBB;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
-  outline: none;
-  -webkit-transition: all .5s linear;
-  -moz-transition: all .5s linear; }
-  form input:focus {
-    background: #FFF;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
-    border-color: #AAA; }
-form input[type="submit"] {
-  position: static;
-  color: #FFF;
-  cursor: pointer;
-  background: #5adcd3;
-  /* Old browsers */
-  background: -moz-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5adcd3), color-stop(50%, #55dbd0), color-stop(51%, #5adcd3), color-stop(100%, #dbdbdb));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -ms-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
-  /* IE10+ */
-  background: linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
-  /* W3C */
-  -webkit-transition: all .6s, .6s, .6s; }
-  form input[type="submit"]:hover {
-    background: #90dbd5;
+form {
+  overflow: hidden; }
+  form input {
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    left: 0;
+    padding: 8px 10px 6px;
+    position: absolute;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid #BBB;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+    outline: none;
+    -webkit-transition: all .5s linear;
+    -moz-transition: all .5s linear; }
+    form input:focus {
+      background: #FFF;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
+      border-color: #AAA; }
+  form input[type="submit"] {
+    position: static;
+    color: #FFF;
+    cursor: pointer;
+    background: #5adcd3;
     /* Old browsers */
-    background: -moz-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+    background: -moz-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
     /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #90dbd5), color-stop(50%, #55dbd0), color-stop(51%, #5adcd3), color-stop(100%, #dbdbdb));
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5adcd3), color-stop(50%, #55dbd0), color-stop(51%, #5adcd3), color-stop(100%, #dbdbdb));
     /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+    background: -webkit-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
     /* Chrome10+,Safari5.1+ */
-    background: -ms-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+    background: -ms-linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
     /* IE10+ */
-    background: linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+    background: linear-gradient(top, #5adcd3 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
     /* W3C */
-    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2); }
-form label {
-  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  font-size: 20px;
-  color: #666;
-  padding: 11px 10px 4px;
-  position: absolute; }
-form .inputWrapper {
-  float: left;
-  height: 60px;
-  position: relative;
-  width: 250px; }
+    -webkit-transition: all .6s, .6s, .6s; }
+    form input[type="submit"]:hover {
+      background: #90dbd5;
+      /* Old browsers */
+      background: -moz-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+      /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #90dbd5), color-stop(50%, #55dbd0), color-stop(51%, #5adcd3), color-stop(100%, #dbdbdb));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -ms-linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+      /* IE10+ */
+      background: linear-gradient(top, #90dbd5 0%, #55dbd0 50%, #5adcd3 51%, #dbdbdb 100%);
+      /* W3C */
+      -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2); }
+  form label {
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 20px;
+    color: #666;
+    padding: 11px 10px 4px;
+    position: absolute; }
+  form .inputWrapper {
+    float: left;
+    height: 60px;
+    position: relative;
+    width: 250px; }
 
 #errorExplanation {
   background: rgba(255, 255, 194, 0.8);

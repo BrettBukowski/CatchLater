@@ -10,6 +10,9 @@ class User
   key :resetPasswordCode,         String
   key :resetPasswordCodeExpires,  Time
   
+  # Relationships
+  has_many :videos
+  
   # Validation
   EMAIL_REGEX = /\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i
   validates_presence_of :email

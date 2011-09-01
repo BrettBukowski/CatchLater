@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :loginRequired, :except => [:new, :create] 
   
   def new
     @user = User.new
@@ -13,5 +14,16 @@ class UsersController < ApplicationController
     else
       render '/sessions/new'
     end
+  end
+  
+  def edit
+    @user = currentUser
+  end
+  
+  def destroy
+    @user = currentUser
+    signOutAndKillSession!
+    @user.destroy
+    redirect_to root_path
   end
 end

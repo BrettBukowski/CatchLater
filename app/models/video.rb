@@ -38,6 +38,10 @@ class Video
     first(:conditions => {:id => id})
   end
   
+  def self.find_by_user(user)
+    
+  end
+  
   def embed
     if self.url
       url = self.url

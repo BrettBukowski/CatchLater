@@ -1,0 +1,17 @@
+<h2>Your Account</h2>
+
+<section>
+	<h3 class="rule">Change your password</h3>
+	<%= form_tag @user do |form| %>
+		<div class="inputWrapper">
+			<%= label_tag 'passwordText', 'Password' %>
+			<%= text_field_tag :passwordText %>
+		</div>
+			<%= submit_tag 'Save', :disable_with => 'Saving...' %>
+	<% end %>
+</section>
+
+<section>
+	<h3 class="rule">Close up shop here</h3>
+	<%= link_to "Delete your account", user_path(@user), :confirm => "Are you sure?", :method => :delete, :class => "delete" %>
+</section>

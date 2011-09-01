@@ -12,8 +12,8 @@
 		<h1><a href="/">CatchLater</a></h1>
 		<span id="helloAgain">
 			<% if currentUser %>
-			Hello, <%= currentUser.email %>.
-			<%= link_to "Sign out", signout_url %>
+			Hello, <%= link_to currentUser.email, edit_user_path(currentUser.id), :class => 'userLink' %>.
+			<%= link_to "Sign out", signout_url, :class => 'signout' %>
 			<% end %>
 		</span>
 	</header>

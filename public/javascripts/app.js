@@ -15,7 +15,7 @@ var CatchLater = CatchLater || (function() {
       element.innerHTML = html;
     });
   });
-  
+
   var Parser = (function() {
     var _sources = {
       iframe: [
@@ -24,39 +24,42 @@ var CatchLater = CatchLater || (function() {
         { name: 'blip', regex: /blip\.tv\/play\/([^.]+)\.html/ }
       ],
       object: [
-        { vimeo: /player\.vimeo\.com\/video\/([0-9]+)/ },
-        { ted: /video\.ted\.com/ }
+        { vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ } },
+        { ted: { data: /video\.ted\.com/, id: /mp4:([^.]+\.mp4)/, decode: true } }
       ],
       embed: [
         { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?]+)/ },
         { name: 'vimeo', regex: /vimeo\.com\/[^0-9]+([0-9]+)/ }
       ]
     },
-    _checkSrc = function(sources, element) {
-      for (var i = 0, src = element.src, match; i < sources.length; i++) {
-        if (match = sources[i].regex.exec(src)) {
-          return Video.foundVideo(element, {source: sources[i].name, id: match[match.length - 1]});
+    _checkIframeSrc = function(sources, el) {
+      var src = el.src, match, i;
+      for (i in sources) {
+        if (sources.hasOwnProperty(i) && (match = sources[i].regex.exec(src))) {
+          return Video.foundVideo(el, {source: sources[i].name, id: match[match.length - 1]});
+        }
+      }
+    },
+    _checkObjectData = function(sources, el) {
+      var data = el.data, 
+          source, match, i, paramData;
+      for (i in sources) {
+        source = sources[i];
+        if (sources.hasOwnProperty(i) && (match = source.data.exec(data))) {
+          paramData = $.wrap('#' + el.id + ' param[name="flashvars"]')[0];
+          (source.decode && (paramData = decodeURIComponent(paramData.value));
+          if (match = source.id.exec(paramData)) {
+            return found(el, {source: i, id: match[match.length - 1]});
+          }
         }
       }
     };
     return {
       iframe: function(el) {
-        return _checkSrc(_sources.iframe, el);
+        return _checkIframeSrc(_sources.iframe, el);
       },
       object: function(el) {
-        var data = el.data, match;
-        
-        if (match = _sources.object.ted.regex.exec(data)) {
-          var paramData = $.wrap('#' + el.id + 'param[name="flashvars"]')[0];
-          paramData = decodeURIComponent(paramData.value);
-          if (match = /mp4:([^.]+\.mp4)/) {
-            return found(el, {source: 'ted', id: match[1]});
-          }
-        }
-        
-        if (match = _sources.object.vimeo.regex.exec(data)) {
-          
-        }
+        return _checkObjectData(_sources.object, el);
       },
       embed: function(el) {
         return _checkSrc(_sources.embed, el);

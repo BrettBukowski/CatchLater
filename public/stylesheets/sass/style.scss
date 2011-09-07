@@ -53,13 +53,15 @@ header {
   #helloAgain {
     float:right;
     padding-top:24px;
+    a {
+      text-decoration:none;
+    }
     a.signout {
       color:#A2A2A2;
       padding-left:10px;
     }
     a.userLink {
       color:#010101;
-      text-decoration:none;
       -webkit-transition: all .5s linear;
       -moz-transition: all .5s linear;
     }

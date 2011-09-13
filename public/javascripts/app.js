@@ -1,19 +1,21 @@
 var CatchLater = CatchLater || (function() {
   var $ = snack.wrap;
   
-  $.define('setStyle', function(styles) {
-    return this.each(function(element) {
-      for (var i in styles) {
-        if (styles.hasOwnProperty(i)) {
-          element.style[i] = styles[i];
+  $.define({
+    setStyle: function(styles) {
+      return this.each(function(element) {
+        for (var i in styles) {
+          if (styles.hasOwnProperty(i)) {
+            element.style[i] = styles[i];
+          }
         }
-      }
-    });
-  });
-  $.define('html', function(html) {
-    return this.each(function(element) {
-      element.innerHTML = html;
-    });
+      });
+    },
+    html: function(html) {
+      return this.each(function(element) {
+        element.innerHTML = html;
+      });
+    }
   });
 
   var Parser = (function() {
@@ -23,19 +25,18 @@ var CatchLater = CatchLater || (function() {
         { name: 'vimeo', regex: /player\.vimeo\.com\/video\/([0-9]+)/ },
         { name: 'blip', regex: /blip\.tv\/play\/([^.]+)\.html/ }
       ],
-      object: [
-        { vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ } },
-        { ted: { data: /video\.ted\.com/, id: /mp4:([^.]+\.mp4)/, decode: true } }
-      ],
+      object: {
+        vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
+        ted: { data: /video\.ted\.com/, id: /mp4:([^.]+\.mp4)/, decode: true }
+      },
       embed: [
         { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?]+)/ },
         { name: 'vimeo', regex: /vimeo\.com\/[^0-9]+([0-9]+)/ }
       ]
     },
     _checkIframeSrc = function(sources, el) {
-      var src = el.src, match, i;
-      for (i in sources) {
-        if (sources.hasOwnProperty(i) && (match = sources[i].regex.exec(src))) {
+      for (var src = el.src, match, i = 0; i < sources.length; i++) {
+        if (match = sources[i].regex.exec(src)) {
           return Video.foundVideo(el, {source: sources[i].name, id: match[match.length - 1]});
         }
       }
@@ -46,10 +47,10 @@ var CatchLater = CatchLater || (function() {
       for (i in sources) {
         source = sources[i];
         if (sources.hasOwnProperty(i) && (match = source.data.exec(data))) {
-          paramData = $.wrap('#' + el.id + ' param[name="flashvars"]')[0];
-          (source.decode && (paramData = decodeURIComponent(paramData.value));
-          if (match = source.id.exec(paramData)) {
-            return found(el, {source: i, id: match[match.length - 1]});
+          paramData = $('#' + el.id + ' param[name="flashvars"]')[0];
+          (source.decode && (paramData = decodeURIComponent(paramData.value)));
+          if (match = source.id.exec(paramData.value)) {
+            return Video.foundVideo(el, {source: i, id: match[match.length - 1]});
           }
         }
       }
@@ -69,25 +70,35 @@ var CatchLater = CatchLater || (function() {
   
   UI = (function() {
     var _padding = 3;
-    
-    function _border(element) {
+
+    function _getXY(node) {
+      var coords = {x: 0, y: 0, height: node.offsetHeight, width: node.offsetWidth};
+      while (node) {
+        coords.x += node.offsetLeft;
+        coords.y += node.offsetTop;
+        node = node.offsetParent;
+      }
+      return coords;
+    }
+
+    function _border(coords) {
       var border = document.createElement("div");
       $(border).setStyle({
         position: "absolute",
         padding: _padding + "px",
         border: "3px dotted red",
-        width: element.offsetWidth + "px",
-        height: element.offsetHeight + "px",
-        top: element.offsetTop - _padding + "px",
-        left: element.offsetLeft - _padding + "px",
-        bottom: element.offsetTop + element.offsetHeight + "px",
-        right: element.offsetLeft + element.offsetWidth + "px",
+        width: coords.width + "px",
+        height: coords.height + "px",
+        top: coords.y - _padding + "px",
+        left: coords.x - _padding + "px",
+        bottom: coords.y + coords.height + "px",
+        right: coords.x + coords.width + "px",
         zIndex: 9999
       });
       return border;
     }
-    
-    function _prompt(element, border) {
+
+    function _prompt(coords, border) {
       var prompt = document.createElement("div");
       $(prompt).setStyle({
         background: "red",
@@ -95,7 +106,7 @@ var CatchLater = CatchLater || (function() {
         opacity: "0.96",
         position: "absolute",
         height: "50px",
-        width: styleElement.offsetWidth + _padding + "px",
+        width: coords.width + _padding + "px",
         left: border.style.left,
         top: parseInt(border.style.top, 10) - 50 + "px",
         zIndex: 10000
@@ -105,7 +116,7 @@ var CatchLater = CatchLater || (function() {
       }
       return prompt;
     }
-    
+
     function _close(border, prompt) {
       var close = document.createElement("a");
       $(close).setStyle({
@@ -124,8 +135,9 @@ var CatchLater = CatchLater || (function() {
           border.parentNode.removeChild(border);
           prompt.parentNode.removeChild(prompt);
       });
+      return close;
     }
-    
+
     function _add(onClick) {
       var add = document.createElement("a");
       $(add).setStyle({
@@ -147,21 +159,23 @@ var CatchLater = CatchLater || (function() {
         snack.preventDefault(e);
         onClick();
       });
+      return add;
     }
-    
+
     return {
       drawPrompt: function(element, details) {
-        var styleElement = (element.offsetHeight) ? element : element.parentNode,
-            border = _border(styleElement);
-            prompt = _prompt(styleElement, border);
-            close = _close(border, prompt);
+        var coords = _getXY((element.offsetHeight) ? element : element.parentNode),
+            border = _border(coords),
+            prompt = _prompt(coords, border),
+            close = _close(border, prompt),
             add = _add(function() {
               Video.addVideo(element.src, element.tagName.toLowerCase(), details);
             });
-        
+
         document.body.appendChild(border);
         document.body.appendChild(prompt);
-        prompt.appendChild(close); prompt.appendChild(add);
+        prompt.appendChild(close);
+        prompt.appendChild(add);
       }
     };
   })(),

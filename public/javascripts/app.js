@@ -29,10 +29,10 @@ var CatchLater = CatchLater || (function() {
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
         ted: { data: /video\.ted\.com/, id: /mp4:([^.]+\.mp4)/, decode: true }
       },
-      embed: [
-        { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?]+)/ },
-        { name: 'vimeo', regex: /vimeo\.com\/[^0-9]+([0-9]+)/ }
-      ]
+      embed: {
+        youtube: { src: /ytimg.com/, id: /video_id=([^&?]+)/ },
+        vimeo: { src: /vimeo\.com\/[^0-9]+([0-9]+)/ }
+      }
     },
     _checkIframeSrc = function(sources, el) {
       for (var src = el.src, match, i = 0; i < sources.length; i++) {
@@ -54,6 +54,19 @@ var CatchLater = CatchLater || (function() {
           }
         }
       }
+    },
+    _checkEmbedData = function(sources, el) {
+      var src = el.src, 
+          source, match, i, paramData;
+      for (i in sources) {
+        source = sources[i];
+        if (sources.hasOwnProperty(i) && (match = source.src.exec(src))) {
+          paramData = el.getAttribute("flashvars");
+          if (match = source.id.exec(paramData)) {
+            return Video.foundVideo(el, {source: i, id: match[match.length - 1]});
+          }
+        }
+      }
     };
     return {
       iframe: function(el) {
@@ -63,7 +76,8 @@ var CatchLater = CatchLater || (function() {
         return _checkObjectData(_sources.object, el);
       },
       embed: function(el) {
-        return _checkSrc(_sources.embed, el);
+        debugger;
+        return _checkEmbedData(_sources.embed, el);
       }
     };
   })(),

@@ -21,7 +21,7 @@ var CatchLater = CatchLater || (function() {
   var Parser = (function() {
     var _sources = {
       iframe: [
-        { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?]+)/ },
+        { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?\/]+)/ },
         { name: 'vimeo', regex: /player\.vimeo\.com\/video\/([0-9]+)/ },
         { name: 'blip', regex: /blip\.tv\/play\/([^.]+)\.html/ }
       ],
@@ -30,8 +30,9 @@ var CatchLater = CatchLater || (function() {
         ted: { data: /video\.ted\.com/, id: /mp4:([^.]+\.mp4)/, decode: true }
       },
       embed: {
-        youtube: { src: /ytimg.com/, id: /video_id=([^&?]+)/ },
-        vimeo: { src: /vimeo\.com\/[^0-9]+([0-9]+)/ }
+        youtube: [ { src: /ytimg.com/, id: /video_id=([^&?]+)/ },
+                   { src: /www\.youtube.com\/v\/([^&?\/]+)/ } ],
+        vimeo: [ { src: /vimeo\.com\/[^0-9]+([0-9]+)/ } ]
       }
     },
     _checkIframeSrc = function(sources, el) {
@@ -57,13 +58,22 @@ var CatchLater = CatchLater || (function() {
     },
     _checkEmbedData = function(sources, el) {
       var src = el.src, 
-          source, match, i, paramData;
+          source, match, i, j, paramData;
       for (i in sources) {
-        source = sources[i];
-        if (sources.hasOwnProperty(i) && (match = source.src.exec(src))) {
-          paramData = el.getAttribute("flashvars");
-          if (match = source.id.exec(paramData)) {
-            return Video.foundVideo(el, {source: i, id: match[match.length - 1]});
+        if (sources.hasOwnProperty(i)) {
+          source = sources[i];
+          for (j = 0; j < source.length; j++) {
+            if (match = source[j].src.exec(src)) {
+              if (source[j].id) {
+                paramData = el.getAttribute("flashvars");
+                if (match = source[j].id.exec(paramData)) {
+                  return Video.foundVideo(el, {source: i, id: match[match.length - 1]});
+                }
+              }
+              else if (match.length > 1) {
+                return Video.foundVideo(el, {source: i, id: match[match.length - 1]});
+              }
+            }
           }
         }
       }
@@ -83,7 +93,7 @@ var CatchLater = CatchLater || (function() {
   })(),
   
   UI = (function() {
-    var _padding = 3;
+    var _padding = 0;
 
     function _getXY(node) {
       var coords = {x: 0, y: 0, height: node.offsetHeight, width: node.offsetWidth};
@@ -100,7 +110,7 @@ var CatchLater = CatchLater || (function() {
       $(border).setStyle({
         position: "absolute",
         padding: _padding + "px",
-        border: "3px dotted red",
+        boxShadow: "3px 3px 11px rgba(0,0,0,.4)",
         width: coords.width + "px",
         height: coords.height + "px",
         top: coords.y - _padding + "px",
@@ -115,9 +125,9 @@ var CatchLater = CatchLater || (function() {
     function _prompt(coords, border) {
       var prompt = document.createElement("div");
       $(prompt).setStyle({
-        background: "red",
+        backgroundColor: "rgba(50,50,50,.9)",
+        boxShadow: "3px 3px 11px rgba(0,0,0,.4)",
         fontFamily: "'Lucida Grande', 'Lucida Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-        opacity: "0.96",
         position: "absolute",
         height: "50px",
         width: coords.width + _padding + "px",
@@ -131,7 +141,7 @@ var CatchLater = CatchLater || (function() {
       return prompt;
     }
 
-    function _close(border, prompt) {
+    function _close(closeFunc) {
       var close = document.createElement("a");
       $(close).setStyle({
         color: "#FFF",
@@ -139,16 +149,12 @@ var CatchLater = CatchLater || (function() {
         position: "absolute",
         top: "4px",
         right: "4px"
-      }).html("Close");
+      }).html("✕");
       close.href = "#";
       snack.listener({
         node: close,
         event: "click"
-      }, function(e) {
-          snack.preventDefault(e);
-          border.parentNode.removeChild(border);
-          prompt.parentNode.removeChild(prompt);
-      });
+      }, closeFunc);
       return close;
     }
 
@@ -164,14 +170,16 @@ var CatchLater = CatchLater || (function() {
         padding: "6px 8px",
         boxShadow: "0 3px 3px rgba(0,0,0,.4)",
         background: "#5CCCCC"
-      }).html("Add to Queue +");
+      }).html("Catch later");
       add.href = "#";
-      snack.listener({
+      var listen = snack.listener({
         node: add,
         event: "click"
       }, function(e) {
         snack.preventDefault(e);
-        onClick();
+        add.innerHTML = "Catching...";
+        listen.detach();
+        onClick(add);
       });
       return add;
     }
@@ -181,9 +189,16 @@ var CatchLater = CatchLater || (function() {
         var coords = _getXY((element.offsetHeight) ? element : element.parentNode),
             border = _border(coords),
             prompt = _prompt(coords, border),
-            close = _close(border, prompt),
-            add = _add(function() {
-              Video.addVideo(element.src, element.tagName.toLowerCase(), details);
+            closeFunc = function() {
+                border.parentNode.removeChild(border);
+                prompt.parentNode.removeChild(prompt);
+            },
+            close = _close(function(e) {
+              snack.preventDefault(e);
+              closeFunc();
+            }),
+            add = _add(function(writeTo) {
+              Video.addVideo(element.src, element.tagName.toLowerCase(), details, writeTo, closeFunc);
             });
 
         document.body.appendChild(border);
@@ -220,7 +235,7 @@ var CatchLater = CatchLater || (function() {
         }
       },
 
-      addVideo: function(url, type, details) {
+      addVideo: function(url, type, details, writeTo, closePrompt) {
         snack.JSONP({
           url: 'http://0.0.0.0:3000/queue/push/',
           key: 'callback',
@@ -232,7 +247,8 @@ var CatchLater = CatchLater || (function() {
             webpageUrl: window.top.location.href
           }
         }, function(resp) {
-          console.log(resp);
+            writeTo.innerHTML = (resp.id) ? "Caught!" : resp;
+            setTimeout(closePrompt, 1500);
         });
       }
     };

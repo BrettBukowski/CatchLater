@@ -49,8 +49,8 @@ var CatchLater = CatchLater || (function() {
         source = sources[i];
         if (sources.hasOwnProperty(i) && (match = source.data.exec(data))) {
           paramData = $('#' + el.id + ' param[name="flashvars"]')[0];
-          (source.decode && (paramData = decodeURIComponent(paramData.value)));
-          if (match = source.id.exec(paramData.value)) {
+          paramData = ((source.decode) ? decodeURIComponent(paramData.value) : paramData.value);
+          if (match = source.id.exec(paramData)) {
             return Video.foundVideo(el, {source: i, id: match[match.length - 1]});
           }
         }
@@ -86,7 +86,6 @@ var CatchLater = CatchLater || (function() {
         return _checkObjectData(_sources.object, el);
       },
       embed: function(el) {
-        debugger;
         return _checkEmbedData(_sources.embed, el);
       }
     };
@@ -257,14 +256,14 @@ var CatchLater = CatchLater || (function() {
   function run() {
     Video.findVideo();
   }
+  return new run();
+  // var instance;
   
-  var instance;
-  
-  return function() {
-    if (typeof instance === "undefined") {
-      instance = new run();
-    }
-    // only run this bookmarklet once per page
-    return instance;
-  };
+  // return function() {
+  //   if (typeof instance === "undefined") {
+  //     instance = new run();
+  //   }
+  //   // only run this bookmarklet once per page
+  //   return instance;
+  // };
 })();

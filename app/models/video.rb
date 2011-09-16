@@ -50,7 +50,11 @@ class Video
     elsif self.source == 'vimeo'
       url = "http://player.vimeo.com/video/#{videoID}"
     elsif self.source == 'ted'
-      url = "http://video.ted.com/#{videoID}"
+      poster = "http://images.ted.com/images/ted/tedindex/embed-posters/" +
+          self.videoID.gsub(/-[A-Za-z0-9]+\.mp4/, '-embed.jpg').split('/').last
+      return "<video src='http://video.ted.com/#{videoID}' poster='#{poster}' controls preload='none'>
+              Your browser doesn't support this type of video :(
+              </video>"
     end
     return "<iframe src='#{url}' allowfullscreen></iframe>"
   end

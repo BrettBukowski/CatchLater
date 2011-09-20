@@ -18,6 +18,13 @@
 			<%= link_to "Source", video.webpageUrl, :class => "source" %>
 			<%= link_to "Delete", video_path(video), :confirm => "Are you sure?", :method => :delete, :class => "delete" %>
 		</span>
+		<span class="tags">
+			<% if !video.tags.empty? %>
+			<span class="label">Tags:</span> 
+			<%= video.tags.join(" ") %>
+			<% end %>
+			<a href="#" title="">+ Add Tags</a>
+		</span>
 	</div>
 <% end %>
 <%= will_paginate @videos %>

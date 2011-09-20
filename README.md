@@ -13,7 +13,6 @@
         * cnn??
         * bbc??
         * packers??
-        * nfl??
     * Tags
 * General
     * bookmarklet

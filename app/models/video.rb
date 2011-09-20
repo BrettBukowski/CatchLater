@@ -6,7 +6,7 @@ class Video
   key :type,        String, :required => true
   key :source,      String, :required => true
   key :title,       String
-  key :url,         String
+  key :tags,        Array
   key :user_id,     ObjectId
 
   timestamps!
@@ -30,7 +30,6 @@ class Video
     'embed'
   ]
   validates_presence_of :webpageUrl, :type, :source, :videoID
-  validates_format_of :url, :with => URL_REGEX, :allow_blank => true
   validates_format_of :webpageUrl, :with => URL_REGEX
   validates_inclusion_of :source, :in => SUPPORTED_SOURCES, :message => "Sorry, your source %{value} isn't supported"
 
@@ -38,14 +37,12 @@ class Video
     first(:conditions => {:id => id})
   end
 
-  def self.find_by_user(user)
-    
+  def self.find_by_tag(tag)
+    all(:tags => ["#{tag}"])
   end
 
   def embed
-    if self.url
-      url = self.url
-    elsif self.source == 'youtube'
+    if self.source == 'youtube'
       url = "http://www.youtube.com/embed/#{videoID}"
     elsif self.source == 'vimeo'
       url = "http://player.vimeo.com/video/#{videoID}"

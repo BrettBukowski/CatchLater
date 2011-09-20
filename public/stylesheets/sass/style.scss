@@ -73,48 +73,11 @@ header {
     @include textShadow(1px, rgba(255, 255, 255, .3));
   }
 }
-.queue {
-  text-align:center;
-  .video {
-    border-bottom:1px solid #E2E2E2;
-    border-top:2px solid #FFF;
-    padding:70px 0;
-    &:first-child { border-top:0; }
-    iframe {
-      border: 0;
-      height: 349px;
-      width: 560px;
-    }
-    .aux {
-      display:block;
-      margin: auto;
-      width: 560px;
-      text-align:right;
-      a {
-        color:#000;
-        padding-left:7px;
-      }
-      .date {
-        float:left;
-      }
-    }
-  }
-  .pagination {
-    padding:20px 0;
-    .disabled {
-      display:none;
-    }
-    .current {
-      font-style:normal;
-    }
-    a {
-      padding:0 5px;
-    }
-  }
-}
+
 #main {
   @include wrapping;
 }
 
 @import "home";
 @import "forms";
+@import "video";

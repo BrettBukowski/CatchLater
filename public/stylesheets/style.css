@@ -292,6 +292,28 @@ form {
       height: 349px;
       margin: auto;
       width: 560px; }
+    .queue .video .content {
+      position: relative; }
+    .queue .video .fave {
+      background-color: #FFF;
+      -webkit-border-top-right-radius: 4px;
+      -webkit-border-bottom-right-radius: 4px;
+      -moz-border-radius-topright: 4px;
+      -moz-border-radius-bottomright: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      font-size: 0;
+      position: absolute;
+      width: 7px;
+      height: 22px;
+      border: 1px solid #D0D0D0;
+      -webkit-transition: width .2s linear;
+      -moz-transition: width .2s linear; }
+      .queue .video .fave.selected, .queue .video .fave:hover, .queue .video .fave:focus {
+        background: white url(/images/fave.png) no-repeat;
+        width: 24px; }
+      .queue .video .fave.selected {
+        background-position: 0 27px; }
     .queue .video .aux {
       display: block;
       margin: auto;

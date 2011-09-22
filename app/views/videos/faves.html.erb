@@ -1,7 +1,7 @@
 <%= render :partial => "heading", :locals => { 
-							:heading => "Your list",
+							:heading => "Your favorites",
 							:videos => @videos,
-							:emptyMessage => "There's nothing here"
+							:emptyMessage => "You haven't favorited anything yet"
 } %>
 
 <%= render :partial => "list", :locals => { :videos => @videos } %>

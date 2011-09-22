@@ -26,6 +26,12 @@ class VideosController < ApplicationController
     @videos = Video.paginate(:page => @page, :order => 'created_at DESC', :per_page => 6)
   end
   
+  def faves
+    @page = (params[:page] || 1).to_i
+    @videos = Video.paginate(:page => @page, :conditions => {:favorited => true}, :order => 'created_at DESC', :per_page => 6)    
+  end
+  
+  # called from bookmarklet
   def addToQueue
     if currentUser
       @video = newVideoFromParams

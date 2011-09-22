@@ -7,6 +7,7 @@ class Video
   key :source,      String, :required => true
   key :title,       String
   key :tags,        Array
+  key :favorited,   Boolean
   key :user_id,     ObjectId
 
   timestamps!
@@ -16,19 +17,9 @@ class Video
 
   # Validation
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
-  SUPPORTED_SOURCES = [
-    'youtube',
-    'vimeo',
-    'ted',
-    'blip',
-    'adultswim'
-  ]
-  TYPES = [
-    'iframe',
-    'video',
-    'object',
-    'embed'
-  ]
+  SUPPORTED_SOURCES = %w[youtube vimeo ted blip adultswim]
+  TYPES = %w[iframe video object embed]
+
   validates_presence_of :webpageUrl, :type, :source, :videoID
   validates_format_of :webpageUrl, :with => URL_REGEX
   validates_inclusion_of :source, :in => SUPPORTED_SOURCES, :message => "Sorry, your source %{value} isn't supported"

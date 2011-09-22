@@ -1,0 +1,24 @@
+<section class="queue">
+<% videos.each do |video| %>
+	<div class="video">
+		<span class="title">
+			<%= video.title %>
+		</span>
+		<div class="content">
+			<%= raw video.embed %>
+			<%= link_to "Favorite", "/foo", :class => "fave" + ((video.favorited) ? " selected" : ""), :title => "Favorite this video" %>
+		</div>
+		<span class="aux">
+			<span class="date"><%= video.created_at.strftime("%b %e")%></span>
+			<%= link_to "Share", video.webpageUrl, :class => "share" %>
+			<%= link_to "Source", video.webpageUrl, :class => "source" %>
+			<%= link_to "Delete", video_path(video), :confirm => "Are you sure?", :method => :delete, :class => "delete" %>
+		</span>
+		<span class="tags">
+			<span class="label">Tags</span> 
+			<%= video.tags.join(" ") %>
+		</span>
+	</div>
+<% end %>
+<%= will_paginate videos %>
+</section>

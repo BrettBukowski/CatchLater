@@ -279,6 +279,11 @@ form {
   #errorExplanation h2 {
     margin: 10px 0; }
 
+nav {
+  float: right;
+  position: relative;
+  top: -64px; }
+
 .queue {
   text-align: center; }
   .queue .video {

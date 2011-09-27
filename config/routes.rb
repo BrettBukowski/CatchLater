@@ -1,7 +1,7 @@
 Catchlater::Application.routes.draw do
   get "home/index"
   root :to => "home#index"
-  match '/videos/faves', :controller => 'videos', :action => 'faves'
+  match '/videos/faves', :controller => 'videos', :action => 'faves', :as => :faves
   resources :users, :videos
   resource :session
   match "signin" => "sessions#new", :as => :signin

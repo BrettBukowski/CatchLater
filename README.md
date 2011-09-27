@@ -18,6 +18,8 @@
     * bookmarklet
         * local storage to track when users drag bookmarklet button
     * JS goodness
+	    * infinite scroll
+	    * actions
     * background dimmer for video page
     * clean up models code
 * TEST, TEST, TEST

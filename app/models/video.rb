@@ -20,9 +20,15 @@ class Video
   SUPPORTED_SOURCES = %w[youtube vimeo ted blip adultswim]
   TYPES = %w[iframe video object embed]
 
-  validates_presence_of :webpageUrl, :type, :source, :videoID
-  validates_format_of :webpageUrl, :with => URL_REGEX
-  validates_inclusion_of :source, :in => SUPPORTED_SOURCES, :message => "Sorry, your source %{value} isn't supported"
+  validates :webpageUrl, :type, :source, :videoID, :presence => true
+  validates :webpageUrl, :format => {
+    :with => URL_REGEX,
+    :message => "The web page's URL is invalid"
+  }
+  validates :source, :inclusion => {
+    :in => SUPPORTED_SOURCES,
+    :message => "Sorry, your source %{value} isn't supported"
+  }
 
   def self.find_by_id(id)
     first(:conditions => {:id => id})
@@ -40,9 +46,9 @@ class Video
     elsif self.source == 'ted'
       poster = "http://images.ted.com/images/ted/tedindex/embed-posters/" +
           self.videoID.gsub(/-[A-Za-z0-9]+\.mp4/, '-embed.jpg').split('/').last
-      return "<video src='http://video.ted.com/#{videoID}' poster='#{poster}' controls preload='none'>
+      return %{<video src='http://video.ted.com/#{videoID}' poster='#{poster}' controls preload='none'>
               Your browser doesn't support this type of video :(
-              </video>"
+              </video>}
     end
     return "<iframe src='#{url}' allowfullscreen></iframe>"
   end

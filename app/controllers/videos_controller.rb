@@ -15,6 +15,13 @@ class VideosController < ApplicationController
     end
   end
   
+  def edit
+    @video = Video.find_by_id(params[:id])
+    @video.favorited = params[:favorited]
+    @video.save
+    redirect_to :back
+  end
+  
   def destroy
     @video = Video.find_by_id(params[:id])
     @video.destroy

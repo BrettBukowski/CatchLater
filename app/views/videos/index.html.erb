@@ -3,5 +3,7 @@
 							:videos => @videos,
 							:emptyMessage => "There's nothing here"
 } %>
-
+<nav>
+<%= link_to "Favorites", faves_path %>
+</nav>
 <%= render :partial => "list", :locals => { :videos => @videos } %>

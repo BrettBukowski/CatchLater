@@ -2,7 +2,11 @@
   margin: auto;
   width: 560px;
 }
-
+nav {
+  float:right;
+  position:relative;
+  top:-64px;
+}
 .queue {
   text-align:center;
   .video {

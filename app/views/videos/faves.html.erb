@@ -3,5 +3,7 @@
 							:videos => @videos,
 							:emptyMessage => "You haven't favorited anything yet"
 } %>
-
+<nav>
+<%= link_to "All videos", videos_path %>
+</nav>
 <%= render :partial => "list", :locals => { :videos => @videos } %>

@@ -284,22 +284,22 @@ nav {
   position: relative;
   top: -64px; }
 
-.queue {
+.videos section {
   text-align: center; }
-  .queue .video {
+  .videos section .video {
     border-bottom: 1px solid #E2E2E2;
     border-top: 2px solid #FFF;
     padding: 70px 0; }
-    .queue .video:first-child {
+    .videos section .video:first-child {
       border-top: 0; }
-    .queue .video iframe {
+    .videos section .video iframe {
       border: 0;
       height: 349px;
       margin: auto;
       width: 560px; }
-    .queue .video .content {
+    .videos section .video .content {
       position: relative; }
-    .queue .video .fave {
+    .videos section .video .fave {
       background-color: #FFF;
       -webkit-border-top-right-radius: 4px;
       -webkit-border-bottom-right-radius: 4px;
@@ -314,33 +314,33 @@ nav {
       border: 1px solid #D0D0D0;
       -webkit-transition: width .2s linear;
       -moz-transition: width .2s linear; }
-      .queue .video .fave.selected, .queue .video .fave:hover, .queue .video .fave:focus {
+      .videos section .video .fave.selected, .videos section .video .fave:hover, .videos section .video .fave:focus {
         background: white url(/images/fave.png) no-repeat;
         width: 24px; }
-      .queue .video .fave.selected {
+      .videos section .video .fave.selected {
         background-position: 0 27px; }
-    .queue .video .aux {
+    .videos section .video .aux {
       display: block;
       margin: auto;
       margin: auto;
       width: 560px;
       text-align: right; }
-      .queue .video .aux a {
+      .videos section .video .aux a {
         color: #000;
         padding-left: 7px; }
-      .queue .video .aux .date {
+      .videos section .video .aux .date {
         float: left; }
-    .queue .video .tags {
+    .videos section .video .tags {
       display: block;
       font-size: .86em;
       margin: auto;
       width: 560px;
       text-align: left; }
-  .queue .pagination {
+  .videos section .pagination {
     padding: 20px 0; }
-    .queue .pagination .disabled {
+    .videos section .pagination .disabled {
       display: none; }
-    .queue .pagination .current {
+    .videos section .pagination .current {
       font-style: normal; }
-    .queue .pagination a {
+    .videos section .pagination a {
       padding: 0 5px; }

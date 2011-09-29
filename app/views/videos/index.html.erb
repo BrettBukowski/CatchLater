@@ -4,6 +4,9 @@
 							:emptyMessage => "There's nothing here"
 } %>
 <nav>
-<%= link_to "Favorites", faves_path %>
+	<%= link_to "Favorites", faves_path %>
 </nav>
-<%= render :partial => "list", :locals => { :videos => @videos } %>
+<section class="queue">
+	<%= render @videos %>
+	<%= will_paginate @videos %>
+</section>

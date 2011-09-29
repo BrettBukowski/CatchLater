@@ -1,7 +1,7 @@
-@import "mixins";
+@import "partials/mixins";
 
 html {
-  background: url(/images/grayBg.png);
+  background: url(/assets/grayBg.png);
 }
 body {  
   font-family:'News Cycle';
@@ -77,7 +77,6 @@ header {
 #main {
   @include wrapping;
 }
-
-@import "home";
-@import "forms";
-@import "video";
+@import "partials/home";
+@import "partials/forms";
+@import "partials/video";

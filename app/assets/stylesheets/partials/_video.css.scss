@@ -7,7 +7,7 @@ nav {
   position:relative;
   top:-64px;
 }
-.queue {
+.videos section {
   text-align:center;
   .video {
     border-bottom:1px solid #E2E2E2;
@@ -39,7 +39,7 @@ nav {
       -moz-transition: width .2s linear;
       &.selected,
       &:hover, &:focus {
-        background:#FFF url(/images/fave.png) no-repeat;
+        background:#FFF url(/assets/fave.png) no-repeat;
         width:24px;
       }
       &.selected {

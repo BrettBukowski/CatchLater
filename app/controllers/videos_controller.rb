@@ -15,7 +15,7 @@ class VideosController < ApplicationController
     end
   end
   
-  def edit
+  def update
     @video = Video.find_by_id(params[:id])
     @video.favorited = params[:favorited]
     @video.save

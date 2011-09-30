@@ -1,7 +1,7 @@
-<%= render :partial => "heading", :locals => { 
-							:heading => "Your list",
-							:videos => @videos,
-							:emptyMessage => "There's nothing here"
+<%= render partial: "heading", locals: { 
+			heading: "Your list",
+			videos: @videos,
+			emptyMessage: "There's nothing here"
 } %>
 <nav>
 	<%= link_to "Favorites", faves_path %>

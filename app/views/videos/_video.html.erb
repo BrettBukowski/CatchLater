@@ -1,19 +1,24 @@
-<div class="video">
+<div id="<%= video.id %>" class="video">
 	<span class="title">
 		<%= video.title %>
 	</span>
 	<div class="content">
 		<%= raw video.embed %>
-		<%= link_to "Favorite", edit_video_path(video.id), :class => "fave" + ((video.favorited) ? " selected" : ""), :title => "Favorite this video" %>
+		<%= link_to "Favorite", toggle_fave_path(video), 
+					class: "fave" + ((video.favorited) ? " selected" : ""), 
+					title: "Favorite this video",
+					remote: true,
+					method: :post
+		%>
 	</div>
 	<span class="aux">
-		<span class="date"><%= video.created_at.strftime("%b %e")%></span>
-		<%= link_to "Share", video.webpageUrl, :class => "share" %>
-		<%= link_to "Source", video.webpageUrl, :class => "source", :target => "_blank" %>
-		<%= link_to "Delete", video_path(video), :confirm => "Are you sure?", :method => :delete, :class => "delete" %>
+		<span class="date"><%= video.created_at.strftime("%b %e") %></span>
+		<%= link_to "Share", video.webpageUrl, class: "share" %>
+		<%= link_to "Source", video.webpageUrl, class: "source", target: "_blank" %>
+		<%= link_to "Delete", video_path(video), class: "delete", confirm: "Are you sure?", method: :delete %>
 	</span>
 	<span class="tags">
-		<span class="label">Tags</span> 
+		<span class="label">Tags</span>
 		<%= video.tags.join(" ") %>
 	</span>
 </div>

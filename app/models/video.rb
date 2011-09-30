@@ -7,7 +7,7 @@ class Video
   key :source,      String, :required => true
   key :title,       String
   key :tags,        Array
-  key :favorited,   Boolean
+  key :favorited,   Boolean, :default => false
   key :user_id,     ObjectId
 
   timestamps!
@@ -22,12 +22,12 @@ class Video
 
   validates :webpageUrl, :type, :source, :videoID, :presence => true
   validates :webpageUrl, :format => {
-    :with => URL_REGEX,
-    :message => "The web page's URL is invalid"
+    with: URL_REGEX,
+    message: "The web page's URL is invalid"
   }
   validates :source, :inclusion => {
-    :in => SUPPORTED_SOURCES,
-    :message => "Sorry, your source %{value} isn't supported"
+    in: SUPPORTED_SOURCES,
+    message: "Sorry, your source %{value} isn't supported"
   }
 
   def self.find_by_id(id)

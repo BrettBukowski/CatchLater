@@ -6,7 +6,7 @@
     for (i = 0; i < length; i++) {  
         s = document.createElement('script');
         s.type = 'text/javascript';
-        s.src = 'http://0.0.0.0:3000/javascripts/' + scripts[i] + '.js?cb=' + new Date().getTime();
+        s.src = 'http://0.0.0.0:3000/assets/' + scripts[i] + '.js?cb=' + new Date().getTime();
         head.appendChild(s);
     }
     // Rather than readystatechange / onload, do an interval check, since there's multiple scripts

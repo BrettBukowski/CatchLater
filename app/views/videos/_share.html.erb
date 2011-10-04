@@ -1,0 +1,7 @@
+<span class="shareDropdown hide">
+	<ul>
+		<li><%= window_open "Facebook", "http://www.facebook.com/sharer.php?u=#{videoUrl}" %></li>
+		<li><%= window_open "Twitter", "http://twitter.com/home?status=#{videoUrl}" %></li>
+		<li><%= window_open "Tumblr", "http://www.tumblr.com/share?v=3&u=" + url_encode(videoUrl) %></li>
+	</ul>
+</span>

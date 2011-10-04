@@ -51,12 +51,35 @@ nav {
       margin: auto;
       @include videoArea;
       text-align:right;
-      a {
+      > a {
         color:#000;
         padding-left:7px;
       }
       .date {
         float:left;
+      }
+      .shareDropdown {
+        position:absolute;
+        a {
+          padding:0 4px;
+        }
+        ul {
+          background:yellow;
+          -webkit-border-radius:4px;
+          -moz-border-radius:4px;
+          border-radius:4px;
+          -webkit-box-shadow:0 1px 0 rgba(0, 0, 0, .3);
+          -moz-box-shadow:0 1px 0 rgba(0, 0, 0, .3);
+          box-shadow:0 1px 0 rgba(0, 0, 0, .3);
+          margin:42px 0 0 -120px;
+          overflow:hidden;
+          padding:6px;
+          opacity:0.6;
+        }
+        li {
+          float:left;
+          list-style-type:none;
+        }
       }
     }
     .tags {

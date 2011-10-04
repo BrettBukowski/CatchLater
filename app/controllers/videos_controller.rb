@@ -27,8 +27,6 @@ class VideosController < ApplicationController
         format.html { redirect_to :back }
         format.js
         format.json { render json: @video }
-      else
-        format.html { }
       end
     end
   end
@@ -38,6 +36,7 @@ class VideosController < ApplicationController
     @video.destroy
     respond_to do |format|
       format.html { redirect_to videos_path }
+      format.js
       format.json { head :ok }
     end
   end

@@ -74,6 +74,8 @@ header {
   }
 }
 
+.hide { display:none }
+
 #main {
   @include wrapping;
 }

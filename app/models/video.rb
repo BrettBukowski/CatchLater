@@ -1,13 +1,13 @@
 class Video
   include MongoMapper::Document
 
-  key :videoID,     String, :required => true
-  key :webpageUrl,  String, :required => true
-  key :type,        String, :required => true
-  key :source,      String, :required => true
+  key :videoID,     String, required: true
+  key :webpageUrl,  String, required: true
+  key :type,        String, required: true
+  key :source,      String, required: true
   key :title,       String
   key :tags,        Array
-  key :favorited,   Boolean, :default => false
+  key :favorited,   Boolean, default: false
   key :user_id,     ObjectId
 
   timestamps!
@@ -20,22 +20,22 @@ class Video
   SUPPORTED_SOURCES = %w[youtube vimeo ted blip adultswim]
   TYPES = %w[iframe video object embed]
 
-  validates :webpageUrl, :type, :source, :videoID, :presence => true
-  validates :webpageUrl, :format => {
+  validates :webpageUrl, :type, :source, :videoID, presence: true
+  validates :webpageUrl, format: {
     with: URL_REGEX,
     message: "The web page's URL is invalid"
   }
-  validates :source, :inclusion => {
+  validates :source, inclusion: {
     in: SUPPORTED_SOURCES,
     message: "Sorry, your source %{value} isn't supported"
   }
 
   def self.find_by_id(id)
-    first(:conditions => {:id => id})
+    first(conditions: {id: id})
   end
 
   def self.find_by_tag(tag)
-    all(:tags => ["#{tag}"])
+    all(tags: ["#{tag}"])
   end
 
   def embed

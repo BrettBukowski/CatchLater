@@ -5,22 +5,22 @@ class User
   include MongoMapper::Document
   include BCrypt
   
-  key :email,                     String, :required => true
+  key :email,                     String, required: true
   key :passwordHash,              String
   key :resetPasswordCode,         String
   key :resetPasswordCodeExpires,  Time
   
   # Relationships
-  has_many :videos, :dependent => :destroy
+  has_many :videos, dependent: :destroy
   
   # Validation
   EMAIL_REGEX = /\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i
   validates_presence_of :email
-  validates_length_of   :email, :within => 6..100
-  validates_format_of   :email, :with => EMAIL_REGEX
+  validates_length_of   :email, within: 6..100
+  validates_format_of   :email, with: EMAIL_REGEX
   
   def self.logIn(email, password)
-    user = User.first(:conditions => {:email => email.downcase})
+    user = User.first(conditions: {email: email.downcase})
     user && user.loggedIn?(password) ? user : nil
   end
   

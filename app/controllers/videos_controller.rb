@@ -19,7 +19,7 @@ class VideosController < ApplicationController
     end
   end
   
-  def toggleFave
+  def toggle_fave
     @video = Video.find_by_id(params[:id])
     @video.favorited = !@video.favorited
     respond_to do |format|

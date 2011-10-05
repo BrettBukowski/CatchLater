@@ -4,7 +4,7 @@
 	</span>
 	<div class="content">
 		<%= raw video.embed %>
-		<%= link_to "Favorite", toggle_fave_path(video), 
+		<%= link_to "Favorite", toggle_fave_video_path(video), 
 					class: "fave" + ((video.favorited) ? " selected" : ""), 
 					title: "Favorite this video",
 					remote: true,

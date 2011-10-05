@@ -1,11 +1,13 @@
 Catchlater::Application.routes.draw do
   get "home/index"
-  root :to => "home#index"
-  match "/videos/:id/toggleFave" => "videos#toggleFave", :via => :post, :as => :toggle_fave
-  match "/videos/faves" => "videos#faves", :via => :get, :as => :faves
-  match "queue/push" => "videos#addToQueue", :via => :get
-  resources :users, :videos
+  root to: "home#index"
+  match "queue/push" => "videos#addToQueue", via: :get
+  resources :videos do
+    post 'toggle_fave', on: :member
+    get 'faves', on: :collection
+  end
+  resources :users
   resource :session
-  match "signin" => "sessions#new", :as => :signin
-  match "signout" => "sessions#destroy", :as => :signout
+  match "signin" => "sessions#new", as: :signin
+  match "signout" => "sessions#destroy", as: :signout
 end

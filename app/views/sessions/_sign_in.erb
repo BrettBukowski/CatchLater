@@ -1,0 +1,12 @@
+<h2>Sign in</h2>
+<%= form_tag session_path do %>
+	<div class="inputWrapper">
+		<%= label_tag 'email', 'Email' %>
+		<%= text_field_tag :email %>
+	</div>
+	<div class="inputWrapper">
+		<%= label_tag 'password', 'Password' %>
+		<%= password_field_tag :password %>
+	</div>
+	<%= submit_tag 'Sign In', disable_with: 'Signing you in...' %>
+<% end %>

@@ -2,6 +2,8 @@
 	<ul>
 		<li><%= window_open "Facebook", "http://www.facebook.com/sharer.php?u=#{videoUrl}" %></li>
 		<li><%= window_open "Twitter", "http://twitter.com/home?status=#{videoUrl}" %></li>
+		<li><%= window_open "Google+", "https://m.google.com/app/plus/x/?v=compose&content=#{videoUrl}" %></li>
 		<li><%= window_open "Tumblr", "http://www.tumblr.com/share?v=3&u=" + url_encode(videoUrl) %></li>
+		<li class="source"><%= link_to truncate(videoUrl, length: 30), videoUrl, target: "_blank" %></li>
 	</ul>
 </span>

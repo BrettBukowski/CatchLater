@@ -1,0 +1,22 @@
+<h2>Sign up</h2>
+<%= form_for @user do |form| %>
+  <% if @user.errors.any? %>
+		<div id="error">
+			<h3>Whoops... There were <%= pluralize(@user.errors.count, "error") %>.</h3>
+			<ul>
+				<% @user.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<div class="inputWrapper">
+		<%= form.label :email %>
+		<%= form.email_field :email, size: 40 %>
+	</div>
+	<div class="inputWrapper">
+		<%= form.label :password %>
+		<%= form.password_field :password %>
+	</div>
+	<%= submit_tag 'Sign Up', disable_with: 'Signing you up...' %>
+<% end %>

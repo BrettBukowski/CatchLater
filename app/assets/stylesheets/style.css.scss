@@ -19,6 +19,7 @@ h1 {
   font-size:46px;
   letter-spacing:.5px;
   @include nomargin;
+  text-shadow:0 1px 0 rgba(255, 255, 255, 0.4);
   width:80%;
 }
 h2 {

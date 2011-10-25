@@ -13,10 +13,11 @@
 	</div>
 	<span class="aux">
 		<span class="date"><%= video.created_at.strftime("%b %e") %></span>
-		<%= link_to "Share", "javascript:void(0)", class: "share" %>
-		<%= render partial: "share", locals: { videoUrl: video.webpageUrl } %>
-		<%= link_to "Source", video.webpageUrl, class: "source", target: "_blank" %>
-		<%= link_to "Delete", video_path(video), class: "delete", confirm: "Are you sure?", method: :delete, remote: true %>
+		<span class="actions">
+			<%= link_to "Share", "javascript:void(0)", class: "share", title: "Share" %>
+			<%= render partial: "share", locals: { videoUrl: video.webpageUrl } %>
+			<%= link_to "Delete", video_path(video), class: "delete", title: "Delete", confirm: "Are you sure?", method: :delete, remote: true %>
+		</span>
 	</span>
 	<span class="tags">
 		<span class="label">Tags</span>

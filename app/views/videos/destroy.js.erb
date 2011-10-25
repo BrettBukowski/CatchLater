@@ -1,3 +1,4 @@
-$("#<%= @video.id %>").slideUp("slow", function() {
-  this.remove();
-});
+$("#<%= @video.id %>").slideUp("slow");//, function() {
+  // var context = this;
+  // setTimeout(function() { context.remove(); }, 1500);
+// });

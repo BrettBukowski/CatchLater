@@ -39,16 +39,17 @@ nav {
       -moz-transition: width .2s linear;
       &.selected,
       &:hover, &:focus {
-        background:#FFF url(/assets/fave.png) no-repeat;
+        background:#FFF url(/assets/fave.png) no-repeat 0 1px;
         width:24px;
       }
       &.selected {
-        background-position:0 27px;
+        background-position:0 -24px;
       }
     }
     .aux {
       display:block;
       margin: auto;
+      overflow:hidden;
       @include videoArea;
       text-align:right;
       > a {
@@ -58,27 +59,66 @@ nav {
       .date {
         float:left;
       }
-      .shareDropdown {
-        position:absolute;
-        a {
-          padding:0 4px;
-        }
-        ul {
-          background:yellow;
-          -webkit-border-radius:4px;
-          -moz-border-radius:4px;
-          border-radius:4px;
-          -webkit-box-shadow:0 1px 0 rgba(0, 0, 0, .3);
-          -moz-box-shadow:0 1px 0 rgba(0, 0, 0, .3);
-          box-shadow:0 1px 0 rgba(0, 0, 0, .3);
-          margin:42px 0 0 -120px;
-          overflow:hidden;
-          padding:6px;
-          opacity:0.6;
-        }
-        li {
+      .actions {
+        float:right;
+        .delete,
+        .share {
+          font-size:0;
+          color:transparent;
+          display:block;
+          width:32px;
+          height:32px;
           float:left;
-          list-style-type:none;
+        }
+        .share {
+          background:url(/assets/action.png) no-repeat;
+        }
+        .delete {
+          background:url(/assets/trash.png) no-repeat;
+        }
+        .shareDropdown {
+          position:absolute;
+          ul {
+            background:yellow;
+            -webkit-border-radius:4px;
+            -moz-border-radius:4px;
+            border-radius:4px;
+            -webkit-box-shadow:0 1px 0 rgba(0, 0, 0, .3);
+            -moz-box-shadow:0 1px 0 rgba(0, 0, 0, .3);
+            box-shadow:0 1px 0 rgba(0, 0, 0, .3);
+            margin:42px 0 0 -120px;
+            overflow:hidden;
+            padding:6px;
+            opacity:0.6;
+            li {
+              float:left;
+              list-style-type:none;
+              border-bottom:1px solid #041B4F;
+              padding-bottom:4px;
+              a {
+                padding:0 6px;
+                text-decoration:none;
+              }
+              &.source {
+                float:none;
+                padding-top:4px;
+                text-align:center;
+                border-bottom:0;
+                font-size:smaller;
+              }
+            }
+            &::before { /* nib */
+              border-bottom:10px solid yellow;
+              border-left:10px solid transparent;
+              border-right:10px solid transparent;
+              content:" ";
+              height:0;
+              left:-36px;
+              position:absolute;
+              top:32px;
+              width:0;
+            }
+          }
         }
       }
     }

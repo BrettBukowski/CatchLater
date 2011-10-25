@@ -29,6 +29,10 @@ class Video
     in: SUPPORTED_SOURCES,
     message: "Sorry, your source %{value} isn't supported"
   }
+  validates :type, inclusion: {
+    in: TYPES,
+    message: "The type of video isn't supported"
+  }
 
   def self.find_by_id(id)
     first(conditions: {id: id})
@@ -45,7 +49,7 @@ class Video
       url = "http://player.vimeo.com/video/#{videoID}"
     elsif self.source == 'ted'
       poster = "http://images.ted.com/images/ted/tedindex/embed-posters/" +
-          self.videoID.gsub(/-[A-Za-z0-9]+\.mp4/, '-embed.jpg').split('/').last
+          self.videoID.gsub('_', '-').gsub(/-[A-Za-z0-9]+\.mp4/, '.embed_thumbnail.jpg').split('/').last
       return %{<video src='http://video.ted.com/#{videoID}' poster='#{poster}' controls preload='none'>
               Your browser doesn't support this type of video :(
               </video>}

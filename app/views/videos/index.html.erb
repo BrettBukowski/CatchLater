@@ -6,6 +6,9 @@
 <nav>
 	<%= link_to "Favorites", faves_videos_path %>
 </nav>
+<% if notice %>
+<div id="notice"><%= notice %></div>
+<% end %>
 <section class="queue">
 	<%= render @videos %>
 	<%= will_paginate @videos %>

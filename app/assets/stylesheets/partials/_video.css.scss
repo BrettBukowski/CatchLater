@@ -61,6 +61,7 @@ nav {
       }
       .actions {
         float:right;
+        margin-top:5px;
         .delete,
         .share {
           font-size:0;
@@ -69,23 +70,31 @@ nav {
           width:32px;
           height:32px;
           float:left;
+          -webkit-transition: all .3s linear;
+          -moz-transition: all .3s linear;
+          &:focus,
+          &:hover {
+            opacity:1;
+          }
         }
         .share {
           background:url(/assets/action.png) no-repeat;
+          opacity:.1;
         }
         .delete {
-          background:url(/assets/trash.png) no-repeat;
+          background:url(/assets/trash.png) no-repeat 0 2px;
+          opacity:.13;
         }
         .shareDropdown {
           position:absolute;
           ul {
-            background:yellow;
+            background:#FFFC17;
             -webkit-border-radius:4px;
             -moz-border-radius:4px;
             border-radius:4px;
-            -webkit-box-shadow:0 1px 0 rgba(0, 0, 0, .3);
-            -moz-box-shadow:0 1px 0 rgba(0, 0, 0, .3);
-            box-shadow:0 1px 0 rgba(0, 0, 0, .3);
+            -webkit-box-shadow:1px 2px 3px rgba(0, 0, 0, .3);
+            -moz-box-shadow:1px 2px 3px rgba(0, 0, 0, .3);
+            box-shadow:1px 2px 3px rgba(0, 0, 0, .3);
             margin:42px 0 0 -120px;
             overflow:hidden;
             padding:6px;
@@ -93,22 +102,31 @@ nav {
             li {
               float:left;
               list-style-type:none;
-              border-bottom:1px solid #041B4F;
+              border-bottom:1px solid #06308f;
               padding-bottom:4px;
               a {
-                padding:0 6px;
+                display:block;
+                padding:0 6px 4px;
                 text-decoration:none;
+                -webkit-transition: text-shadow .3s linear;
+                -moz-transition: text-shadow .3s linear;
+                &:focus,
+                &:hover {
+                  text-shadow:0 3px 3px rgba(255, 255, 255, 1);
+                }
               }
               &.source {
                 float:none;
-                padding-top:4px;
                 text-align:center;
                 border-bottom:0;
                 font-size:smaller;
+                a {
+                  padding-top:4px;
+                }
               }
             }
             &::before { /* nib */
-              border-bottom:10px solid yellow;
+              border-bottom:10px solid #FFFC17;
               border-left:10px solid transparent;
               border-right:10px solid transparent;
               content:" ";

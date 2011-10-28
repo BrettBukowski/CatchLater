@@ -1,4 +1,6 @@
-$("#<%= @video.id %>").slideUp("slow");//, function() {
-  // var context = this;
-  // setTimeout(function() { context.remove(); }, 1500);
-// });
+$("#<%= @video.id %>").slideUp("slow");
+/* Adding a post-animation callback somehow causes the the animation
+  to stutter... */
+  setTimeout(function() {
+    $("#<%= @video.id %>").remove();
+  }, 1000);

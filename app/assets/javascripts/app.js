@@ -30,7 +30,7 @@ var CatchLater = CatchLater || (function() {
         ted: { data: /video\.ted\.com/, id: /mp4:([^.]+\.mp4)/, decode: true }
       },
       embed: {
-        youtube: [ { src: /ytimg.com/, id: /video_id=([^&?]+)/ },
+        youtube: [ { src: /ytimg.com/, id: /&video_id=([^&?]+)/ },
                    { src: /www\.youtube.com\/v\/([^&?\/]+)/ } ],
         vimeo: [ { src: /vimeo\.com\/[^0-9]+([0-9]+)/ } ]
       }

@@ -21,6 +21,16 @@
 	</span>
 	<span class="tags">
 		<span class="label">Tags</span>
-		<%= video.tags.join(" ") %>
+		<ul>
+		<% video.tags.map do |tag| %>
+			<li class="tag"><%= tag %></li>
+		<% end %>
+			<li class="new">
+				<form>
+					<input type="text"/>
+					<input type="submit" value=""/>
+				</form>
+			</li>
+		</ul>
 	</span>
 </div>

@@ -27,6 +27,7 @@
   background: -webkit-linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* Chrome10+,Safari5.1+ */
   background: -ms-linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* IE10+ */
   background: linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* W3C */
+  -moz-transition:all .6s, .6s, .6s;
   -webkit-transition:all .6s, .6s, .6s;
   &:hover {
     background: #90dbd5; /* Old browsers */

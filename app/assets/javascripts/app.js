@@ -33,12 +33,15 @@ var CatchLater = CatchLater || (function() {
         youtube: [ { src: /ytimg.com/, id: /&video_id=([^&?]+)/ },
                    { src: /www\.youtube.com\/v\/([^&?\/]+)/ } ],
         vimeo: [ { src: /vimeo\.com\/[^0-9]+([0-9]+)/ } ]
+      },
+      video: {
+        youtube: { src: /.*\.youtube\.com/, attr: 'data-youtube-id' }
       }
     },
     _checkIframeSrc = function(sources, el) {
       for (var src = el.src, match, i = 0; i < sources.length; i++) {
         if (match = sources[i].regex.exec(src)) {
-          return Video.foundVideo(el, {source: sources[i].name, id: match[match.length - 1]});
+          return {source: sources[i].name, id: match[match.length - 1]};
         }
       }
     },
@@ -51,7 +54,7 @@ var CatchLater = CatchLater || (function() {
           paramData = $('#' + el.id + ' param[name="flashvars"]')[0];
           paramData = ((source.decode) ? decodeURIComponent(paramData.value) : paramData.value);
           if (match = source.id.exec(paramData)) {
-            return Video.foundVideo(el, {source: i, id: match[match.length - 1]});
+            return {source: i, id: match[match.length - 1]};
           }
         }
       }
@@ -67,18 +70,30 @@ var CatchLater = CatchLater || (function() {
               if (source[j].id) {
                 paramData = el.getAttribute("flashvars");
                 if (match = source[j].id.exec(paramData)) {
-                  return Video.foundVideo(el, {source: i, id: match[match.length - 1]});
+                  return {source: i, id: match[match.length - 1]};
                 }
               }
               else if (match.length > 1) {
-                return Video.foundVideo(el, {source: i, id: match[match.length - 1]});
+                return {source: i, id: match[match.length - 1]};
               }
             }
           }
         }
       }
+    },
+    _checkVideoData = function(sources, el) {
+      var src = el.src, source, i, match;
+      for (i in sources) {
+        if (sources.hasOwnProperty(i)) {
+          source = sources[i];
+          if (sources.hasOwnProperty(i) && (match = source.src.exec(src))) {
+            return {source: i, id: el[source.attr]};
+          }
+        }
+      }
     };
     return {
+      selector: 'object, embed, iframe, video',
       iframe: function(el) {
         return _checkIframeSrc(_sources.iframe, el);
       },
@@ -87,6 +102,9 @@ var CatchLater = CatchLater || (function() {
       },
       embed: function(el) {
         return _checkEmbedData(_sources.embed, el);
+      },
+      video: function(el) {
+        return _checkVideoData(_sources.video, el);
       }
     };
   })(),
@@ -212,24 +230,26 @@ var CatchLater = CatchLater || (function() {
     var _videos = [];
     
     function _highlightVideo() {
+      var i = 0;
       $(_videos).each(function(item) {
         UI.drawPrompt(item.video, item.details);
+        i++;
       });
+      return i;
+    }
+    
+    function _foundVideo(video, details) {
+      if (video && video.tagName && details && details.id && details.source) {
+        _videos.push({video: video, details: details});
+      }
     }
     
     return {
-      foundVideo: function(video, details) {
-        _videos.push({video: video, details: details});
-      },
-
       findVideo: function() {
-        $('object, embed, iframe').each(function(item, index, all) {
-          Parser[item.tagName.toLowerCase()](item);
+        $(Parser.selector).each(function(item, index, all) {
+          _foundVideo(item, Parser[item.tagName.toLowerCase()](item));
         });
-        if (_videos.length) {
-          _highlightVideo();
-        }
-        else {
+        if (!_highlightVideo()) {
           alert("no supported video found :(");
         }
       },

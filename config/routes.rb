@@ -5,6 +5,9 @@ Catchlater::Application.routes.draw do
   resources :videos do
     post 'toggle_fave', on: :member
     get 'faves', on: :collection
+    post 'add_tag', on: :member
+    post 'remove_tag', on: :member
+    get 'tagged', on: :collection
   end
   resources :users
   resource :session

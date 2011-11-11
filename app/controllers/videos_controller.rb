@@ -51,6 +51,14 @@ class VideosController < ApplicationController
     @videos = Video.paginate(:page => @page, :conditions => {:favorited => true}, :order => 'created_at DESC', :per_page => 6)    
   end
   
+  def add_tag
+    
+  end
+  
+  def remove_tag
+    
+  end
+  
   # JSONP request made from bookmarklet
   def addToQueue
     if currentUser

@@ -99,6 +99,8 @@ nav {
             overflow:hidden;
             padding:6px;
             opacity:0.6;
+            z-index:100;
+            min-width:340px;
             li {
               float:left;
               list-style-type:none;

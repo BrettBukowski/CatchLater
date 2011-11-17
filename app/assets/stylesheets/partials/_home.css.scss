@@ -31,7 +31,7 @@
     img {
       border:6px solid #FFF;
       @include boxShadow;
-      border-radius:10px;
+      @include borderRadius(10px);
       display:block;
       margin:26px auto 0;
     }
@@ -41,7 +41,7 @@
   font-size:28px;
 }
 .signup {
-  border-radius:8px;
+  @include borderRadius(8px);
   border:1px solid #FFF;
   @include boxShadow;
   @include button;

@@ -12,7 +12,7 @@
       padding:8px 10px 6px;
       position:absolute;
       width:200px;
-      border-radius:5px;
+      @include borderRadius(5px);
       border:1px solid #BBB;
       box-shadow:0 1px 2px rgba(0, 0, 0, .1) inset;
       outline:none;
@@ -44,7 +44,7 @@
   #errorExplanation {
     background:rgba(255, 255, 194, .8);
     border:1px solid #FFF;
-    border-radius:6px;
+    @include borderRadius(6px);
     @include boxShadow(1px, 6px, 0.2);
     margin-bottom:20px;
     max-width:700px;

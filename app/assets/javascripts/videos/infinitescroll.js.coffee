@@ -1,4 +1,5 @@
 $ ->
+  $(window).sausage({page: '.video'})
   every = (milliseconds, callback) => setInterval callback, milliseconds
   nearBottom = () ->
     $(window).scrollTop() > $(document).height() - $(window).height() - 200
@@ -14,6 +15,7 @@ $ ->
         complete: (resp) ->
           if resp.responseText
             $('#loading').replaceWith(resp.responseText)
+            $(window).sausage('draw')
             loading = false
           else
             clearInterval(checkPage)

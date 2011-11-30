@@ -44,11 +44,19 @@ class VideosController < ApplicationController
   def index
     @page = (params[:page] || 1).to_i
     @videos = Video.paginate(:page => @page, :order => 'created_at DESC', :per_page => 6)
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
   
   def faves
     @page = (params[:page] || 1).to_i
     @videos = Video.paginate(:page => @page, :conditions => {:favorited => true}, :order => 'created_at DESC', :per_page => 6)    
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
   
   def add_tag

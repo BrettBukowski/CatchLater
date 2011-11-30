@@ -7,4 +7,6 @@
 // = require jquery
 // = require jquery-ui
 // = require jquery_ujs
-// = require videos
+// = require videos/infinitescroll
+// = require videos/destroy
+// = require videos/dropdown

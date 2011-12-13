@@ -1,13 +1,13 @@
 .sausage-set {
     position: fixed; right: 0; top: 0;
     width: 15px; height: 100%;
-    border-left: solid 2px #fff;
-    border-right: solid 2px #fff;
+    border-left: solid 1px rgba(255, 255, 255, 0.1);
+    border-right: solid 1px rgba(255, 255, 255, 0.6);
 }
     .sausage {
         position: absolute; left: 0;
         width: 100%; height: 100%;
-        background-color: #f1f1f1;
+        background-color: rgba(241, 241, 241, 0.4);
         text-decoration: none;
         -moz-border-radius: 8px;
         -webkit-border-bottom-left-radius: 8px;
@@ -20,14 +20,13 @@
     }
     .sausage-hover,
     .sausage-current {
-        background-color: #edf6fa;
+        background-color: rgba(237, 246, 250, 0.6);
         -moz-box-shadow: inset 0px 1px 2px 4px rgba(51, 63, 70, 0.025);
     }
         .sausage-span {
-            position: absolute; left: -12px; top: 5px; z-index: 2;
+            position: absolute; left: -60px; top: 5px; z-index: 2;
             display: none;
-            width: 15px; height: 10px;
-            padding: 2px;
+            padding: 5px;
             color: #888;
             background-color: #fff;
             border: solid 2px #b6d8ea;

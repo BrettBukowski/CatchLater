@@ -1,5 +1,8 @@
 $ ->
-  $(window).sausage({page: '.video'})
+  $(window).sausage({page: '.video'
+  , content: (i, page) ->
+   '<span class="sausage-span">' + (i + 1) + ". " + page.find('.date').html() + '</span>'
+  })
   every = (milliseconds, callback) => setInterval callback, milliseconds
   nearBottom = () ->
     $(window).scrollTop() > $(document).height() - $(window).height() - 200

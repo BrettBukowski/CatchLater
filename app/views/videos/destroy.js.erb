@@ -3,4 +3,5 @@ $("#<%= @video.id %>").slideUp("slow");
   to stutter... */
   setTimeout(function() {
     $("#<%= @video.id %>").remove();
+    $(window).sausage('draw');
   }, 1000);

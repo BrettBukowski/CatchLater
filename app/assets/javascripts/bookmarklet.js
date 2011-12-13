@@ -1,7 +1,7 @@
 (function() {
   if (!window.snack && !window.CatchLater) {
     var head = document.getElementsByTagName('head')[0],
-        scripts = ['snack/builds/snack', 'app'],
+        scripts = ['externals/snack/builds/snack', 'app'],
         i, s, length = scripts.length, interval;
     for (i = 0; i < length; i++) {  
         s = document.createElement('script');

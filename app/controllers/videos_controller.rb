@@ -1,13 +1,13 @@
 class VideosController < ApplicationController
-  before_filter :loginRequired, :except => :addToQueue
+  before_filter :login_required, :except => :addToQueue
   
   def new
     @video = Video.new
   end
   
   def create
-    @video = newVideoFromParams
-    @video.user = currentUser
+    @video = new_video_from_params
+    @video.user = current_user
     respond_to do |format|
       if @video.save
         format.html { redirect_to root_path }
@@ -68,22 +68,22 @@ class VideosController < ApplicationController
   end
   
   # JSONP request made from bookmarklet
-  def addToQueue
-    if currentUser
-      @video = newVideoFromParams
-      @video.user = currentUser
+  def add_to_queue
+    if current_user
+      @video = new_video_from_params
+      @video.user = current_user
       if @video.save
-        renderJSON @video.to_json
+        render_jsonp @video.to_json
       else
-        renderJSON @video.errors
+        render_jsonp @video.errors
       end
     else
-      renderJSON [:error => "login required"]
+      render_jsonp [:error => "login required"]
     end
   end
   
   private
-  def newVideoFromParams
+  def new_video_from_params
     video = Video.new
     video.type = params[:type]
     video.source = params[:source]

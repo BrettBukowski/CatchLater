@@ -2,12 +2,12 @@ class ApplicationController < ActionController::Base
   include Authentication
   helper :all
   protect_from_forgery
-  before_filter :storeLocation
+  before_filter :store_location
   
   protected
   
-  def loginRequired
-    if !currentUser
+  def login_required
+    if !current_user
       flash[:notice] = "Log in"
       redirect_to signin_url
     else
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def renderJSON(json, options={})
+  def render_jsonp(json, options={})
     callback = params[:callback]
     response = begin
       if callback

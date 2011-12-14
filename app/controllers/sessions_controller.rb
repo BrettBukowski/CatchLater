@@ -1,13 +1,13 @@
 class SessionsController < ApplicationController
   
   def new
-    signOut!
+    sign_out!
     @user = User.new
   end
   
   def create
-    signOut!
-    if @user = User.logIn(params[:email], params[:password])
+    sign_out!
+    if @user = User.log_in(params[:email], params[:password])
       session[:userId] = @user.id
       redirect_to videos_url
     else
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    signOutAndKillSession!
+    sign_out_and_kill_session!
     redirect_to new_session_url
   end
 end

@@ -1,7 +1,7 @@
 Catchlater::Application.routes.draw do
   get "home/index"
   root to: "home#index"
-  match "queue/push" => "videos#addToQueue", via: :get
+  match "queue/push" => "videos#add_to_queue", via: :get
   resources :videos do
     post 'toggle_fave', on: :member
     get 'faves', on: :collection

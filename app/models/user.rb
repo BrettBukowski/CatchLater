@@ -18,12 +18,12 @@ class User
   validates :email, presence: true, uniqueness: true, length: { in: 6..100 },
     format: {with: EMAIL_REGEX, message: "The email you entered is invalid"}
   
-  def self.logIn(email, password)
+  def self.log_in(email, password)
     user = User.first(conditions: {email: email.downcase})
-    user && user.loggedIn?(password) ? user : nil
+    user && user.logged_in?(password) ? user : nil
   end
   
-  def loggedIn?(pass)
+  def logged_in?(pass)
     password == pass
   end
   
@@ -45,7 +45,7 @@ class User
     write_attribute(:email, newEmail)
   end
   
-  def resetPassword!
+  def reset_password!
     self.resetPasswordCodeExpires = 1.day.from_now
     seed = "#{email}#{Time.now.to_s.split(//).sort_by {rand}.join}"
     self.resetPasswordCode = Digest::SHA1.hexdigest(seed)

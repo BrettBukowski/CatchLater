@@ -1,11 +1,13 @@
 $ ->
+	# Don't run on non-video pages
+	return if $('.videos')
   $(window).sausage({page: '.video'
   , content: (i, page) ->
    '<span class="sausage-span">' + (i + 1) + ". " + page.find('.date').html() + '</span>'
   })
   every = (milliseconds, callback) => setInterval callback, milliseconds
   nearBottom = () ->
-    $(window).scrollTop() > $(document).height() - $(window).height() - 200
+    $(window).scrollTop() > $(document).height() - $(window).height() - 300
   page = 1
   loading = false
   checkPage = every 500, () ->

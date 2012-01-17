@@ -45,10 +45,11 @@ class User
     write_attribute(:email, newEmail)
   end
   
-  def reset_password!
+  def send_password_reset!
     self.resetPasswordCodeExpires = 1.day.from_now
     seed = "#{email}#{Time.now.to_s.split(//).sort_by {rand}.join}"
     self.resetPasswordCode = Digest::SHA1.hexdigest(seed)
-    save!
+    self.save
+    UserMailer.password_reset(self).deliver
   end
 end

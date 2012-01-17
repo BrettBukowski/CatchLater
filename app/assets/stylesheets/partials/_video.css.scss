@@ -17,6 +17,7 @@ nav {
     iframe {
       border: 0;
       height: 349px;
+	  @include boxShadow(0, 5px, 0.9);
       @include videoArea;
     }
     .content {

@@ -29,16 +29,25 @@ class UsersController < ApplicationController
   
   def send_password_reset
     @user = User.first(conditions: {email: params[:email].downcase})
+    exit if !@user
     @user.send_password_reset! if @user
-    redirect_to request.referer notice: "An email has been sent with password reset instructions"
+    redirect_to forgot_password_users_url, notice: "An email has been sent with password reset instructions"
   end
   
   def reset_password
-    if params[:token].present? && @user = User.first(conditions: {resetPasswordCode: params[:token]})
+    if !params[:token].present? || !@user = User.first(conditions: {resetPasswordCode: params[:token]})
+      error = "The link you used is invalid"
+    elsif @user.resetPasswordCodeExpires > DateTime.now
+      error = "Whoops! The link you used to reset your password has expired. Please request a new reset email."
+    end
+    redirect_to(signin_url notice: error) if error
   end
   
   def set_new_password
-    unless params[:token].present? && @user = User.first(conditions: {resetPasswordCode: params[:token]})
-      
+    
+    # if params[:token].present? && @user = User.first(conditions: {resetPasswordCode: params[:token]})
+      # return @user
+      # redirect_to signin_url
+    # end
   end
 end

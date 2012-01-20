@@ -44,10 +44,12 @@ class UsersController < ApplicationController
   end
   
   def set_new_password
-    
-    # if params[:token].present? && @user = User.first(conditions: {resetPasswordCode: params[:token]})
-      # return @user
-      # redirect_to signin_url
-    # end
+    if @user = User.first(conditions: {id: params[:id]}) && params[:token].present? && params[:token] == @user.resetPasswordCode
+      @user.password = params[:password]
+      @user.save
+      redirect_to root_path
+    else
+      redirect_to signin_url notice: "There was an error with the request"
+    end
   end
 end

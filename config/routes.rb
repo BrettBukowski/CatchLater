@@ -12,7 +12,7 @@ Catchlater::Application.routes.draw do
   resources :users do
     get "forgot_password", on: :collection
     post "send_password_reset", on: :collection
-    post "set_new_password", on: :collection
+    post "set_new_password", on: :member
   end
   match "reset_password" => "users#reset_password", via: :get
   resource :session

@@ -11,3 +11,4 @@
 // = require videos/infinitescroll
 // = require videos/destroy
 // = require videos/dropdown
+// = require videos/tags

@@ -21,16 +21,12 @@
 	</span>
 	<span class="tags">
 		<span class="label">Tags</span>
-		<ul>
-		<% video.tags.map do |tag| %>
-			<li class="tag"><%= tag %><%= link_to "×", remove_tag_video_path(video), class: "delete-tag", title: "Remove this tag", remote: true, method: :post %></li>
-		<% end %>
-			<li class="new">
-				<%= form_tag add_tag_video_path(video) do %>
-					<%= text_field_tag :tag %>
-					<%= submit_tag 'Add Tag', disable_with: '' %>
+		<%= form_tag set_tags_video_path(video) do %>
+			<textarea name="tags" class="tagEntry" rows="1">
+				<% video.tags.map do |tag| %>
+					<%= tag %>
 				<% end %>
-			</li>
-		</ul>
+			</textarea>
+		<% end %>
 	</span>
 </div>

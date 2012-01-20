@@ -59,13 +59,10 @@ class VideosController < ApplicationController
     end
   end
   
-  def add_tag
+  def save_tags
     
   end
   
-  def remove_tag
-    
-  end
   
   # JSONP request made from bookmarklet
   def add_to_queue

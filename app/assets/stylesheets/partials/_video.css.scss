@@ -2,11 +2,13 @@
   margin: auto;
   width: 560px;
 }
+
 nav {
   float:right;
   position:relative;
   top:-64px;
 }
+
 .videos section {
   text-align:center;
   .video {
@@ -143,72 +145,32 @@ nav {
       font-size:.86em;
       @include videoArea;
       text-align:left;
-      ul {
+	  form {
+          margin:6px 0;
+		  .text-core {
+	          @include borderRadius(5px);
+		  }
+	  }
+      textarea {
         cursor:pointer;
-        margin:6px 0;
-        overflow:hidden;
         padding:4px;
         width:540px;
-        @include borderRadius(5px);
+		background: none;
+		font-size: 12px;
+		outline: none;
+		border: 0;
         opacity:.3;
         border:1px solid transparent;
         -webkit-transition:all .6s;
-        &:hover {
+        &:hover, &:focus, &:active {
           opacity:1;
           border:1px solid #BBB;
           box-shadow:0 1px 2px rgba(0, 0, 0, .1) inset;
         }
-        li {
-          list-style-type:none;
-          &.tag {
-            background:#50565A;
-            @include borderRadius(14px);
-            border:1px solid #FFF;
-            color:#FFF;
-            float:left;
-            padding:0 6px 5px;
-            position:relative;
-            text-shadow:none;
-            -webkit-transition:all .4s;
-            &:hover {
-              padding-right:30px;
-              a.delete-tag {
-                right:13px;
-                top:-2px;
-                opacity:1;
-                -webkit-transform:scale(2);
-              }
-            }
-            a.delete-tag {
-              opacity:0;
-              color: white;
-              position: absolute;
-              right:0;
-              text-decoration: none;
-              top:0;
-            }
-          }
-          input {
-            font-size:12px;
-            background:none;
-            outline:none;
-            border:0;
-          }
-          input[type="text"] {
-            -webkit-transition:all .4s;
-            &:hover, &:focus {
-//              width:auto;
-            }
-          }
-          input[type="submit"] {
-            cursor:pointer;
-            display:none;
-          }
-        }
       }
     }
   }
-  .pagination {
+/*  .pagination {
     padding:20px 0;
     .disabled {
       display:none;
@@ -219,5 +181,5 @@ nav {
     a {
       padding:0 5px;
     }
-  }
+  }*/
 }

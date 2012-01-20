@@ -1,6 +1,7 @@
 $ ->
-	# Don't run on non-video pages
-	return if $('.videos')
+  # Don't run on non-video pages
+  return if not $('.videos').length
+  
   $(window).sausage({page: '.video'
   , content: (i, page) ->
    '<span class="sausage-span">' + (i + 1) + ". " + page.find('.date').html() + '</span>'

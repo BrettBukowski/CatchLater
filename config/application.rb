@@ -18,7 +18,6 @@ module Catchlater
     config.autoload_paths += %W(#{config.root}/lib/authentication)
     
     # Plugins
-    # config.plugins = [ :dynamic_form ]
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

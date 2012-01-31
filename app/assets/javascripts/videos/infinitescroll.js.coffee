@@ -8,10 +8,10 @@ $ ->
   })
   every = (milliseconds, callback) => setInterval callback, milliseconds
   nearBottom = () ->
-    $(window).scrollTop() > $(document).height() - $(window).height() - 300
+    $(window).scrollTop() > $(document).height() - $(window).height() - 500
   page = 1
   loading = false
-  checkPage = every 500, () ->
+  checkPage = every 200, () ->
     if not loading and nearBottom()
       loading = true
       $('.queue').append($('<div id="loading">Loading...</div>'))

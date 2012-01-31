@@ -1,6 +1,6 @@
 $ ->	
 	$('.tagEntry').textext({
-	  plugins: 'tags autocomplete'
+	  plugins: 'autocomplete tags'
 		ext: {
 			tags: {
 				addTags: (tags) ->
@@ -14,3 +14,5 @@ $ ->
 	}).bind 'isTagAllowed', (e, data) ->
 		if data.tag.indexOf(',') > -1
 			data.result = false
+	.each () ->
+		$(this).textext()[0].tags().addTags($(this).attr('data-tags').split(','))

@@ -22,11 +22,7 @@
 	<span class="tags">
 		<span class="label">Tags</span>
 		<%= form_tag set_tags_video_path(video) do %>
-			<textarea name="tags" class="tagEntry" rows="1">
-				<% video.tags.map do |tag| %>
-					<%= tag %>
-				<% end %>
-			</textarea>
+			<textarea name="tags" class="tagEntry" rows="1" data-tags="<%= video.tags.join(',') %>"></textarea>
 		<% end %>
 	</span>
 </div>

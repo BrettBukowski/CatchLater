@@ -87,6 +87,7 @@ nav {
         }
         .shareDropdown {
           position:absolute;
+		  z-index:100;
           ul {
             background:#FFFC17;
             @include borderRadius(4px);
@@ -97,7 +98,7 @@ nav {
             overflow:hidden;
             padding:6px;
             opacity:0.6;
-            z-index:100;
+            z-index:101;
             min-width:340px;
             li {
               float:left;

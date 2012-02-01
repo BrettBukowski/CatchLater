@@ -87,7 +87,7 @@ nav {
         }
         .shareDropdown {
           position:absolute;
-		  z-index:100;
+		      z-index:100;
           ul {
             background:#FFFC17;
             @include borderRadius(4px);
@@ -146,26 +146,23 @@ nav {
       font-size:.86em;
       @include videoArea;
       text-align:left;
-	  form {
-          margin:6px 0;
-		  .text-core {
-	          @include borderRadius(5px);
-		  }
-	  }
-      textarea {
-        cursor:pointer;
-        padding:4px;
-        width:540px;
-		background: none;
-		font-size: 12px;
-		outline: none;
-		border: 0;
-        opacity:.3;
-        box-shadow:0 1px 2px rgba(0, 0, 0, .1) inset;
-        -webkit-transition:all .6s;
-        &:hover, &:focus, &:active {
-          opacity:1;
-		  box-shadow:0 0 0 rgba(0, 0, 0, .1);
+      form {
+        margin:6px 0;
+        textarea {
+          cursor:pointer;
+          padding:4px;
+          width:540px;
+		      background: none;
+		      font-size: 12px;
+		      outline: none;
+		      border: 0;
+          opacity:.3;
+          box-shadow:0 1px 2px rgba(0, 0, 0, .1) inset;
+          -webkit-transition:all .6s;
+          &:hover, &:focus, &:active {
+            opacity:1;
+		        box-shadow:0 0 0 rgba(0, 0, 0, .1);
+          }
         }
       }
     }
@@ -182,4 +179,15 @@ nav {
       padding:0 5px;
     }
   }*/
+  // TextExt Overrides
+  .text-core {
+    background: rgba(255, 255, 255, .9);
+    @include borderRadius(5px);
+    .text-wrap .text-tags .text-tag .text-button {
+      @include borderRadius(3px);
+      a.text-remove {
+        @include borderRadius(8px);
+      }
+    }
+  }
 }

@@ -56,4 +56,12 @@ class Video
     end
     return "<iframe src='#{url}' allowfullscreen></iframe>"
   end
+  
+  def link
+    if self.source == 'youtube'
+      return "http://www.youtube.com/watch?v=#{videoID}"
+    elsif self.source == 'vimeo'
+      return "http://vimeo.com/#{videoID}"
+    end
+  end
 end

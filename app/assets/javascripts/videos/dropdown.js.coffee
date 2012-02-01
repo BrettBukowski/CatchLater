@@ -1,6 +1,6 @@
 $ ->
   itemOpened = 0
-  $('.videoList').on 'click', '.video a.share', (toggleClick) ->
+  $('.video a.share').click (toggleClick) ->
     itemOpened++
     dropdown = $(this).next('.shareDropdown').toggle()
     button = $(toggleClick.target)

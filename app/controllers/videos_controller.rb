@@ -43,7 +43,7 @@ class VideosController < ApplicationController
   
   def index
     @page = (params[:page] || 1).to_i
-    @videos = Video.paginate(:page => @page, :order => 'created_at DESC', :per_page => 6)
+    @videos = Video.paginate(page: @page, conditions: {favorited: false}, order: 'created_at DESC', per_page: 3)
     respond_to do |format|
       format.js
       format.html
@@ -52,7 +52,7 @@ class VideosController < ApplicationController
   
   def faves
     @page = (params[:page] || 1).to_i
-    @videos = Video.paginate(:page => @page, :conditions => {:favorited => true}, :order => 'created_at DESC', :per_page => 6)    
+    @videos = Video.paginate(page: @page, conditions: {favorited: true}, order: 'created_at DESC', per_page: 3)    
     respond_to do |format|
       format.js
       format.html

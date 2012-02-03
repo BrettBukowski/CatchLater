@@ -23,6 +23,7 @@
 		<span class="label">Tags</span>
 		<%= form_tag set_tags_video_path(video) do %>
 			<textarea name="tags" class="tagEntry" rows="1" data-tags="<%= video.tags.join(',') %>"></textarea>
+			<span class="tip hide">Protip: Separate tags with comma, tab, or enter.</span>
 		<% end %>
 	</span>
 </div>

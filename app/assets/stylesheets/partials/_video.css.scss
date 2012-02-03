@@ -149,47 +149,37 @@ nav {
       form {
         margin:6px 0;
         textarea {
-/*          cursor:pointer;*/
-/*          padding:4px;*/
-          width:540px;
-/*		      background: none;*/
-/*		      font-size: 12px;*/
-/*		      outline: none;*/
-		      border: 0;
-			  height: 22px;
-/*          opacity:.3;*/
-/*          box-shadow:0 1px 2px rgba(0, 0, 0, .1) inset;*/
-/*          -webkit-transition:all .6s;*/
-/*          &:hover, &:focus, &:active {*/
-/*            opacity:1;*/
-/*		        box-shadow:0 0 0 rgba(0, 0, 0, .1);*/
-/*          }*/
+	      border: 0;
+		  height: 22px;
+		  width: 540px;
         }
+		.tip {
+			background:#F4F889;
+			background: rgba(244, 248, 137, 0.6);
+			margin-top: 6px;
+			position: absolute;
+			@include textShadow(1px);
+		}
       }
     }
   }
-/*  .pagination {
-    padding:20px 0;
-    .disabled {
-      display:none;
-    }
-    .current {
-      font-style:normal;
-    }
-    a {
-      padding:0 5px;
-    }
-  }*/
   // TextExt Overrides
   .text-core {
-    background: rgba(255, 255, 255, .9);
-	@include boxShadow(0, 7px, 0.1);
+    background: rgba(251, 251, 251, .3);
+	@include boxShadow(0, 2px, 0.1);
     @include borderRadius(5px);
     .text-wrap .text-tags .text-tag .text-button {
       @include borderRadius(3px);
       a.text-remove {
         @include borderRadius(8px);
       }
+	  .text-label {
+		@include textShadow(1px);
+	  }
     }
+	&.focus {
+	  background: rgba(255, 255, 255, .8);
+	  box-shadow: 0 0 0 rgba(46, 119, 149, .5);
+	}
   }
 }

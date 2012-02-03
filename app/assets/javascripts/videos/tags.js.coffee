@@ -15,6 +15,11 @@
 	.bind 'isTagAllowed', (e, data) ->
 		if data.tag.indexOf(',') > -1
 			data.result = false
+	.on 'focus', () ->
+		$(this).closest('.text-core').addClass('focus').next().fadeIn()
+		
+	.on 'blur', () ->
+		$(this).closest('.text-core').removeClass('focus').next().fadeOut()
 	.each () ->
 		$(this).textext()[0].tags().addTags($(this).attr('data-tags').split(','), true)
 

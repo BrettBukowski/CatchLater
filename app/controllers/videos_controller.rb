@@ -62,7 +62,7 @@ class VideosController < ApplicationController
   def set_tags
     if params[:id].present?
       @video = Video.find_by_id(params[:id])
-      @video.tags = params[:tags].strip.split(',')
+      @video.tags = params[:tags].strip.split(',').uniq
       @video.save
       render :json => @video.tags
     else

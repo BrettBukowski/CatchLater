@@ -13,7 +13,7 @@
 						$.post(this.core().input().closest('form').attr('action'), { tags: this.core().hiddenInput().attr('value').replace(/["\[\]]/g, '')})
   )
 	.bind 'isTagAllowed', (e, data) ->
-		if data.tag.indexOf(',') > -1
+		if data.tag.indexOf(',') > -1 or $.inArray(data.tag, $(e.target).textext()[0].tags()._formData) > -1
 			data.result = false
 	.on 'focus', () ->
 		return if window.localStorage.protips > 5
@@ -33,7 +33,7 @@ $ ->
 		if e.keyCode is 9
 			$(e.target).textext()[0].tags().onEnterKeyPress(e)
 			e.target.value = ''
-			false
+			e.stopPropagation()
 		onKeyDown.call(this, e)
 	$.fn.textext.TextExt.prototype.onAnyKeyUp = (e, keyCode) ->
 		if keyCode is 188

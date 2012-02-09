@@ -23,7 +23,8 @@ var CatchLater = CatchLater || (function() {
       iframe: [
         { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?\/]+)/ },
         { name: 'vimeo', regex: /player\.vimeo\.com\/video\/([0-9]+)/ },
-        { name: 'blip', regex: /blip\.tv\/play\/([^.]+)\.html/ }
+        { name: 'blip', regex: /blip\.tv\/play\/([^.]+)\.html/ },
+		{ name: 'npr', regex: /npr\.org\/templates\/event\/embeddedVideo.php\?storyId=([0-9]+)/ }
       ],
       object: {
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },

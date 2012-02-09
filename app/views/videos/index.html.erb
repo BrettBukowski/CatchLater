@@ -6,6 +6,9 @@
 <nav>
 	<%= link_to "Favorites", faves_videos_path %>
 </nav>
+<% @tags.each do |tag| %>
+<%= tag['_id'] %> (<%= tag['value'].to_i %>)<br>
+<% end %>
 <% if notice %>
 <div id="notice"><%= notice %></div>
 <% end %>

@@ -27,7 +27,8 @@ var CatchLater = CatchLater || (function() {
       ],
       object: {
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
-        ted: { data: /video\.ted\.com/, id: /mp4:([^.]+\.mp4)/, decode: true }
+        ted: { data: /video\.ted\.com/, id: /mp4:([^.]+\.mp4)/, decode: true },
+		npr: { data: /media\.npr\.org/, id: /\?storyId=([0-9]+)/, decode: true }
       },
       embed: {
         youtube: [ { src: /ytimg.com/, id: /&video_id=([^&?]+)/ },

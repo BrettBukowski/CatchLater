@@ -17,7 +17,7 @@ class Video
 
   # Validation
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
-  SUPPORTED_SOURCES = %w[youtube vimeo ted blip adultswim]
+  SUPPORTED_SOURCES = %w[youtube vimeo ted blip npr]
   TYPES = %w[iframe video object embed]
 
   validates :webpageUrl, :type, :source, :videoID, presence: true
@@ -47,6 +47,8 @@ class Video
       url = "http://www.youtube.com/embed/#{videoID}"
     elsif self.source == 'vimeo'
       url = "http://player.vimeo.com/video/#{videoID}"
+    elsif self.source == 'npr'
+      url = "http://www.npr.org/templates/event/embeddedVideo.php?storyId=#{videoID}"
     elsif self.source == 'ted'
       poster = "http://images.ted.com/images/ted/tedindex/embed-posters/" +
           self.videoID.gsub('_', '-').gsub(/-[A-Za-z0-9]+\.mp4/, '.embed_thumbnail.jpg').split('/').last
@@ -62,6 +64,9 @@ class Video
       return "http://www.youtube.com/watch?v=#{videoID}"
     elsif self.source == 'vimeo'
       return "http://vimeo.com/#{videoID}"
+    elsif self.source == 'npr'
+      return "http://www.npr.org/templates/event/embeddedVideo.php?storyId=#{videoID}"
     end
+    self.webpageUrl
   end
 end

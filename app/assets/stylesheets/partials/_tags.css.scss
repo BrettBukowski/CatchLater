@@ -1,0 +1,23 @@
+.tagList {
+	clear: both;
+	overflow: hidden;
+	.tag {
+		background: #00cfd1;
+		border: 1px solid #999;
+		float: left;
+		list-style: none;
+		margin: 4px;
+		@include borderRadius;
+		a {
+			color: #FFF;
+			display: block;
+			padding: 0 7px 6px;
+			text-decoration: none;
+			text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+			.count {
+				color: #EFEFEF;
+				font-size: smaller;
+			}
+		}
+	}
+}

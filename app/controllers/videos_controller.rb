@@ -44,8 +44,7 @@ class VideosController < ApplicationController
   def index
     @page = (params[:page] || 1).to_i
     @videos = Video.paginate(page: @page, conditions: {favorited: false}, order: 'created_at DESC', per_page: 3)
-    require 'user_video_tags'
-    @tags = UserVideoTags.build(current_user.id).find()
+    @tags = get_tags_for_current_user
     respond_to do |format|
       format.js
       format.html
@@ -54,7 +53,8 @@ class VideosController < ApplicationController
   
   def faves
     @page = (params[:page] || 1).to_i
-    @videos = Video.paginate(page: @page, conditions: {favorited: true}, order: 'created_at DESC', per_page: 3)    
+    @videos = Video.paginate(page: @page, conditions: {favorited: true}, order: 'created_at DESC', per_page: 3)   
+    @tags = get_tags_for_current_user 
     respond_to do |format|
       format.js
       format.html
@@ -72,6 +72,20 @@ class VideosController < ApplicationController
     end
   end
   
+  def tags
+    @tags = get_tags_for_current_user
+  end
+  
+  def tagged
+    @tag = params[:with]
+    @page = (params[:page] || 1).to_i
+    @videos = Video.paginate(page: @page, conditions: {tags: @tag}, order: 'created_at DESC', per_page: 3)
+    @tags = get_tags_for_current_user
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
   
   # JSONP request made from bookmarklet
   def add_to_queue
@@ -96,5 +110,10 @@ class VideosController < ApplicationController
     video.videoID = params[:videoID]
     video.webpageUrl = params[:webpageUrl]
     return video
+  end
+  
+  def get_tags_for_current_user
+    require 'user_video_tags'
+    UserVideoTags.build(current_user.id).find()
   end
 end

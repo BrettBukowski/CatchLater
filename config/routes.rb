@@ -7,6 +7,7 @@ Catchlater::Application.routes.draw do
     get "faves", on: :collection
     post "set_tags", on: :member
     get "tagged", on: :collection
+    get "tags", on: :collection
   end
   resources :users do
     get "forgot_password", on: :collection

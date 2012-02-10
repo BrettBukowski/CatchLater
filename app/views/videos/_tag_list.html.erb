@@ -1,0 +1,10 @@
+<ul class="tagList">
+<% @tags.each do |tag| %>
+  <li class="tag">
+	<a href="<%= tagged_videos_path %>?with=<%= tag['_id'] %>">
+    <span class="name"><%= tag['_id'] %></span>
+		<span class="count">(<%= tag['value'].to_i %>)</span>
+	</a>
+  </li>
+<% end %>
+</ul>

@@ -16,7 +16,7 @@ $ ->
       loading = true
       $('.queue').append($('<div id="loading">Loading...</div>'))
       page++
-      $.ajax(window.location.pathname + "?page=#{ page }", {
+      $.ajax(window.location.pathname + (window.location.search || '?') + "&page=#{ page }", {
         dataType: 'script',
         complete: (resp) ->
           if resp.responseText
@@ -26,4 +26,5 @@ $ ->
             loading = false
           else
             clearInterval(checkPage)
+            $('#loading').remove()
       })

@@ -7,7 +7,7 @@
 <nav>
 	<%= link_to "All videos", videos_path %>
 	<%= link_to "Favorites", faves_videos_path %>
-	<%= link_to "Tags", tagged_videos_path %>
+	<%= link_to "Tags", tags_videos_path, id: "tagDropdown" %>
 </nav>
 
 <%= render partial: "tag_list" %>

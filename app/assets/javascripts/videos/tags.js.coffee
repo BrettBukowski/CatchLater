@@ -1,3 +1,7 @@
+suggestionList = $.map($('.tagList .name'), (i) ->
+    i.innerHTML
+)
+
 (exports ? this).affixTags = (elements) ->
 	elements.textext(
 		plugins: 'autocomplete tags'
@@ -12,6 +16,13 @@
 					if not alreadySaved
 						$.post(this.core().input().closest('form').attr('action'), { tags: this.core().hiddenInput().attr('value').replace(/["\[\]]/g, '')})
   )
+	.bind 'getSuggestions', (e, data) ->
+		textext = $(e.target).textext()[0]
+		query = if data then data.query else ''
+		query or= ''
+		$(this).trigger 'setSuggestions', {
+			result: textext.itemManager().filter(suggestionList, query)
+		}
 	.bind 'isTagAllowed', (e, data) ->
 		if data.tag.indexOf(',') > -1 or $.inArray(data.tag, $(e.target).textext()[0].tags()._formData) > -1
 			data.result = false
@@ -25,6 +36,10 @@
 		$(this).textext()[0].tags().addTags($(this).attr('data-tags').split(','), true)
 
 $ ->	
+  $('#tagDropdown').click () ->
+    $('.tagList').toggleClass('hide')
+    false
+
 	proto = $.fn.textext.TextExt.prototype
 	onKeyDown = proto.onKeyDown
 	onAnyKeyUp = proto.onAnyKeyUp

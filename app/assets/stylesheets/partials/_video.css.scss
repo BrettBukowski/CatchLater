@@ -168,13 +168,18 @@ nav {
     background: rgba(251, 251, 251, .3);
 	@include boxShadow(0, 2px, 0.1);
     @include borderRadius(5px);
-    .text-wrap .text-tags .text-tag .text-button {
-      @include borderRadius(3px);
-      a.text-remove {
-        @include borderRadius(8px);
+    .text-wrap {
+	  .text-tags .text-tag .text-button {
+        @include borderRadius(3px);
+        a.text-remove {
+          @include borderRadius(8px);
+        }
+	    .text-label {
+		  @include textShadow(1px);
+	    }
       }
-	  .text-label {
-		@include textShadow(1px);
+	  .text-dropdown .text-list .text-suggestion.text-selected {
+		  @include textShadow(0);
 	  }
     }
 	&.focus {

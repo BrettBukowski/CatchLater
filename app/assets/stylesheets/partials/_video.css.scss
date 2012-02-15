@@ -188,3 +188,16 @@ nav {
 	}
   }
 }
+
+#up {
+	background: #FFF;
+	background: rgba(255, 255, 255, 0.7);
+	bottom: 10px;
+	cursor: pointer;
+	font-size: 0.8em;
+	padding: 5px 9px 7px;
+	position: fixed;
+	right: 0;
+	text-transform: uppercase;
+	@include boxShadow(3px, 3px, 0.5);
+}

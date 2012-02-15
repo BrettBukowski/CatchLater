@@ -29,9 +29,9 @@ $ ->
   $(document.body).append(goUpDiv)
   goBackUp = every 200, () ->
     if $(window).scrollTop() > $(window).height()
-      goUpDiv.removeClass('hide')
+      goUpDiv.fadeIn()
     else
-      goUpDiv.addClass('hide')
+      goUpDiv.fadeOut()
       
       $(document).keypress (e) ->
         return unless e.target.tagName.toLowerCase() == 'body' and (e.which == 107 or e.which == 106)

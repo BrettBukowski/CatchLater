@@ -15,8 +15,9 @@ $ ->
         dataType: 'script',
         complete: (resp) ->
           if resp.responseText
-            $('#loading').replaceWith("<div class='page' data-page='#{ page }'>#{ resp.responseText }</div>")
-            affixTags($(".page[data-page='#{ page }'] .video .tagEntry"))
+            $('#loading').remove()
+            $('.videoList').append(resp.responseText)
+            affixTags($(".video[data-page='#{ page }'] .tagEntry"))
             loading = false
           else
             clearInterval(infiniteScroll)

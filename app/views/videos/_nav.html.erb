@@ -1,0 +1,16 @@
+<nav>
+  <% current = controller.action_name %>
+  <% if current != 'index' %>
+	<%= link_to "Your list", videos_path %> |
+  <% end %>
+  <% if current != 'faves' %>
+  <%= link_to "Favorites", faves_videos_path %> |
+  <% end %>
+  <% if current != 'tags' %>
+  <%= link_to "Tags ▿", tags_videos_path, id: "tagDropdown" %>
+  <% end %>
+</nav>
+
+<% if current != 'tags' %>
+<%= render partial: "tag_list" %>
+<% end %>

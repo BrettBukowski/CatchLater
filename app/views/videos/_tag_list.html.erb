@@ -1,4 +1,8 @@
+<% if defined? visible %>
+<ul class="tagList">
+<% else %>
 <ul class="tagList hide">
+<% end %>
 <% @tags.each do |tag| %>
   <li class="tag">
 	<a href="<%= tagged_videos_path %>?with=<%= tag['_id'] %>">

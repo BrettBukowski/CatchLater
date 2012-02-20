@@ -1,16 +1,8 @@
 <%= render partial: "heading", locals: { 
 			heading: @tag,
-			videos: @videos,
-			emptyMessage: "There's nothing here"
 } %>
 
-<nav>
-	<%= link_to "All videos", videos_path %>
-	<%= link_to "Favorites", faves_videos_path %>
-	<%= link_to "Tags", tags_videos_path, id: "tagDropdown" %>
-</nav>
-
-<%= render partial: "tag_list" %>
+<%= render partial: "nav" %>
 
 <% if notice %>
   <div id="notice"><%= notice %></div>

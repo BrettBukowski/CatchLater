@@ -1,11 +1,8 @@
-<%= render :partial => "heading", :locals => { 
-							:heading => "Your favorites",
-							:videos => @videos,
-							:emptyMessage => "You haven't favorited anything yet"
+<%= render partial: "heading", locals: { 
+					 heading: "Your favorites",
+					 emptyMessage: "You haven't favorited anything yet"
 } %>
-<nav>
-	<%= link_to "All videos", videos_path %>
-</nav>
+<%= render partial: "nav" %>
 <section class="faves videoList">
 	<%= render @videos %>
 </section>

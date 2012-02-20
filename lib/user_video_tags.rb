@@ -1,10 +1,15 @@
 class UserVideoTags
 
+  def self.get(limit_to_user)
+    build(limit_to_user).find().map {|item| {name: item['_id'], count: item['value']} }
+  end
+
+  private
+
   def self.build(limit_to_user)
     Video.collection.map_reduce(map, reduce, out: 'results', query: {user_id: limit_to_user})
   end
-
-
+  
   def self.map
     <<-MAP
     function() {

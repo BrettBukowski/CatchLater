@@ -1,9 +1,10 @@
 <%= render partial: "heading" %>
 <%= render partial: "nav" %>
-<%= render partial: "tag_list" %>
+
 <% if notice %>
 <div id="notice"><%= notice %></div>
 <% end %>
+
 <section class="queue videoList">
 	<%= render @videos %>
 </section>

@@ -5,9 +5,9 @@
 <% end %>
 <% @tags.each do |tag| %>
   <li class="tag">
-	<a href="<%= tagged_videos_path %>?with=<%= tag['_id'] %>">
-    <span class="name"><%= tag['_id'] %></span>
-		<span class="count">(<%= tag['value'].to_i %>)</span>
+    <a href="<%= tagged_videos_path %>?with=<%= tag[:name] %>">
+      <span class="name"><%= tag[:name] %></span>
+		<span class="count">(<%= tag[:count].to_i %>)</span>
 	</a>
   </li>
 <% end %>

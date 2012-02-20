@@ -114,6 +114,6 @@ class VideosController < ApplicationController
   
   def get_tags_for_current_user
     require 'user_video_tags'
-    UserVideoTags.build(current_user.id).find()
+    UserVideoTags.get(current_user.id)
   end
 end

@@ -5,8 +5,9 @@ gem 'mongo'
 gem 'bson_ext'
 gem 'mongo_mapper'
 gem 'bcrypt-ruby'
-gem 'will_paginate'
 gem 'jquery-rails'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 # Gems used only for assets and not required
 # in production environments by default.

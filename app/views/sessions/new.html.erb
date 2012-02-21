@@ -1,3 +1,15 @@
+<h2>Sign in (or sign up) with an account you already have</h2>
+<section class="thirdPartyLogin">
+  <%= link_to "Login with Facebook", "/auth/facebook", class: "fbLink" %>
+  <%= link_to "Login with Twitter", "/auth/twitter", class: "twitterLink" %>
+</section>
+
+<div class="separator">
+  <hr>
+  <em>or</em>
+  <hr>
+</div>
+
 <%= render partial: "sign_in", locals: {} %>
 
 <%= render partial: "sign_up", locals: { user: @user }%>

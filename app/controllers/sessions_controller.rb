@@ -16,6 +16,18 @@ class SessionsController < ApplicationController
     end
   end
   
+  def create_using_third_party_auth
+    render :text => request.env['omniauth.auth'].inspect
+    # TK - if not given email...
+    # stash provider+uid in flash
+    # redirect to signin_url
+    # pop dialog
+    # get email
+    # come back here
+    # create / update user
+    # redirect to videos_url
+  end
+  
   def destroy
     sign_out_and_kill_session!
     redirect_to new_session_url

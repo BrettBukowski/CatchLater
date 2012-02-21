@@ -43,6 +43,10 @@
 @mixin textShadow($down: 2px, $color: #FFF) {
   text-shadow:0 $down 0 $color;
 }
+@mixin linearTransition($duration: 0.5s) {
+  -webkit-transition: all $duration linear;
+  -moz-transition: all $duration linear;
+}
 @mixin button {
   color:#FFF;
   cursor:pointer;

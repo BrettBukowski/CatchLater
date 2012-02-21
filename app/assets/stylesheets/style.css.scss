@@ -71,8 +71,7 @@ header {
     }
     a.userLink {
       color:#010101;
-      -webkit-transition: all .5s linear;
-      -moz-transition: all .5s linear;
+      @include linearTransition();
     }
     a.userLink:hover,
     a.userLink:focus {

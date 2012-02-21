@@ -54,7 +54,7 @@ class VideosController < ApplicationController
   def faves
     @page = (params[:page] || 1).to_i
     @videos = Video.paginate(page: @page, conditions: {favorited: true}, order: 'created_at DESC', per_page: 3)   
-    @tags = get_tags_for_current_user 
+    get_tags_for_current_user 
     respond_to do |format|
       format.js
       format.html
@@ -66,21 +66,22 @@ class VideosController < ApplicationController
       @video = Video.find_by_id(params[:id])
       @video.tags = params[:tags].strip.split(',').uniq
       @video.save
-      render :json => @video.tags
+      invalidate_tags_for_current_user
+      render json: @video.tags
     else
-      render :json => 'oh no'
+      render json: 'oh no'
     end
   end
   
   def tags
-    @tags = get_tags_for_current_user
+    get_tags_for_current_user
   end
   
   def tagged
     @tag = params[:with]
     @page = (params[:page] || 1).to_i
     @videos = Video.paginate(page: @page, conditions: {tags: @tag}, order: 'created_at DESC', per_page: 3)
-    @tags = get_tags_for_current_user
+    get_tags_for_current_user
     respond_to do |format|
       format.js
       format.html
@@ -98,7 +99,7 @@ class VideosController < ApplicationController
         render_jsonp @video.errors
       end
     else
-      render_jsonp [:error => "login required"]
+      render_jsonp [error: "login required"]
     end
   end
   
@@ -113,7 +114,13 @@ class VideosController < ApplicationController
   end
   
   def get_tags_for_current_user
-    require 'user_video_tags'
-    UserVideoTags.get(current_user.id)
+    unless fragment_exist?("#{current_user.id}:tags")
+      require 'user_video_tags'
+      @tags = UserVideoTags.get(current_user.id)
+    end
+  end
+  
+  def invalidate_tags_for_current_user
+    expire_fragment("#{current_user.id}:tags")
   end
 end

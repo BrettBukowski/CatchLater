@@ -3,8 +3,22 @@
   font-size:20px;
 }
 .users, .sessions {
+  .nativeLogin,
   .thirdPartyLogin {
     margin: 3em 0;
+    position: relative;
+    aside {
+      float: right;
+      position: absolute;
+      -webkit-transform: rotate(1deg);
+      -moz-transform: rotate(1deg);
+      right: 0;
+      &.arrow {
+        background: center 49px url(/assets/arrow.png) no-repeat;
+        height: 80px;      
+        top: -92px;
+      }
+    }
     .fbLink,
     .twitterLink {
       border: 1px solid #999;
@@ -46,6 +60,14 @@
       float: left;
       width: 48%;
       margin: 0;
+    }
+  }
+  .nativeLogin {
+    a,
+    form {
+      display: block;
+      margin: auto;
+      width: 55%;
     }
   }
   form {

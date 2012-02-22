@@ -44,6 +44,9 @@ h3.rule {
   border-bottom:1px solid #BBB;
   padding-bottom:8px;
 }
+aside {
+  font: 1.3em 'Sue Ellen Francisco';
+}
 
 header {
   border-bottom:1px solid #FFF;
@@ -80,6 +83,12 @@ header {
     }
     @include textShadow(1px, rgba(255, 255, 255, .3));
   }
+}
+footer {
+  background: #384a6f;
+  border-top: 1px solid #FFF;
+  height: 100px;
+  margin-top: 4em;
 }
 
 .hide { display:none }

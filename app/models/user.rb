@@ -5,21 +5,25 @@ class User
   include MongoMapper::Document
   include BCrypt
   
-  key :email,                     String, required: true
+  key :email,                     String
   key :passwordHash,              String
   key :resetPasswordCode,         String
   key :resetPasswordCodeExpires,  Time
+  key :thirdPartyAuthServices,    Hash
   
   # Relationships
   has_many :videos, dependent: :destroy
   
   # Validation
   EMAIL_REGEX = /\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i
+  THIRD_PARTY_SERVICES = %w[facebook twitter]
+
   validates :email, presence: true, uniqueness: true, length: { in: 6..100 },
     format: {with: EMAIL_REGEX, message: "The email you entered is invalid"}
+  validate :validate_third_party_services
   
   def self.log_in(email, password)
-    user = User.first(conditions: {email: email.downcase})
+    user = User.first({email: email.downcase})
     user && user.logged_in?(password) ? user : nil
   end
   
@@ -51,5 +55,12 @@ class User
     self.resetPasswordCode = Digest::SHA1.hexdigest(seed)
     self.save
     UserMailer.password_reset(self).deliver
+  end
+  
+  private
+  def validate_third_party_services
+    if !thirdPartyServices.empty?
+      
+    end
   end
 end

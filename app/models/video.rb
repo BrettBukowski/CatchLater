@@ -20,7 +20,6 @@ class Video
   SUPPORTED_SOURCES = %w[youtube vimeo ted blip npr]
   TYPES = %w[iframe video object embed]
 
-  validates :webpageUrl, :type, :source, :videoID, presence: true
   validates :webpageUrl, format: {
     with: URL_REGEX,
     message: "The web page's URL is invalid"

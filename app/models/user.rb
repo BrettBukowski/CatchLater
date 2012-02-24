@@ -17,6 +17,7 @@ class User
   # Validation
   EMAIL_REGEX = /\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i
   THIRD_PARTY_SERVICES = %w[facebook twitter]
+  THIRD_PARTY_ID_REGEX = /[0-9a-zA-Z]+/i
 
   validates :email, presence: true, uniqueness: true, length: { in: 6..100 },
     format: {with: EMAIL_REGEX, message: "The email you entered is invalid"}
@@ -57,10 +58,19 @@ class User
     UserMailer.password_reset(self).deliver
   end
   
+  def self.find_by_third_party_account(service, user_id)
+    User.where("thirdPartyServices#{service}" => user_id).first
+  end
+  
   private
+  # TK validate value uniqueness & no duplicate keys
   def validate_third_party_services
-    if !thirdPartyServices.empty?
-      
+    if !thirdPartyAuthServices.empty?
+      thirdPartyAuthServices.each do |key, value|
+        if !THIRD_PARTY_SERVICES.include?(key) || !THIRD_PARTY_ID_REGEX.match(value)
+          errors.add(:thirdPartyAuthServices, "There's a problem with the #{key} account")
+        end
+      end
     end
   end
 end

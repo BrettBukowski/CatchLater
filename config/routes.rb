@@ -19,4 +19,5 @@ Catchlater::Application.routes.draw do
   match "signin" => "sessions#new", as: :signin
   match "signout" => "sessions#destroy", as: :signout
   match "auth/:provider/callback" => "sessions#create_using_third_party_auth"
+  match "sessions/provide_email" => "sessions#provide_email", via: :post
 end

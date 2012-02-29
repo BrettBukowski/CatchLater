@@ -23,7 +23,7 @@ nav {
     iframe {
       border: 0;
       height: 349px;
-	  @include boxShadow(0, 5px, 0.9);
+      @include boxShadow(0, 5px, 0.9);
       @include videoArea;
     }
     .content {
@@ -94,7 +94,7 @@ nav {
         }
         .shareDropdown {
           position:absolute;
-		      z-index:100;
+          z-index:100;
           ul {
             background:#FFFC17;
             @include borderRadius(4px);
@@ -158,55 +158,55 @@ nav {
       form {
         margin:6px 0;
         textarea {
-	      border: 0;
-		  height: 22px;
-		  width: 540px;
+          border: 0;
+          height: 22px;
+          width: 540px;
         }
-		.tip {
-			background:#F4F889;
-			background: rgba(244, 248, 137, 0.6);
-			margin-top: 6px;
-			position: absolute;
-			@include textShadow(1px);
-		}
+        .tip {
+          font-family: 'Sue Ellen Francisco';
+          background: rgba(244, 248, 137, 0.6);
+          margin-top: 6px;
+          position: absolute;
+          @include textShadow(1px);
+        }
       }
     }
   }
   // TextExt Overrides
   .text-core {
     background: rgba(251, 251, 251, .3);
-	@include boxShadow(0, 2px, 0.1);
+    @include boxShadow(0, 2px, 0.1);
     @include borderRadius(5px);
     .text-wrap {
-	  .text-tags .text-tag .text-button {
+      .text-tags .text-tag .text-button {
         @include borderRadius(3px);
         a.text-remove {
           @include borderRadius(8px);
         }
-	    .text-label {
-		  @include textShadow(1px);
-	    }
+        .text-label {
+          @include textShadow(1px);
+        }
       }
-	  .text-dropdown .text-list .text-suggestion.text-selected {
-		  @include textShadow(0);
-	  }
+      .text-dropdown .text-list .text-suggestion.text-selected {
+        @include textShadow(0);
+      }
     }
-	&.focus {
-	  background: rgba(255, 255, 255, .8);
-	  box-shadow: 0 0 0 rgba(46, 119, 149, .5);
-	}
+    &.focus {
+      background: rgba(255, 255, 255, .8);
+      box-shadow: 0 0 0 rgba(46, 119, 149, .5);
+    }
   }
 }
 
 #up {
-	background: #FFF;
-	background: rgba(255, 255, 255, 0.7);
-	bottom: 10px;
-	cursor: pointer;
-	font-size: 0.8em;
-	padding: 5px 9px 7px;
-	position: fixed;
-	right: 0;
-	text-transform: uppercase;
-	@include boxShadow(3px, 3px, 0.5);
+  background: #FFF;
+  background: rgba(255, 255, 255, 0.7);
+  bottom: 10px;
+  cursor: pointer;
+  font-size: 0.8em;
+  padding: 5px 9px 7px;
+  position: fixed;
+  right: 0;
+  text-transform: uppercase;
+  @include boxShadow(3px, 3px, 0.5);
 }

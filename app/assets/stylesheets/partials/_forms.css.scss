@@ -3,6 +3,18 @@
   font-size:20px;
 }
 .users, .sessions {
+  #emailDialog {
+    text-align: center;
+    input {
+      display: block;
+      margin: auto;
+      position: static;
+      width: 80%;
+      &[type='submit'] {
+        margin: 20px auto;
+      }
+    }
+  }
   .nativeLogin,
   .thirdPartyLogin {
     margin: 3em 0;

@@ -1,9 +1,6 @@
 <h2>Welcome</h2>
-<section class="thirdPartyLogin">
-  <aside class="arrow">Sign in (or sign up) with an account you already have</aside>
-  <%= link_to "Login with Facebook", "/auth/facebook", class: "fbLink" %>
-  <%= link_to "Login with Twitter", "/auth/twitter", class: "twitterLink" %>
-</section>
+
+<%= render partial: "third_party" %>
 
 <div class="separator">
   <hr>

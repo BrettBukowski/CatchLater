@@ -90,8 +90,18 @@ footer {
   height: 100px;
   margin-top: 4em;
 }
-
+.highlight {
+  background:#F4F889;
+}
 .hide { display:none }
+.screenReaderOnly {
+  position:absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
 
 #main {
   @include wrapping;

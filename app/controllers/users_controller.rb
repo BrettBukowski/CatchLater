@@ -12,7 +12,9 @@ class UsersController < ApplicationController
       self.current_user = @user
       redirect_to root_path, notice: "You're all set! Start grabbing videos"
     else
-      render new_session_url
+      flash[:error] = @user.errors
+      redirect_to new_session_url
+      # render new_session_url
     end
   end
 

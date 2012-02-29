@@ -57,9 +57,9 @@ header {
     a {
       color:#a6734b;
       text-decoration:none;
-	  &:active {
-		  @include textShadow(1px, rgba(255, 255, 255, .2));
-	  }
+      &:active {
+        @include textShadow(1px, rgba(255, 255, 255, .2));
+      }
     }
   }
   #helloAgain {

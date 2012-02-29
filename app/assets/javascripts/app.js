@@ -24,12 +24,12 @@ var CatchLater = CatchLater || (function() {
         { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?\/]+)/ },
         { name: 'vimeo', regex: /player\.vimeo\.com\/video\/([0-9]+)/ },
         { name: 'blip', regex: /blip\.tv\/play\/([^.]+)\.html/ },
-		{ name: 'npr', regex: /npr\.org\/templates\/event\/embeddedVideo.php\?storyId=([0-9]+)/ }
+        { name: 'npr', regex: /npr\.org\/templates\/event\/embeddedVideo.php\?storyId=([0-9]+)/ }
       ],
       object: {
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
         ted: { data: /video\.ted\.com/, id: /mp4:([^.]+\.mp4)/, decode: true },
-		npr: { data: /media\.npr\.org/, id: /\?storyId=([0-9]+)/, decode: true }
+        npr: { data: /media\.npr\.org/, id: /\?storyId=([0-9]+)/, decode: true }
       },
       embed: {
         youtube: [ { src: /ytimg.com/, id: /&video_id=([^&?]+)/ },

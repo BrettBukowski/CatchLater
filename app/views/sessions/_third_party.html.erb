@@ -8,10 +8,10 @@
  <div id='emailDialog' class='hide'>
  <p>Please enter your <span class='highlight'>email address</span> to finish creating your account</p>
  <%= form_tag sessions_provide_email_path, method: :post, remote: true %>
-    <%= hidden_field 'userid', flash[:user_id] %>
-    <%= hidden_field 'provider', flash[:provider] %>
-    <%= label_tag 'email', 'Email', for: 'user[email]', class: 'screenReaderOnly' %>
-    <%= email_field 'user', 'email' %>
+    <%= hidden_field :user, :id, value: flash[:user_id] %>
+    <%= hidden_field :user, :provider, value: flash[:provider] %>
+    <%= label_tag 'email', 'Email address', for: 'user_email', class: 'screenReaderOnly' %>
+    <%= email_field :user, :email, required: true %>
 	  <%= submit_tag 'Sign in', disable_with: 'Signing you in...' %>
     <small><a href=''>Your email is used solely for login purposes</a></small>
   </form>

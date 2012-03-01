@@ -25,8 +25,9 @@ class SessionsController < ApplicationController
         session[:userId] = user.id
         redirect_to videos_url
       elsif third_party_info.info.email
-        process_user_email(third_party_info.info.email, third_party_info.provider, third_party_info.uid)
+        process_user_email({ email: third_party_info.info.email, provider: third_party_info.provider, id: third_party_info.uid })
       else
+        # head back + pop a dialog prompting for email
         flash[:email_required] = true
         flash[:user_id] = third_party_info.uid
         flash[:provider] = third_party_info.provider
@@ -41,22 +42,7 @@ class SessionsController < ApplicationController
   # User provides an email address to attach the third-party account
   # with any native email+password account
   def provide_email
-    if params[:email].present? && params[:uid].present? && params[:provider].present?
-      user = User.first(email: params[:email]) || User.new
-      user.email = params[:email]
-      user.thirdPartyAuthproviders[params[:provider]] = params[:uid]
-      if user.save()
-        redirect_to videos_url
-      else
-        respond_to do |format|
-          format.html { redirect_to new_session_url, notice: user.errors }
-        end
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to new_session_url, notice: "Sorry, but we need an email address to log you in" }
-      end
-    end
+    process_user_email(params[:user])
   end
   
   def destroy
@@ -65,15 +51,31 @@ class SessionsController < ApplicationController
   end
   
   private
-  def process_user_email(email, provider, user_id)
-    user = User.first(email: email) || User.new
-    user.email = email
-    user.thirdPartyAuthproviders[provider] = user_id
-    if user.save()
-      redirect_to videos_url
+  def process_user_email(user_info)
+    email = user_info[:email]
+    user_id = user_info[:id]
+    provider = user_info[:provider]
+    
+    if !email.empty? && !user_id.empty? && !provider.empty?
+      email.downcase!
+      email.strip!
+      user = User.first(email: email) || User.new
+      user.email = email
+      user.thirdPartyAuthServices[provider] = user_id
+      if user.save()
+        session[:userId] = user.id
+        respond_to do |format|
+          format.html { redirect_to videos_url, notice: 'Welcome!' }
+          format.js { render 'redirect' }
+        end
+      else
+        flash[:notice] = user.errors
+        redirect_to new_session_url
+      end
     else
-      flash[:notice] = user.errors
-      redirect_to new_session_url
+      respond_to do |format|
+        format.html { redirect_to new_session_url, notice: 'Sorry, but we need an email address to log you in' }
+      end
     end
   end
 end

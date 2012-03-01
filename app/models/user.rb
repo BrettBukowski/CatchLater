@@ -47,6 +47,7 @@ class User
   
   def email=(newEmail)
     newEmail.downcase!
+    newEmail.strip!
     write_attribute(:email, newEmail)
   end
   
@@ -59,11 +60,10 @@ class User
   end
   
   def self.find_by_third_party_account(service, user_id)
-    User.where("thirdPartyServices#{service}" => user_id).first
+    User.where("thirdPartyAuthServices.#{service}" => user_id).first
   end
   
   private
-  # TK validate value uniqueness & no duplicate keys
   def validate_third_party_services
     if !thirdPartyAuthServices.empty?
       thirdPartyAuthServices.each do |key, value|

@@ -4,7 +4,11 @@
 		<li><%= window_open "Twitter", "http://twitter.com/home?status=#{videoUrl}", title: "Share on Twitter" %></li>
 		<li><%= window_open "Google+", "https://m.google.com/app/plus/x/?v=compose&content=#{videoUrl}", title: "Share on Google+" %></li>
 		<li><%= window_open "Tumblr", "http://www.tumblr.com/share?v=3&u=" + url_encode(videoUrl), title: "Share on Tumblr" %></li>
-		<li><%= mail_to "", "Email", subject: "Shared Video", body: "\n\n" + videoUrl %></li>
-		<li class="source"><%= link_to truncate(sourceUrl, length: 30), sourceUrl, title: videoUrl, target: "_blank" %></li>
+		<li><%= mail_to "", "Email", subject: "Shared Video", body: "\n\n" + videoUrl, title: "Email a link" %></li>
+		<li class="source"><%= link_to truncate(videoUrl, length: 20), videoUrl, title: videoUrl, target: "_blank" %></li>
+  <% if URI.split(videoUrl).slice(1, 8) != URI.split(sourceUrl).slice(1, 8) %>
+  <% # Ignore protocol comparison %>
+		<li class="source"><%= link_to truncate(sourceUrl, length: 20), sourceUrl, title: sourceUrl, target: "_blank" %></li>
+  <% end %>
 	</ul>
 </span>

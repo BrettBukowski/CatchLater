@@ -44,7 +44,7 @@ class VideosController < ApplicationController
   def index
     @page = (params[:page] || 1).to_i
     @videos = Video.paginate(page: @page, conditions: {favorited: false}, order: 'created_at DESC', per_page: 3)
-    @tags = get_tags_for_current_user
+    get_tags_for_current_user
     respond_to do |format|
       format.js
       format.html

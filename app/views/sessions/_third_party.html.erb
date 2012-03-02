@@ -2,6 +2,7 @@
   <aside class="arrow">Sign in (or sign up) with an account you already have</aside>
   <%= link_to "Login with Facebook", "/auth/facebook", class: "fbLink" %>
   <%= link_to "Login with Twitter", "/auth/twitter", class: "twitterLink" %>
+  <small>(Used solely for login purposes. We'll never post on your behalf.)</small>
 </section>
 
 <% if flash[:email_required] %>

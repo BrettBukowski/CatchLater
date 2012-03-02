@@ -19,6 +19,7 @@
   .thirdPartyLogin {
     margin: 3em 0;
     position: relative;
+    text-align: center;
     aside {
       float: right;
       position: absolute;
@@ -30,6 +31,10 @@
         height: 80px;      
         top: -92px;
       }
+    }
+    small {
+      display: block;
+      margin-top: 2em;
     }
     .fbLink,
     .twitterLink {

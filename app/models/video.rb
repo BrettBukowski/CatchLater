@@ -40,8 +40,12 @@ class Video
   def self.find_by_tag(tag)
     all(tags: ["#{tag}"])
   end
+  
+  def self.for_user(current_user, condition, page_number)
+    self.paginate(page: page_number, conditions: condition.merge({user_id: current_user.id}), order: 'created_at DESC', per_page: 3)
+  end
 
-  def embed
+  def embed(iframe = true)
     if self.source == 'youtube'
       url = "http://www.youtube.com/embed/#{videoID}"
     elsif self.source == 'vimeo'
@@ -49,13 +53,21 @@ class Video
     elsif self.source == 'npr'
       url = "http://www.npr.org/templates/event/embeddedVideo.php?storyId=#{videoID}"
     elsif self.source == 'ted'
+      url = "http://video.ted.com/#{videoID}"
       poster = "http://images.ted.com/images/ted/tedindex/embed-posters/" +
-          self.videoID.gsub('_', '-').gsub(/-[A-Za-z0-9]+\.mp4/, '.embed_thumbnail.jpg').split('/').last
-      return %{<video src='http://video.ted.com/#{videoID}' poster='#{poster}' controls preload='none'>
-              Your browser doesn't support this type of video :(
-              </video>}
+            self.videoID
+              .gsub('_', '-')
+              .gsub(/-[A-Za-z0-9]+\.mp4/, '.embed_thumbnail.jpg')
+              .split('/').last
+      if iframe
+        return %{<video src='#{url}' poster='#{poster}' controls preload='none'>
+               Your browser doesn't support this type of video :(
+               </video>}
+      else
+        return url
+      end 
     end
-    return "<iframe src='#{url}' allowfullscreen></iframe>"
+    return "<iframe src='#{url}' allowfullscreen></iframe>" if iframe else url
   end
   
   def link

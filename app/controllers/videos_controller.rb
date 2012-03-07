@@ -43,7 +43,7 @@ class VideosController < ApplicationController
   
   def index
     @page = (params[:page] || 1).to_i
-    @videos = Video.paginate(page: @page, conditions: {favorited: false}, order: 'created_at DESC', per_page: 3)
+    @videos = Video.for_user(current_user, {favorited: false}, @page)
     get_tags_for_current_user
     respond_to do |format|
       format.js
@@ -53,7 +53,7 @@ class VideosController < ApplicationController
   
   def faves
     @page = (params[:page] || 1).to_i
-    @videos = Video.paginate(page: @page, conditions: {favorited: true}, order: 'created_at DESC', per_page: 3)   
+    @videos = Video.for_user(current_user, {favorited: true}, @page)
     get_tags_for_current_user 
     respond_to do |format|
       format.js
@@ -80,11 +80,18 @@ class VideosController < ApplicationController
   def tagged
     @tag = params[:with]
     @page = (params[:page] || 1).to_i
-    @videos = Video.paginate(page: @page, conditions: {tags: @tag}, order: 'created_at DESC', per_page: 3)
+    @videos = Video.for_user(current_user, {tags: @tag}, @page)
     get_tags_for_current_user
     respond_to do |format|
       format.js
       format.html
+    end
+  end
+  
+  def feed
+    @videos = Video.all(conditions: {user_id: (User.first(conditions: {feedKey: params[:key]}) || User.new).id})
+    respond_to do |format|
+      format.atom
     end
   end
   

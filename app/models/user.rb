@@ -5,11 +5,14 @@ class User
   include MongoMapper::Document
   include BCrypt
   
+  before_create :create_feed_key
+  
   key :email,                     String
   key :passwordHash,              String
   key :resetPasswordCode,         String
   key :resetPasswordCodeExpires,  Time
   key :thirdPartyAuthServices,    Hash
+  key :feedKey,                   String
   
   # Relationships
   has_many :videos, dependent: :destroy
@@ -72,5 +75,14 @@ class User
         end
       end
     end
+  end
+  
+  def create_feed_key
+    self.feedKey = Digest::MD5.hexdigest(self.email)
+  end
+
+  # Keep feedKey attribute restricted for external assignment
+  def feedKey=(val)
+    self.feedKey = val
   end
 end

@@ -6,7 +6,8 @@
 }
 
 #home {
-  background:#FFF;
+  border-top:4px solid #2DB6B6;
+  background:#384A6F;
   h1 {
     font-size:148px;
     letter-spacing:-3px;
@@ -16,11 +17,12 @@
 #top {
   background:url(/assets/bg.png);
   position:relative;
-  @include textShadow;
+  text-shadow:none;
   @include boxShadow(3px, 9px);
   @include homepad(70px);
 }
 #bottom {
+  background: #FFF;
   @include homepad;
   min-height:400px;
   section {

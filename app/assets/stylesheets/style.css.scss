@@ -21,10 +21,10 @@ a {
 h1 {
   color:#a6734b;
   font-family:'Molengo';
-  font-size:46px;
+  font-size:38px;
   letter-spacing:.5px;
   @include nomargin;
-  text-shadow:0 1px 0 rgba(255, 255, 255, 0.4);
+  text-shadow:0 1px 0 rgba(255, 255, 255, 0.6);
   width:80%;
 }
 h2 {
@@ -50,7 +50,9 @@ aside {
 
 header {
   border-bottom:1px solid #FFF;
-  background-color:#006c6d;
+  border-top:4px solid #2DB6B6;
+  @include boxShadow(1px, 3px 0.2);
+  background:url(demo.png) fixed;
   @include wrapping;
   h1 {
     display:inline;
@@ -63,8 +65,9 @@ header {
     }
   }
   #helloAgain {
-    float:right;
-    padding-top:24px;
+    float: right;
+    padding-top: 15px;
+    text-shadow: none;
     a {
       text-decoration:none;
     }
@@ -74,21 +77,38 @@ header {
     }
     a.userLink {
       color:#010101;
-      @include linearTransition();
+      @include linearTransition(0.2s);
     }
     a.userLink:hover,
     a.userLink:focus {
       color:#A2A2A2;
       text-decoration:underline;
     }
-    @include textShadow(1px, rgba(255, 255, 255, .3));
   }
 }
 footer {
   background: #384a6f;
-  border-top: 1px solid #FFF;
-  height: 100px;
-  margin-top: 4em;
+  min-height: 100px;
+  overflow: hidden;
+  text-shadow:none;
+  @include wrapping();
+  li {
+    float: left;
+    list-style-type: none;
+    margin-right: 0.5em;
+    &:last-child {
+      float: right;
+      font-size: smaller;
+    }
+    a {
+      color: #C2C2C2;
+      text-decoration: none;
+      text-shadow: none;
+      &:hover, &:focus {
+        color: #FFF;
+      }
+    }
+  }
 }
 .highlight {
   background:#F4F889;
@@ -105,6 +125,7 @@ footer {
 
 #main {
   @include wrapping;
+  padding-bottom: 100px;
 }
 @import "partials/home";
 @import "partials/forms";

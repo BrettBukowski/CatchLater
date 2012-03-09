@@ -54,13 +54,8 @@ class Video
       url = "http://www.npr.org/templates/event/embeddedVideo.php?storyId=#{videoID}"
     elsif self.source == 'ted'
       url = "http://video.ted.com/#{videoID}"
-      poster = "http://images.ted.com/images/ted/tedindex/embed-posters/" +
-            self.videoID
-              .gsub('_', '-')
-              .gsub(/-[A-Za-z0-9]+\.mp4/, '.embed_thumbnail.jpg')
-              .split('/').last
       if iframe
-        return %{<video src='#{url}' poster='#{poster}' controls preload='none'>
+        return %{<video src='#{url}' poster='/assets/tedPoster.png' controls preload='none'>
                Your browser doesn't support this type of video :(
                </video>}
       else

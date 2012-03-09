@@ -24,7 +24,7 @@ h1 {
   font-size:38px;
   letter-spacing:.5px;
   @include nomargin;
-  text-shadow:0 1px 0 rgba(255, 255, 255, 0.6);
+  @include textShadow(1px, rgba(255, 255, 255, 0.6));
   width:80%;
 }
 h2 {
@@ -59,8 +59,9 @@ header {
     a {
       color:#a6734b;
       text-decoration:none;
+      @include textShadow(1px, rgba(255, 255, 255, 0.2));
       &:active {
-        @include textShadow(1px, rgba(255, 255, 255, .2));
+        @include textShadow(1px, rgba(255, 255, 255, 0.6));
       }
     }
   }
@@ -99,6 +100,7 @@ footer {
     &:last-child {
       float: right;
       font-size: smaller;
+      padding-top: 4px;
     }
     a {
       color: #C2C2C2;

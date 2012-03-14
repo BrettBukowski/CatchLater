@@ -2,8 +2,11 @@ class SessionsController < ApplicationController
   layout 'session'
   
   def new
-    sign_out!
-    @user = User.new
+    if current_user
+      redirect_to root_path
+    else
+      @user = User.new
+    end
   end
   
   def create

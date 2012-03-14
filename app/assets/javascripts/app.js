@@ -1,5 +1,7 @@
 var CatchLater = CatchLater || (function() {
   var $ = snack.wrap;
+  // Modules
+  var Parser, UI, Video;
   
   $.define({
     setStyle: function(styles) {
@@ -18,12 +20,11 @@ var CatchLater = CatchLater || (function() {
     }
   });
 
-  var Parser = (function() {
+  Parser = (function() {
     var _sources = {
       iframe: [
         { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?\/]+)/ },
         { name: 'vimeo', regex: /player\.vimeo\.com\/video\/([0-9]+)/ },
-        { name: 'blip', regex: /blip\.tv\/play\/([^.]+)\.html/ },
         { name: 'npr', regex: /npr\.org\/templates\/event\/embeddedVideo.php\?storyId=([0-9]+)/ }
       ],
       object: {
@@ -109,7 +110,7 @@ var CatchLater = CatchLater || (function() {
         return _checkVideoData(_sources.video, el);
       }
     };
-  })(),
+  })();
   
   UI = (function() {
     var _padding = 0;
@@ -135,8 +136,7 @@ var CatchLater = CatchLater || (function() {
         top: coords.y - _padding + "px",
         left: coords.x - _padding + "px",
         bottom: coords.y + coords.height + "px",
-        right: coords.x + coords.width + "px",
-        zIndex: 9999
+        right: coords.x + coords.width + "px"
       });
       return border;
     }
@@ -160,7 +160,7 @@ var CatchLater = CatchLater || (function() {
       return prompt;
     }
 
-    function _close(closeFunc) {
+    function _close() {
       var close = document.createElement("a");
       $(close).setStyle({
         color: "#FFF",
@@ -168,16 +168,12 @@ var CatchLater = CatchLater || (function() {
         position: "absolute",
         top: "4px",
         right: "4px"
-      }).html("✕");
+      }).html('&#215;');
       close.href = "#";
-      snack.listener({
-        node: close,
-        event: "click"
-      }, closeFunc);
       return close;
     }
 
-    function _add(onClick) {
+    function _add() {
       var add = document.createElement("a");
       $(add).setStyle({
         color: "#FFF",
@@ -191,42 +187,87 @@ var CatchLater = CatchLater || (function() {
         background: "#5CCCCC"
       }).html("Catch later");
       add.href = "#";
-      var listen = snack.listener({
-        node: add,
-        event: "click"
-      }, function(e) {
-        snack.preventDefault(e);
-        add.innerHTML = "Catching...";
-        listen.detach();
-        onClick(add);
-      });
       return add;
     }
+        
+    function prompt(element, details) {
+      var coords = _getXY((element.offsetHeight) ? element : element.parentNode);
+      
+      this.border = _border(coords);
+      this.prompt = _prompt(coords, this.border);
+      this.close = _close();
+      this.add = _add();
 
-    return {
-      drawPrompt: function(element, details) {
-        var coords = _getXY((element.offsetHeight) ? element : element.parentNode),
-            border = _border(coords),
-            prompt = _prompt(coords, border),
-            closeFunc = function() {
-                border.parentNode.removeChild(border);
-                prompt.parentNode.removeChild(prompt);
-            },
-            close = _close(function(e) {
-              snack.preventDefault(e);
-              closeFunc();
-            }),
-            add = _add(function(writeTo) {
-              Video.addVideo(element.src, element.tagName.toLowerCase(), details, writeTo, closeFunc);
-            });
+      snack.listener({
+        node: this.close,
+        event: "click"
+      }, this.bind(function(e) {
+          snack.preventDefault(e);
+          this.destroy();        
+      }));
 
-        document.body.appendChild(border);
-        document.body.appendChild(prompt);
-        prompt.appendChild(close);
-        prompt.appendChild(add);
+      document.body.appendChild(this.border);
+      document.body.appendChild(this.prompt);
+      this.prompt.appendChild(this.close);
+      this.prompt.appendChild(this.add);      
+    }
+    prompt.prototype = {
+      destroy: function() {
+        this.border.parentNode.removeChild(this.border);
+        this.border = null;
+        this.prompt.parentNode.removeChild(this.prompt);
+        this.prompt = null;
+      },
+      bind: function(func) {
+        var _this = this;
+        return function() {
+          func.apply(_this, arguments);
+        }
+      },
+      onAdd: function(func) {
+        var listen = snack.listener({
+          node: this.add,
+          event: "click"
+        }, this.bind(function(e) {
+          snack.preventDefault(e);
+          listen.detach();
+          this.addText('Catching...');
+          func.call(this);
+        }));
+      },
+      addText: function(text) {
+        this.add.innerHTML = text;
+      },
+      addLoginLink: function() {
+        var link = document.createElement('a');
+        $(link).setStyle({
+          background: '#000',
+          color: '#FFF',
+          textDecoration: 'underline',
+          padding: '3px',
+          position: 'absolute',
+          top: '30%',
+          right: '40%',
+          fontSize: '16px',
+          zIndex: 1
+        });
+        link.target = '_blank';
+        link.href = 'http://0.0.0.0:3000/signin';
+        link.innerHTML = 'Log in real quick \u2192';
+        this.addText('Oops... You aren\'t logged in');
+        this.add.parentNode.insertBefore(link, this.add);
+        snack.listener({
+          node: link,
+          event: 'click'
+        }, this.bind(function() {
+            link.parentNode.removeChild(link);
+            this.addText('Catch later');
+        }));
       }
     };
-  })(),
+    
+    return {prompt: prompt};
+  })();
   
   Video = (function() {
     var _videos = [];
@@ -234,7 +275,9 @@ var CatchLater = CatchLater || (function() {
     function _highlightVideo() {
       var i = 0;
       $(_videos).each(function(item) {
-        UI.drawPrompt(item.video, item.details);
+        new UI.prompt(item.video, item.details).onAdd(function() {
+          Video.addVideo(item.video.src, item.video.tagName.toLowerCase(), item.details, this);
+        });
         i++;
       });
       return i;
@@ -256,20 +299,29 @@ var CatchLater = CatchLater || (function() {
         }
       },
 
-      addVideo: function(url, type, details, writeTo, closePrompt) {
+      addVideo: function(url, type, details, prompt) {
+        var request = {
+          url: url,
+          type: type,
+          source: details.source,
+          videoID: details.id,
+          webpageUrl: window.top.location.href
+        };
         snack.JSONP({
           url: 'http://0.0.0.0:3000/queue/push/',
           key: 'callback',
-          data: {
-            url: url,
-            type: type,
-            source: details.source,
-            videoID: details.id,
-            webpageUrl: window.top.location.href
-          }
+          data: request
         }, function(resp) {
-            writeTo.innerHTML = (resp.id) ? "Caught!" : resp;
-            setTimeout(closePrompt, 1500);
+            if (resp.login_required) {
+              prompt.addLoginLink();
+              prompt.onAdd(function() {
+                Video.addVideo(url, type, details, prompt);
+              });
+            }
+            else {
+              prompt.addText((resp.id) ? 'Caught!' : resp);
+              setTimeout(prompt.destroy(), 1500);
+            }
         });
       }
     };

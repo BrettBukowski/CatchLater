@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_filter :login_required, :except => :addToQueue
+  before_filter :login_required, :except => :add_to_queue
   
   def new
     @video = Video.new
@@ -103,10 +103,10 @@ class VideosController < ApplicationController
       if @video.save
         render_jsonp @video.to_json
       else
-        render_jsonp @video.errors
+        render_jsonp @video.errors.to_json
       end
     else
-      render_jsonp [error: "login required"]
+      render_jsonp Hash[login_required: true].to_json
     end
   end
   

@@ -5,7 +5,7 @@ class User
   include MongoMapper::Document
   include BCrypt
   
-  before_create :create_feed_key
+  before_validation :create_feed_key, on: :create
   
   key :email,                     String
   key :passwordHash,              String

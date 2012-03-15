@@ -5,7 +5,7 @@ class User
   include MongoMapper::Document
   include BCrypt
   
-  before_validation :create_feed_key, on: :create
+  before_create :create_feed_key
   
   key :email,                     String
   key :passwordHash,              String
@@ -20,7 +20,7 @@ class User
   # Validation
   EMAIL_REGEX = /\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i
   THIRD_PARTY_SERVICES = %w[facebook twitter]
-  THIRD_PARTY_ID_REGEX = /[0-9a-zA-Z]+/i
+  THIRD_PARTY_ID_REGEX = /^[0-9a-zA-Z]+$/i
 
   validates :email, presence: true, uniqueness: true, length: { in: 6..100 },
     format: {with: EMAIL_REGEX, message: "The email you entered is invalid"}
@@ -78,7 +78,11 @@ class User
   end
   
   def create_feed_key
-    self.feedKey = Digest::MD5.hexdigest(self.email)
+    begin
+      self.feedKey = Digest::MD5.hexdigest(self.email)
+    rescue
+      
+    end
   end
 
   # Keep feedKey attribute restricted for external assignment

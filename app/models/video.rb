@@ -17,7 +17,7 @@ class Video
 
   # Validation
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
-  SUPPORTED_SOURCES = %w[youtube vimeo ted blip npr]
+  SUPPORTED_SOURCES = %w[youtube vimeo ted npr]
   TYPES = %w[iframe video object embed]
 
   validates :webpageUrl, format: {
@@ -62,7 +62,11 @@ class Video
         return url
       end 
     end
-    return "<iframe src='#{url}' allowfullscreen></iframe>" if iframe else url
+    if iframe
+      "<iframe src='#{url}' allowfullscreen></iframe>"
+    else
+      url
+    end
   end
   
   def link

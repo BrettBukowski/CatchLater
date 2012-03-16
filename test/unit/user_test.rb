@@ -33,6 +33,12 @@ class UserTest < ActiveSupport::TestCase
     assert user.valid?
   end
   
+  test "email must be unique" do
+    user = create(:user)
+    dupe = User.new(email: user.email)
+    assert dupe.invalid?
+  end
+    
   test "third party services must be legit" do
     user = User.new(email: 'abc@def.com')
     
@@ -65,6 +71,10 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "log user in" do
+    
+  end
+  
+  test "user can't log in with the wrong password" do
     
   end
 end

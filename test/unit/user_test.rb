@@ -38,6 +38,12 @@ class UserTest < ActiveSupport::TestCase
     dupe = User.new(email: user.email)
     assert dupe.invalid?
   end
+  
+  test "email is normalized" do
+    user = User.new(email: ' Foo@bar.com ')
+    assert user.valid?
+    assert_equal 'foo@bar.com', user.email
+  end
     
   test "third party services must be legit" do
     user = User.new(email: 'abc@def.com')
@@ -71,10 +77,45 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "log user in" do
-    
+    user = create(:user, password: 'myPassword')
+    assert user.logged_in?('myPassword')
   end
   
   test "user can't log in with the wrong password" do
+    user = create(:user, password: '')
+    assert !user.logged_in?('a')
+  end
+  
+  test "existing user can log in" do
+    user = create(:user, password: 'banana')
+    assert !User.log_in(user.email, 'banan')
+    assert User.log_in(user.email, 'banana')
+  end
+  
+  test "non-existant user can't log in" do
+    assert !User.log_in('blah@foo.bar', 'pass')
+  end
+  
+  test "feed key is generated for creates" do
+    user = create(:user)
+    assert_equal Digest::MD5.hexdigest(user.email), user.feedKey
+  end
+  
+  test "password reset is sent" do
     
+  end
+  
+  test "find a user based on his twitter account" do
+    user = create(:user)
+    user.thirdPartyAuthServices[:twitter] = '123abc000'
+    user.save
+    assert_equal user, User.find_by_third_party_account('twitter', user.thirdPartyAuthServices[:twitter])
+  end
+  
+  test "find a user based on her facebook account" do
+    user = create(:user)
+    user.thirdPartyAuthServices[:facebook] = '234156777'
+    user.save
+    assert_equal user, User.find_by_third_party_account('facebook', user.thirdPartyAuthServices[:facebook])
   end
 end

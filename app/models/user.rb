@@ -78,7 +78,7 @@ class User
   end
   
   def create_feed_key
-    feedKey = Digest::MD5.hexdigest(self.email)
+    write_attribute(:feedKey, Digest::MD5.hexdigest(self.email))
   end
 
   # Keep feedKey attribute restricted for external assignment

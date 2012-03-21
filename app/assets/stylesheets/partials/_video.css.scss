@@ -1,6 +1,6 @@
 @mixin videoArea {
   margin: auto;
-  width: 560px;
+  width: 640px;
 }
 
 nav {
@@ -18,11 +18,12 @@ nav {
   .video {
     border-bottom:1px solid #E2E2E2;
     border-top:2px solid #FFF;
-    padding:70px 0 30px;
+    padding:100px 0 50px;
     &:first-child { border-top:0; }
     iframe {
       border: 0;
-      height: 349px;
+      height: 385px;
+      overflow: hidden;
       @include boxShadow(0, 5px, 0.9);
       @include videoArea;
     }

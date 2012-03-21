@@ -25,12 +25,14 @@ var CatchLater = CatchLater || (function() {
       iframe: [
         { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?\/]+)/ },
         { name: 'vimeo', regex: /player\.vimeo\.com\/video\/([0-9]+)/ },
-        { name: 'npr', regex: /npr\.org\/templates\/event\/embeddedVideo.php\?storyId=([0-9]+)/ }
+        { name: 'npr', regex: /npr\.org\/templates\/event\/embeddedVideo.php\?storyId=([0-9]+)/ },
+        { name: 'gamespot', regex: /gamespot\.com\/videoembed\/([0-9]+)/ }
       ],
       object: {
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
         ted: { data: /video\.ted\.com/, id: /mp4:([^.]+\.mp4)/, decode: true },
-        npr: { data: /media\.npr\.org/, id: /\?storyId=([0-9]+)/, decode: true }
+        npr: { data: /media\.npr\.org/, id: /\?storyId=([0-9]+)/, decode: true },
+        gamespot: { data: /image\.com\.com\/gamespot\/images/, id: /\?id=([0-9]+)/, decode: true }
       },
       embed: {
         youtube: [ { src: /ytimg.com/, id: /&video_id=([^&?]+)/ },
@@ -54,7 +56,7 @@ var CatchLater = CatchLater || (function() {
       for (i in sources) {
         source = sources[i];
         if (sources.hasOwnProperty(i) && (match = source.data.exec(data))) {
-          paramData = $('#' + el.id + ' param[name="flashvars"]')[0];
+          paramData = $('#' + el.id + ' param[name="flashvars"], #' + el.id + ' param[name="flashVars"]')[0];
           paramData = ((source.decode) ? decodeURIComponent(paramData.value) : paramData.value);
           if (match = source.id.exec(paramData)) {
             return {source: i, id: match[match.length - 1]};

@@ -17,7 +17,7 @@ class Video
 
   # Validation
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
-  SUPPORTED_SOURCES = %w[youtube vimeo ted npr]
+  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot]
   TYPES = %w[iframe video object embed]
 
   validates :webpageUrl, format: {
@@ -52,6 +52,8 @@ class Video
       url = "http://player.vimeo.com/video/#{videoID}"
     elsif self.source == 'npr'
       url = "http://www.npr.org/templates/event/embeddedVideo.php?storyId=#{videoID}"
+    elsif self.source == 'gamespot'
+      url = "http://www.gamespot.com/videoembed/#{videoID}&vidSize=560"
     elsif self.source == 'ted'
       url = "http://video.ted.com/#{videoID}"
       if iframe

@@ -102,7 +102,14 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "password reset is sent" do
-    
+    user = create(:user)
+    user.send_password_reset!
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal [user.email], mail.to
+    assert_equal 'email@catchlater.com', mail[:from].value
+    assert_equal 'CatchLater Password Reset', mail.subject
+    assert_not_nil user.resetPasswordCodeExpires
+    assert_not_nil user.resetPasswordCode
   end
   
   test "find a user based on his twitter account" do

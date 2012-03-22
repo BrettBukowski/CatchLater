@@ -44,26 +44,22 @@ class Video
   def self.for_user(current_user, condition, page_number)
     self.paginate(page: page_number, conditions: condition.merge({user_id: current_user.id}), order: 'created_at DESC', per_page: 3)
   end
+  
+  VIDEO_EMBEDS = {
+    gamespot: 'http://www.gamespot.com/videoembed/%s/&vidSize=560',
+    youtube:  'http://www.youtube.com/embed/%s',
+    vimeo:    'http://player.vimeo.com/video/%s',
+    npr:      'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
+    ted:      'http://video.ted.com/%s',
+  }
 
   def embed(iframe = true)
-    if self.source == 'youtube'
-      url = "http://www.youtube.com/embed/#{videoID}"
-    elsif self.source == 'vimeo'
-      url = "http://player.vimeo.com/video/#{videoID}"
-    elsif self.source == 'npr'
-      url = "http://www.npr.org/templates/event/embeddedVideo.php?storyId=#{videoID}"
-    elsif self.source == 'gamespot'
-      url = "http://www.gamespot.com/videoembed/#{videoID}&vidSize=560"
-    elsif self.source == 'ted'
-      url = "http://video.ted.com/#{videoID}"
-      if iframe
-        return %{<video src='#{url}' poster='/assets/tedPoster.png' controls preload='none'>
-               Your browser doesn't support this type of video :(
-               </video>}
-      else
-        return url
-      end 
-    end
+    url = VIDEO_EMBEDS[source.to_sym] % videoID
+
+    return %{<video src='#{url}' poster='/assets/tedPoster.png' controls preload='none'>
+           Your browser doesn't support this type of video :(
+           </video>} if iframe && source == 'ted'
+
     if iframe
       "<iframe src='#{url}' allowfullscreen></iframe>"
     else

@@ -12,5 +12,5 @@
 </nav>
 
 <% if current != 'tags' %>
-<%= render partial: "tag_list" %>
+<%= render partial: "tag_list", locals: { tags: tags } %>
 <% end %>

@@ -1,4 +1,4 @@
 <h2>Your tags</h2>
 
-<%= render partial: "nav" %>
-<%= render partial: "tag_list", locals: {visible: true %>
+<%= render partial: "nav", locals: { tags: @tags } %>
+<%= render partial: "tag_list", locals: { visible: true } %>

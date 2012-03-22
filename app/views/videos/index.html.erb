@@ -1,5 +1,5 @@
-<%= render partial: "heading" %>
-<%= render partial: "nav" %>
+<%= render partial: "heading", locals: { empty: @videos.empty? } %>
+<%= render partial: "nav", locals: { tags: @tags } %>
 
 <% if notice %>
 <div id="notice"><%= notice %></div>

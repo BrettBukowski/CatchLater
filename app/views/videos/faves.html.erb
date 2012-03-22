@@ -1,8 +1,9 @@
 <%= render partial: "heading", locals: { 
 					 heading: "Your favorites",
-					 emptyMessage: "You haven't favorited anything yet"
+					 emptyMessage: "You haven't favorited anything yet",
+           empty: @videos.empty?
 } %>
-<%= render partial: "nav" %>
+<%= render partial: "nav", locals: { tags: @tags } %>
 
 <section class="faves videoList">
 	<%= render @videos %>

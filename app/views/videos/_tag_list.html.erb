@@ -4,7 +4,7 @@
 <ul class="tagList hide">
 <% end %>
 <% cache("#{@current_user.id}:tags") do %>
-  <% @tags.each do |tag| %>
+  <% tags.each do |tag| %>
     <li class="tag">
       <a href="<%= tagged_videos_path %>?with=<%= tag[:name] %>">
         <span class="name"><%= tag[:name] %></span>

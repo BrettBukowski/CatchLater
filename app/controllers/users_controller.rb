@@ -2,8 +2,11 @@ class UsersController < ApplicationController
   before_filter :login_required, :except => [:new, :create, :send_password_reset, :forgot_password, :reset_password]
 
   def new
-    @user = User.new
-    render new_session_url
+    if current_user
+      redirect_to root_path
+    else
+      @user = User.new
+    end
   end
 
   def create

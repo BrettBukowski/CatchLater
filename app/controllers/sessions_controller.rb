@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
   layout 'session'
   
+  # New session.
+  # Redirects to root path if the user's
+  # already logged in.
   def new
     if current_user
       redirect_to root_path
@@ -9,6 +12,9 @@ class SessionsController < ApplicationController
     end
   end
   
+  # Creates a new session.
+  # Required POST params: email, password
+  # Responds to HTML
   def create
     sign_out!
     if @user = User.log_in(params[:email], params[:password])
@@ -21,6 +27,10 @@ class SessionsController < ApplicationController
     end
   end
   
+  # Callback for OmniAuth middleware.
+  # Deals with the quirks involved if the user's
+  # email isn't supplied
+  # Responds to HTML
   def create_using_third_party_auth
     if request.env['omniauth.auth'].present?
       third_party_info = request.env['omniauth.auth']
@@ -48,12 +58,23 @@ class SessionsController < ApplicationController
     process_user_email(params[:user])
   end
   
+  # Kills the session
   def destroy
     sign_out_and_kill_session!
     redirect_to new_session_url
   end
   
   private
+  
+  # Deals with the email supplied by the 
+  # user of a third-party-account.
+  # Either creates or retrieves a user
+  # for the given email.
+  # `user_info` should contain three keys:
+  # -email
+  # -user_id: third party services' id for user
+  # -provider: name of service
+  # Responds to HTML, JS
   def process_user_email(user_info)
     email = user_info[:email]
     user_id = user_info[:id]

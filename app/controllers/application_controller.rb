@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   
   protected
   
+  # Before filter for users and videos.
   def login_required
     if !current_user
       flash[:notice] = "Log in"
@@ -15,6 +16,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Renders a JSONP response.
+  # The name of the callback function
+  # to call within the script should
+  # be supplied as `callback` in options.
   def render_jsonp(json, options={})
     callback = params[:callback]
     response = begin

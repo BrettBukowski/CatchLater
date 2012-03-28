@@ -1,12 +1,18 @@
 class VideosController < ApplicationController
+  # Ensure the user's logged in; #add_to_queue sends its own
+  # response to unauthenticated users
   before_filter :login_required, :except => :add_to_queue
   
+  # New view.
+  # Renders the view
   def new
     @video = Video.new
   end
   
+  # Creates a new view from the supplied post params.
+  # Responds to HTML, JSON
   def create
-    @video = new_video_from_params
+    @video = Video.new(params)
     @video.user = current_user
     respond_to do |format|
       if @video.save
@@ -19,6 +25,11 @@ class VideosController < ApplicationController
     end
   end
   
+  # Toggles the specified video's 'favorited'
+  # field. Flips its current state rather than
+  # accepting a state to set.
+  # Requires POST params: id
+  # Responds to HTML, JS, JSON
   def toggle_fave
     @video = Video.find_by_id(params[:id])
     @video.favorited = !@video.favorited
@@ -31,6 +42,9 @@ class VideosController < ApplicationController
     end
   end
   
+  # Destroys the specified video.
+  # Requires DELETE params: id
+  # Responds to HTML, JS, JSON
   def destroy
     @video = Video.find_by_id(params[:id])
     @video.destroy
@@ -41,6 +55,9 @@ class VideosController < ApplicationController
     end
   end
   
+  # Renders all non-favorited videos.
+  # Optional GET params: page
+  # Responds to HTML, JS
   def index
     @page = (params[:page] || 1).to_i
     @videos = Video.for_user(current_user, {favorited: false}, @page)
@@ -51,6 +68,9 @@ class VideosController < ApplicationController
     end
   end
   
+  # Renders all favorited videos.
+  # Optional GET params: page
+  # Responds to HTML, JS
   def faves
     @page = (params[:page] || 1).to_i
     @videos = Video.for_user(current_user, {favorited: true}, @page)
@@ -61,6 +81,14 @@ class VideosController < ApplicationController
     end
   end
   
+  # Sets tags on the specified video.
+  # Tags are simply set, rather than
+  # appended, so all tags should always
+  # be specified.
+  # Required POST params: id, tags
+  #  `tags` should be a comma-separated
+  #  list of strings.
+  # Responds to JSON
   def set_tags
     if params[:id].present?
       @video = Video.find_by_id(params[:id])
@@ -69,14 +97,21 @@ class VideosController < ApplicationController
       invalidate_tags_for_current_user
       render json: @video.tags
     else
-      render json: 'oh no'
+      render json: {error: 'No video specified'}
     end
   end
   
+  # Renders all tags for 
+  # the user's videos.
   def tags
     get_tags_for_current_user
   end
   
+  # Renders all videos tagged with the
+  # given string.
+  # Required GET params: with
+  # Optional GET params: page
+  # Responds to JS, HTML
   def tagged
     @tag = params[:with]
     @page = (params[:page] || 1).to_i
@@ -88,6 +123,8 @@ class VideosController < ApplicationController
     end
   end
   
+  # Renders all videos as an atom feed.
+  # Required GET params: key
   def feed
     @videos = Video.all(conditions: {user_id: (User.first(conditions: {feedKey: params[:key]}) || User.new).id})
     respond_to do |format|
@@ -95,10 +132,10 @@ class VideosController < ApplicationController
     end
   end
   
-  # JSONP request made from bookmarklet
+  # JSONP request made from bookmarklet.
   def add_to_queue
     if current_user
-      @video = new_video_from_params
+      @video = Video.new(params)
       @video.user = current_user
       if @video.save
         render_jsonp @video.to_json
@@ -111,15 +148,11 @@ class VideosController < ApplicationController
   end
   
   private
-  def new_video_from_params
-    video = Video.new
-    video.type = params[:type]
-    video.source = params[:source]
-    video.videoID = params[:videoID]
-    video.webpageUrl = params[:webpageUrl]
-    return video
-  end
   
+  # Retrieves the tags for all of the user's videos
+  # and sets it as an instance variable.
+  # Checks for view fragment caching.
+  # TK - replace with Redis
   def get_tags_for_current_user
     unless fragment_exist?("#{current_user.id}:tags")
       require 'user_video_tags'
@@ -127,6 +160,7 @@ class VideosController < ApplicationController
     end
   end
   
+  # Expires the tag view fragment cache.
   def invalidate_tags_for_current_user
     expire_fragment("#{current_user.id}:tags")
   end

@@ -17,7 +17,9 @@ class Video
 
   # Validation
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
+  # OFFICIAL list of supported video sources
   SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot]
+  # The type of video that's been scraped
   TYPES = %w[iframe video object embed]
 
   validates :webpageUrl, format: {
@@ -41,8 +43,12 @@ class Video
     all(tags: ["#{tag}"])
   end
   
+  # Retrieves videos for the specified user.
+  # current_user: User instance (required)
+  # condition: Hash conditions (optional)
+  # page_number: Integer (optional)
   def self.for_user(current_user, condition, page_number)
-    self.paginate(page: page_number, conditions: condition.merge({user_id: current_user.id}), order: 'created_at DESC', per_page: 3)
+    self.paginate(page: page_number || 1, conditions: condition.merge({user_id: current_user.id}), order: 'created_at DESC', per_page: 3)
   end
   
   VIDEO_EMBEDS = {
@@ -53,28 +59,42 @@ class Video
     ted:      'http://video.ted.com/%s',
   }
 
-  def embed(iframe = true)
-    url = VIDEO_EMBEDS[source.to_sym] % videoID
-
-    return %{<video src='#{url}' poster='/assets/tedPoster.png' controls preload='none'>
-           Your browser doesn't support this type of video :(
-           </video>} if iframe && source == 'ted'
-
-    if iframe
-      "<iframe src='#{url}' allowfullscreen></iframe>"
-    else
-      url
-    end
+  # Retrieves the embed URL for the video
+  # Returns String
+  def embed_url
+    VIDEO_EMBEDS[source.to_sym] % videoID
   end
   
+  # Retrieves the HTML for the video
+  # Returns String
+  def embed_element
+    url = VIDEO_EMBEDS[source.to_sym] % videoID
+
+    # Yeahh... Special case for TED vids. But at least it's HTML5 ;)
+    return %{<video src='#{url}' poster='/assets/tedPoster.png' controls preload='none'>
+           Your browser doesn't support this type of video :(
+           </video>} if source == 'ted'
+
+    "<iframe src='#{url}' allowfullscreen></iframe>"
+  end
+  
+  VIDEO_URLS = {
+    youtube:'http://www.youtube.com/watch?v=%s',
+    vimeo:  'http://vimeo.com/%s',
+    npr:    'http://www.npr.org/templates/event/embeddedVideo.php?storyId=',
+  }
+  
+  # Retrieves a link to the video page.
+  # If one isn't known, returns the URL
+  # of the source web page where the video
+  # was added from
+  # Returns String
   def link
-    if self.source == 'youtube'
-      return "http://www.youtube.com/watch?v=#{videoID}"
-    elsif self.source == 'vimeo'
-      return "http://vimeo.com/#{videoID}"
-    elsif self.source == 'npr'
-      return "http://www.npr.org/templates/event/embeddedVideo.php?storyId=#{videoID}"
+    url = VIDEO_URLS[source.to_sym]
+    if url
+      url % videoID
+    else
+      self.webpageUrl
     end
-    self.webpageUrl
   end
 end

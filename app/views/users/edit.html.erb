@@ -2,10 +2,10 @@
 
 <section>
 	<h3 class="rule">Change your password</h3>
-	<%= form_tag @user do |form| %>
+	<%= form_for @user do |form| %>
 		<div class="inputWrapper">
-			<%= label_tag 'passwordText', 'Password' %>
-			<%= text_field_tag :passwordText %>
+			<%= form.label :password, 'Password' %>
+			<%= form.password_field :password %>
 		</div>
 			<%= submit_tag 'Save', :disable_with => 'Saving...' %>
 	<% end %>

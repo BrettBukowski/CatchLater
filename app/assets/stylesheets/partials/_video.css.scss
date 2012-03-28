@@ -20,6 +20,9 @@ nav {
     border-top:2px solid #FFF;
     padding:100px 0 50px;
     &:first-child { border-top:0; }
+    video {
+      @include boxShadow(0, 5px, 0.9);    
+    }
     iframe {
       border: 0;
       height: 385px;

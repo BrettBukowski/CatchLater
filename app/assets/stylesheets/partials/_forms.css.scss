@@ -124,7 +124,7 @@
       width:250px;
     }
   }
-  #errorExplanation {
+  .error {
     background:rgba(255, 255, 194, .8);
     border:1px solid #FFF;
     @include borderRadius(6px);

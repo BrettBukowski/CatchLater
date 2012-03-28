@@ -8,7 +8,7 @@ atom_feed do |feed|
     feed.entry(video) do |entry|
       entry.title "Video saved #{video.created_at}"
       entry.summary type: 'xhtml' do |xhtml|
-        xhtml.iframe src: video.embed(false)
+        xhtml.iframe src: video.embed_url
       end
       entry.author do |author|
         author.name video.user.email

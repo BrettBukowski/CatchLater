@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.0'
+gem 'rails', '3.2.2'
 gem 'mongo'
 gem 'bson_ext'
 gem 'mongo_mapper'

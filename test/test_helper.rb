@@ -6,7 +6,7 @@ require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 
 class ActiveSupport::TestCase
-  include Factory::Syntax::Methods
+  include FactoryGirl::Syntax::Methods
   def setup
     DatabaseCleaner.clean
   end

@@ -1,6 +1,6 @@
 class UserMailerTest < ActionMailer::TestCase
   def test_password_reset
-    user = users(:user1)
+    user = create(:user)
     
     email = UserMailer.password_reset(user).deliver
     assert !ActionMailer::Base.deliveries.empty?

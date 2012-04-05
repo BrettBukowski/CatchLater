@@ -7,7 +7,5 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal [user.email], email.to
     assert_equal "CatchLater Password Reset", email.subject
-    # assert_match(, 
-    # assert_match(, 
   end
 end

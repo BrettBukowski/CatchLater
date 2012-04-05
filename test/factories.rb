@@ -13,6 +13,7 @@ FactoryGirl.define do
   
   factory :user do
     email
+    password '123'
     
     factory :user_with_videos do
       ignore do

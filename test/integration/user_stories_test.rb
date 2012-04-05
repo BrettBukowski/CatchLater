@@ -45,6 +45,27 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
     # TK
   end
   
+  test "logging out" do
+    user = create(:user)
+    
+    visit "/signin"
+    within "form[action='#{session_path}']" do
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Sign In'
+    end
+    
+    assert_equal videos_path, current_path
+    
+    find('.signout').click
+    
+    assert_equal signin_path, current_path
+    
+    visit "/videos"
+    
+    assert_equal signin_path, current_path
+  end
+  
   test "resetting a password" do
     visit "/signin"
     find_link('Forgot password?').click
@@ -101,7 +122,23 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
   end
   
   test "tagging a video" do
+    user = create(:user_with_videos, videos_count: 3)
+
+    visit "/signin"
+    within "form[action='#{session_path}']" do
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Sign In'
+    end
     
+    video = user.videos.last
+    
+    within "##{video.id}" do
+      fill_in 'Tags', with: 'banana'
+      click_button 'Submit'
+    end
+
+    assert_equal 'banana', Video.find(video.id).tags.join(' ')
   end
   
   test "deleting a video" do
@@ -109,7 +146,35 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
   end
   
   test "changing password" do
+    user = create(:user)
     
+    visit "/signin"
+    within "form[action='#{session_path}']" do
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Sign In'
+    end
+
+    click_link user.email
+    
+    assert_equal edit_user_path(user.id), current_path
+    
+    within "form#edit_user_#{user.id}" do
+      fill_in 'Password', with: 'banana'
+      click_button 'Save'
+    end
+    
+    find('.signout').click
+    
+    assert_equal signin_path, current_path
+    
+    within "form[action='#{session_path}']" do
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: 'banana'
+      click_button 'Sign In'
+    end
+    
+    assert_equal videos_path, current_path
   end
   
   test "deleting account" do

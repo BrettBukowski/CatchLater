@@ -18,12 +18,12 @@ class SessionsController < ApplicationController
   def create
     sign_out!
     if @user = User.log_in(params[:email], params[:password])
-      session[:userId] = @user.id
-      redirect_to videos_url
+      log_in @user
     else
+      logger.debug User.all.inspect
+      logger.debug params.inspect
       @user = User.new
-      render new_session_url
-      # redirect_to new_session_url
+      render 'sessions/new'
     end
   end
   
@@ -66,6 +66,16 @@ class SessionsController < ApplicationController
   
   private
   
+  # Sets the session variable and
+  # performs the response to logging in
+  def log_in(user)
+    session[:userId] = user.id
+    respond_to do |format|
+      format.html { redirect_to videos_url, notice: 'Welcome!' }
+      format.js { render 'redirect' }
+    end
+  end
+  
   # Deals with the email supplied by the 
   # user of a third-party-account.
   # Either creates or retrieves a user
@@ -87,11 +97,7 @@ class SessionsController < ApplicationController
       user.email = email
       user.thirdPartyAuthServices[provider] = user_id
       if user.save()
-        session[:userId] = user.id
-        respond_to do |format|
-          format.html { redirect_to videos_url, notice: 'Welcome!' }
-          format.js { render 'redirect' }
-        end
+        log_in user
       else
         flash[:notice] = user.errors
         redirect_to new_session_url

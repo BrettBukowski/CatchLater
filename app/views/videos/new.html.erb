@@ -6,14 +6,14 @@
     <% end %>
   </ul>
 <% end %>
-<%= form_tag videos_path do %>
+<%= form_for @video do %>
 	<div class="inputWrapper">
-		<%= label_tag 'url', 'URL' %>
-		<%= text_field_tag :url %>
+		<%= label_tag 'videoID', 'Video ID' %>
+		<%= text_field_tag :videoID %>
 	</div>
 	<div class="inputWrapper">
 		<%= label_tag 'webpageUrl', 'Website page URL' %>
-		<%= text_field_tag :webpageUrl %>
+		<%= url_field_tag :webpageUrl %>
 	</div>
 	<div class="inputWrapper">
 		<%= label_tag 'type', 'Type' %>

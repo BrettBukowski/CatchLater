@@ -310,7 +310,7 @@ var CatchLater = CatchLater || (function() {
           webpageUrl: window.top.location.href
         };
         snack.JSONP({
-          url: 'http://0.0.0.0:3000/queue/push/',
+          url: 'http://0.0.0.0:3000/videos/bookmark/',
           key: 'callback',
           data: request
         }, function(resp) {

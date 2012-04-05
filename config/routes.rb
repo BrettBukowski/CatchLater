@@ -1,7 +1,6 @@
 Catchlater::Application.routes.draw do
   get "home/index"
   root to: "home#index"
-  match "queue/push" => "videos#add_to_queue", via: :get
   resources :videos do
     post "toggle_fave", on: :member
     get "faves", on: :collection
@@ -9,6 +8,7 @@ Catchlater::Application.routes.draw do
     get "tagged", on: :collection
     get "tags", on: :collection
     get "feed", on: :collection
+    get "bookmark", on: :collection
   end
   resources :users do
     get "forgot_password", on: :collection

@@ -1,7 +1,9 @@
 class VideosController < ApplicationController
-  # Ensure the user's logged in; #add_to_queue sends its own
-  # response to unauthenticated users
-  before_filter :login_required, :except => :add_to_queue
+  # Ensure the user's logged in
+  # #bookmark sends its own response to unauthenticated users
+  # #feed provides an atom feed of videos for the user's
+  # md5-ed email address
+  before_filter :login_required, :except => [:bookmark, :feed]
   
   # New view.
   # Renders the view
@@ -12,7 +14,7 @@ class VideosController < ApplicationController
   # Creates a new view from the supplied post params.
   # Responds to HTML, JSON
   def create
-    @video = Video.new(params)
+    @video = Video.new(params[:video])
     @video.user = current_user
     respond_to do |format|
       if @video.save
@@ -25,10 +27,21 @@ class VideosController < ApplicationController
     end
   end
   
+  # Renders a video
+  # Required GET params: id
+  # Responds to HTML, JSON
+  def show
+    @video = Video.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render json: @video }
+    end
+  end
+  
   # Toggles the specified video's 'favorited'
   # field. Flips its current state rather than
   # accepting a state to set.
-  # Requires POST params: id
+  # Required POST params: id
   # Responds to HTML, JS, JSON
   def toggle_fave
     @video = Video.find_by_id(params[:id])
@@ -43,7 +56,7 @@ class VideosController < ApplicationController
   end
   
   # Destroys the specified video.
-  # Requires DELETE params: id
+  # Required DELETE params: id
   # Responds to HTML, JS, JSON
   def destroy
     @video = Video.find_by_id(params[:id])
@@ -126,20 +139,27 @@ class VideosController < ApplicationController
   # Renders all videos as an atom feed.
   # Required GET params: key
   def feed
-    @videos = Video.all(conditions: {user_id: (User.first(conditions: {feedKey: params[:key]}) || User.new).id})
+    @user = User.first(conditions: {feedKey: params[:key]})
+    raise ActionController::RoutingError.new('Not Found') if !@user
+    
+    @videos = Video.all(conditions: {user_id: @user.id}) || []
+    logger.debug @videos.inspect
+    @title = "Videos for #{@user.email}"
+    
     respond_to do |format|
       format.atom
     end
   end
   
   # JSONP request made from bookmarklet.
-  def add_to_queue
+  def bookmark
     if current_user
       @video = Video.new(params)
       @video.user = current_user
       if @video.save
         render_jsonp @video.to_json
       else
+        logger.debug @video.errors.inspect
         render_jsonp @video.errors.to_json
       end
     else

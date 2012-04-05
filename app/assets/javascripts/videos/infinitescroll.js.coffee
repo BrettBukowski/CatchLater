@@ -1,6 +1,6 @@
 $ ->
   # Don't run on non-video pages
-  return if not $('.videos').length
+  return if not $('.videos .videoList').length
   
   nearBottom = () ->
     $(window).scrollTop() > $(document).height() - $(window).height() - 600

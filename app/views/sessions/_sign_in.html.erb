@@ -1,5 +1,5 @@
 <h2>Sign in</h2>
-<%= form_tag session_path do %>
+<%= form_tag session_path, id: 'new_session', class: 'new_session' do %>
 	<div class="inputWrapper">
 		<%= label_tag 'email', 'Email' %>
 		<%= email_field_tag :email %>

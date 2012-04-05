@@ -156,11 +156,11 @@ nav {
       font-size:.86em;
       @include videoArea;
       text-align:left;
-      .label {
-        color: #666;
-      }
       form {
         margin:6px 0;
+        label {
+          color: #999;
+        }
         textarea {
           border: 0;
           height: 22px;
@@ -181,6 +181,7 @@ nav {
     background: rgba(251, 251, 251, .3);
     @include boxShadow(0, 2px, 0.1);
     @include borderRadius(5px);
+    margin-top: 4px;
     .text-wrap {
       .text-tags .text-tag .text-button {
         @include borderRadius(3px);

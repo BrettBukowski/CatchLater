@@ -44,11 +44,11 @@ class SessionsController < ApplicationController
         flash[:email_required] = true
         flash[:user_id] = third_party_info.uid
         flash[:provider] = third_party_info.provider
-        redirect_to new_session_url
+        redirect_to signin_url
       end
     else
       flash[:error] = 'Something unexpected happened. Sorry--please try again later'
-      redirect_to new_session_url
+      redirect_to signin_url
     end
   end
   
@@ -61,7 +61,7 @@ class SessionsController < ApplicationController
   # Kills the session
   def destroy
     sign_out_and_kill_session!
-    redirect_to new_session_url
+    redirect_to signin_url
   end
   
   private
@@ -100,11 +100,11 @@ class SessionsController < ApplicationController
         log_in user
       else
         flash[:notice] = user.errors
-        redirect_to new_session_url
+        redirect_to signin_url
       end
     else
       respond_to do |format|
-        format.html { redirect_to new_session_url, notice: 'Sorry, but we need an email address to log you in' }
+        format.html { redirect_to signin_url, notice: 'Sorry, but we need an email address to log you in' }
       end
     end
   end

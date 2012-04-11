@@ -14,7 +14,7 @@
     <%= label_tag 'email', 'Email address', for: 'user_email', class: 'screenReaderOnly' %>
     <%= email_field :user, :email, required: true %>
 	  <%= submit_tag 'Sign in', disable_with: 'Signing you in...' %>
-    <small><a href=''>Your email is used solely for login purposes</a></small>
+    <small><a href='/privacy.html' target='_blank'>Your email is used solely for login purposes</a></small>
   </form>
   </div>
 <% end %>

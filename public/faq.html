@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/assets/style.css" rel="stylesheet" type="text/css"/>
+    <link href="http://fonts.googleapis.com/css?family=Molengo:regular|News+Cycle|Sue+Ellen+Francisco" rel="stylesheet" type="text/css">
+    <title>CatchLater - FAQ</title>
+  </head>
+  <body>
+    <header>
+	    <h1><a href="/">CatchLater</a></h1>
+    </header>
+    <div id="main">
+      <h2 id="faq">FAQ</h2>
+
+      <h3 id="whynotjustuseyoutubeswatchlaterfeature">Why not just use YouTube&#8217;s watch later feature?</h3>
+
+      <p>YouTube, Vimeo, and other video sites have a watch later feature that allow you to save a video in order to watch it later. But in order to watch videos at a more convenient time you still have to go to each of these individual sites&#8211;when you&#8217;re supposed to be conveniencing (it should be a word since you know what it means), not going to a bunch of sites and trying to figure out where they saved your video. CatchLater grabs videos from multiple sites and presents them in one place. Quick and easy.</p>
+
+      <h3 id="whydoesntthisworkwithvideosite____">Why doesn&#8217;t this work with video site ____?</h3>
+
+      <p>CatchLater only works with sites that provide a <em>modern</em> video embedding technique. Instead of saving videos, CatchLater grabs videos&#8217; embed code and simply presents that embed code. Rather than old fashioned Flash object embeds, modern embed codes use iframes or video tags. The problem with older Flash object embeds is that they won&#8217;t work on your mobile device of choice&#8211;for on-the-go viewing; they&#8217;re also just more problematic to work with. As more and more video sites start to wise up and offer non-Flash-based video embeds that work on any device or platform, CatchLater will work with more sites.</p>
+
+      <h3 id="whatvideositesdoescatchlatersupport">What video sites does CatchLater support?</h3>
+
+      <p>Glad you asked. Here&#8217;s the ever-growing list:</p>
+
+      <ul>
+        <li>YouTube</li>
+        <li>Vimeo</li>
+        <li>TED</li>
+        <li>Gamespot</li>
+        <li>NPR</li>
+      </ul>
+
+      <h3 id="whydoesntthebookmarkletworkonpageswhereicanseeayoutubeorvimeovideo">Why doesn&#8217;t the bookmarklet work on pages where I can see a YouTube or Vimeo video?</h3>
+
+      <p>Some sites&#8211;most notably Vimeo&#8217;s new homepage&#8211;display an image of a video frame rather than the video itself (often there&#8217;s a play button that appears so that the image looks just like a video). These sites do this so that pages load faster. But static images aren&#8217;t videos, so the bookmarklet can&#8217;t see them. Often, when you click one of these images the site will immediately swap in the <em>real</em> video and start playing it. If you click the bookmarklet when the video&#8217;s playing then it will work. If not, just go to the video&#8217;s standalone page itself and the bookmarklet should work just fine.</p>
+
+      <h3 id="whydoigetaloadsecurecontentwarningwheniclickthebookmarklet">Why do I get a &#8220;load secure content&#8221; warning when I click the bookmarklet?</h3>
+
+      <p>When you&#8217;re on a secure site (you can tell if your browser&#8217;s location bar shows &#8220;https&#8221; before the site&#8217;s URL) and you load the bookmarklet, your browser may prompt you to &#8220;load secure content&#8221; or something similar. This just means that the secure (https) site will now contain the non-secure (http) CatchLater content in order to allow CatchLater to look for videos. Don&#8217;t worry&#8211;everything&#8217;s cool. The browser prompt is annoying, but once you confirm the prompt, everything works as normal. Nothing nefarious or shady is going on here.</p>
+    </div>
+    <footer>
+      <ul>
+        <li><a href='/faq.html'>FAQ</a></li>
+        <li><a href='/privacy.html'>Privacy</a></li>
+        <li>Made by <a href='http://brettbukowski.com'>Brett Bukowski</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>

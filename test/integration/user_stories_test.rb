@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserStoriesTest < ActionDispatch::IntegrationTest
+class UserStoriesTest < ActionDispatch::IntegrationTest  
   test "creating an account natively" do
     visit "/signin"
     
@@ -178,6 +178,20 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
   end
   
   test "deleting account" do
+    user = create(:user_with_videos, videos_count: 3)
+
+    visit "/signin"
+    within "form[action='#{session_path}']" do
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Sign In'
+    end
     
+    video = user.videos.last
+    assert_difference 'Video.count', -1 do
+      within "##{video.id}" do
+        click_link 'Delete'
+      end
+    end
   end
 end

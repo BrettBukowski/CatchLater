@@ -56,6 +56,8 @@
   background: -webkit-linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* Chrome10+,Safari5.1+ */
   background: -ms-linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* IE10+ */
   background: linear-gradient(top, #5adcd3 0%,#55dbd0 50%,#5adcd3 51%,#dbdbdb 100%); /* W3C */
+  @include borderRadius(5px);
+  border:1px solid #BBB;
   -moz-transition:all .6s, .6s, .6s;
   -webkit-transition:all .6s, .6s, .6s;
   &:hover {

@@ -1,6 +1,6 @@
 /**
-* Home Page
-*/
+ * Home Page
+ */
 @mixin homepad($bottom: 50px) {
   padding:10px 12% $bottom;
 }
@@ -64,8 +64,27 @@
     text-decoration:none;
   }
 }
+/** 
+ * Bookmarklet page 
+ */
+.bookmarklet {
+  text-align: center;
+  .button {
+    @include button;
+    box-shadow:0 1px 2px rgba(0, 0, 0, .1) inset;
+    display:inline-block;
+    font-size: 2em;
+    margin: 20px;
+    padding: 10px 40px 16px;
+    text-decoration: none;
+    cursor: url(/assets/grab.cur), default !important;
+    
+  }
+}
 
-
+/**
+ * Responsiveness
+ */
 @media only screen and (max-width: 1618px) {
   #bottom {
     section:nth-child(3) {

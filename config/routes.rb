@@ -1,5 +1,6 @@
 Catchlater::Application.routes.draw do
   get "home/index"
+  match "bookmarklet" => "home#bookmarklet"
   root to: "home#index"
   resources :videos do
     post "toggle_fave", on: :member

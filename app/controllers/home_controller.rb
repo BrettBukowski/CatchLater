@@ -1,9 +1,11 @@
 class HomeController < ApplicationController
-  layout 'home'
+  layout 'home', :except => :bookmarklet
   
   def index
-    if current_user
-      redirect_to videos_url
-    end
+    redirect_to videos_url if current_user
+  end
+
+  def bookmarklet
+    render action: 'bookmarklet', layout: 'application'
   end
 end

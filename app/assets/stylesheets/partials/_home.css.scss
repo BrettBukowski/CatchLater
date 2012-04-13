@@ -69,6 +69,20 @@
  */
 .bookmarklet {
   text-align: center;
+  #hand {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -webkit-animation-duration: 1.4s;
+    -webkit-animation-name: bounce;
+    -webkit-animation-iteration-count: 2;
+    -webkit-animation-direction: alternate;
+    -moz-animation-duration: 1.4s;
+    -moz-animation-name: bounce;
+    -moz-animation-iteration-count: 2;
+    -moz-animation-direction: alternate;
+    display: inline-block;
+    position:relative;
+  }
   .button {
     @include button;
     box-shadow:0 1px 2px rgba(0, 0, 0, .1) inset;
@@ -78,7 +92,64 @@
     padding: 10px 40px 16px;
     text-decoration: none;
     cursor: url(/assets/grab.cur), default !important;
-    
+  }
+  .instructions {
+    border-top:1px dashed #CCC;
+    font-weight: bold;
+    margin: 70px 0;
+    padding-top: 50px;
+    ol {
+      margin: auto;
+      text-align: left;
+      width: 60%;
+      li {
+        font-weight: normal;
+        margin: 12px 0;
+      }
+      &#chrome {
+        li {
+          &:first-child,
+          &:nth-child(2) {
+            background: url(/assets/instructions/chrome.png) no-repeat 0 60px;
+            height: 214px;
+            width: 621px;
+          }
+          &:nth-child(2) {
+            background-position: -621px 72px;
+            height: 199px;
+          }
+        }
+      }
+      &#safari {
+        li {
+          &:first-child,
+          &:nth-child(2) {
+            background: url(/assets/instructions/safari.png) no-repeat center 50px;
+            height: 214px;
+          }
+          &:nth-child(2) {
+            background-position: center -395px;
+            height: 190px;
+          }
+        }
+      }
+    }
+  }
+}
+@-webkit-keyframes bounce {
+  from {
+    bottom: -20px;
+  }
+  to {
+    top: -20px;
+  }
+}
+@-moz-keyframes bounce {
+  from {
+    bottom: -20px;
+  }
+  to {
+    top: -20px;
   }
 }
 

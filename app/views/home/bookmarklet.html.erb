@@ -3,6 +3,9 @@
   <p></p>
   <%= link_to_function "CatchLater", "alert('Drag this button to the bookmarks bar')", href: bookmarklet, class: 'button' %>
   <div>
-    <aside>☝ Drag this button up to your bookmarks bar</aside>
+    <aside><span id='hand'>☝</span> Drag this button up to your bookmarks bar</aside>
+  </div>
+  <div class='instructions'>
+    <%= bookmarklet_instructions %>
   </div>
 </div>

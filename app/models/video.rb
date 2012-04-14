@@ -18,7 +18,7 @@ class Video
   # Validation
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
   # OFFICIAL list of supported video sources
-  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot]
+  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot mtv]
   # The type of video that's been scraped
   TYPES = %w[iframe video object embed]
 
@@ -57,6 +57,7 @@ class Video
     vimeo:    'http://player.vimeo.com/video/%s',
     npr:      'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
     ted:      'http://video.ted.com/%s',
+    mtv:      'http://media.mtvnservices.com/mgid:uma:video:mtv.com:%s/',
   }
 
   # Retrieves the embed URL for the video
@@ -81,7 +82,8 @@ class Video
   VIDEO_URLS = {
     youtube:'http://www.youtube.com/watch?v=%s',
     vimeo:  'http://vimeo.com/%s',
-    npr:    'http://www.npr.org/templates/event/embeddedVideo.php?storyId=',
+    npr:    'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
+    mtv:    'http://www.mtvu.com/video/?vid=%s',
   }
   
   # Retrieves a link to the video page.

@@ -26,7 +26,8 @@ var CatchLater = CatchLater || (function() {
         { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?\/]+)/ },
         { name: 'vimeo', regex: /player\.vimeo\.com\/video\/([0-9]+)/ },
         { name: 'npr', regex: /npr\.org\/templates\/event\/embeddedVideo.php\?storyId=([0-9]+)/ },
-        { name: 'gamespot', regex: /gamespot\.com\/videoembed\/([0-9]+)/ }
+        { name: 'gamespot', regex: /gamespot\.com\/videoembed\/([0-9]+)/ },
+        { name: 'mtv', regex: /media\.mtvnservices\.com\/[a-z:.]+([0-9]+)/ }
       ],
       object: {
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
@@ -37,7 +38,8 @@ var CatchLater = CatchLater || (function() {
       embed: {
         youtube: [ { src: /ytimg.com/, id: /&video_id=([^&?]+)/ },
                    { src: /www\.youtube.com\/v\/([^&?\/]+)/ } ],
-        vimeo: [ { src: /vimeo\.com\/[^0-9]+([0-9]+)/ } ]
+        vimeo: [ { src: /vimeo\.com\/[^0-9]+([0-9]+)/ } ],
+        mtv: [ { src: /media\.mtvnservices\.com\/[a-z:.]+([0-9]+)/ } ]
       },
       video: {
         youtube: { src: /.*\.youtube\.com/, attr: 'data-youtube-id' }

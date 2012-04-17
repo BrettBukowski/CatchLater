@@ -18,7 +18,7 @@ class Video
   # Validation
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
   # OFFICIAL list of supported video sources
-  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot mtv]
+  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot mtv dailymotion]
   # The type of video that's been scraped
   TYPES = %w[iframe video object embed]
 
@@ -52,12 +52,13 @@ class Video
   end
   
   VIDEO_EMBEDS = {
-    gamespot: 'http://www.gamespot.com/videoembed/%s/&vidSize=560',
-    youtube:  'http://www.youtube.com/embed/%s',
-    vimeo:    'http://player.vimeo.com/video/%s',
-    npr:      'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
-    ted:      'http://video.ted.com/%s',
-    mtv:      'http://media.mtvnservices.com/mgid:uma:video:mtv.com:%s/',
+    dailymotion: 'http://www.dailymotion.com/embed/video/%s',
+    gamespot:    'http://www.gamespot.com/videoembed/%s/&vidSize=560',
+    youtube:     'http://www.youtube.com/embed/%s',
+    vimeo:       'http://player.vimeo.com/video/%s',
+    npr:         'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
+    ted:         'http://video.ted.com/%s',
+    mtv:         'http://media.mtvnservices.com/mgid:uma:video:mtv.com:%s/',
   }
 
   # Retrieves the embed URL for the video
@@ -80,10 +81,11 @@ class Video
   end
   
   VIDEO_URLS = {
-    youtube:'http://www.youtube.com/watch?v=%s',
-    vimeo:  'http://vimeo.com/%s',
-    npr:    'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
-    mtv:    'http://www.mtvu.com/video/?vid=%s',
+    dailymotion: 'http://www.dailymotion.com/video/%s',
+    youtube:     'http://www.youtube.com/watch?v=%s',
+    vimeo:       'http://vimeo.com/%s',
+    npr:         'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
+    mtv:         'http://www.mtvu.com/video/?vid=%s',
   }
   
   # Retrieves a link to the video page.

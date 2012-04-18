@@ -47,6 +47,11 @@ h3.rule {
 aside {
   font: 1.3em 'Sue Ellen Francisco';
 }
+p {
+  color: #222;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.3em;
+}
 
 header {
   border-bottom:1px solid #FFF;
@@ -89,7 +94,7 @@ header {
 }
 footer {
   background: #384a6f;
-  min-height: 100px;
+  height: 100px;
   overflow: hidden;
   text-shadow:none;
   @include wrapping();
@@ -131,7 +136,9 @@ footer {
 #main {
   @include wrapping;
   padding-bottom: 100px;
+  min-height:79%;
 }
+html, body { height: 100% }
 @import "partials/home";
 @import "partials/forms";
 @import "partials/video";

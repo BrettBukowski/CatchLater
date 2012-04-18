@@ -1,4 +1,7 @@
 <h2>Sign in</h2>
+<% if alert %>
+<div class='error'><%= alert %></div>
+<% end %>
 <%= form_tag session_path, id: 'new_session', class: 'new_session' do %>
 	<div class="inputWrapper">
 		<%= label_tag 'email', 'Email' %>

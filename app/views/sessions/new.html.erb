@@ -1,6 +1,6 @@
 <h2>Welcome</h2>
 
-<%= render partial: "third_party" %>
+<%= render partial: "sessions/third_party" %>
 
 <div class="separator">
   <hr>
@@ -10,6 +10,6 @@
 
 <section class="nativeLogin">
   <aside>Or use an account right here</aside>
-  <%= render partial: "sign_up" %>
-  <%= render partial: "sign_in" %>
+  <%= render partial: "sessions/sign_up" %>
+  <%= render partial: "sessions/sign_in", locals: {alert: alert} %>
 </section>

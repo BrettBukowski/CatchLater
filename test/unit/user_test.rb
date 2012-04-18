@@ -27,7 +27,7 @@ class UserTest < ActiveSupport::TestCase
     
     user.email = 'asdfsdf@sdfdf'
     assert user.invalid?
-    assert_equal 'The email you entered is invalid', user.errors[:email][0]
+    assert_equal "isn't a valid email address", user.errors[:email][0]
     
     user.email = 'abc@def.com'
     assert user.valid?

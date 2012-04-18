@@ -23,7 +23,7 @@ class User
   THIRD_PARTY_ID_REGEX = /^[0-9a-zA-Z]+$/i
 
   validates :email, presence: true, uniqueness: true, length: { in: 6..100 },
-    format: {with: EMAIL_REGEX, message: "The email you entered is invalid"}
+    format: {with: EMAIL_REGEX, message: "isn't a valid email address"}
   validate :validate_third_party_services
   
   # Retrieves the user for the given email

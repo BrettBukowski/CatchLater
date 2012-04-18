@@ -15,7 +15,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_difference 'User.count' do
       post :create, user: {email: 'bansda@sdf.df', password: ''}
     end
-    assert_redirected_to root_path
+    assert_redirected_to videos_path
   end
   
   test "should edit user" do

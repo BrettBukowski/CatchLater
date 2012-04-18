@@ -20,9 +20,8 @@ class SessionsController < ApplicationController
     if @user = User.log_in(params[:email], params[:password])
       log_in @user
     else
-      logger.debug User.all.inspect
-      logger.debug params.inspect
       @user = User.new
+      flash[:alert] = 'The email or password is incorrect'
       render 'sessions/new'
     end
   end
@@ -71,7 +70,7 @@ class SessionsController < ApplicationController
   def log_in(user)
     session[:userId] = user.id
     respond_to do |format|
-      format.html { redirect_to videos_url, notice: 'Welcome!' }
+      format.html { redirect_to videos_url }
       format.js { render 'redirect' }
     end
   end

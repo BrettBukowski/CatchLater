@@ -21,11 +21,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         self.current_user = @user
-        format.html { redirect_to root_path, notice: "You're all set! Start grabbing videos" }
+        format.html { redirect_to videos_url, notice: 'Welcome!' }
       else
         format.html do
-          flash[:error] = @user.errors
-          redirect_to new_session_url
+          render 'sessions/new'
+          # flash[:error] = @user.errors
+          # redirect_to new_session_url
+          
         end
         format.js
       end

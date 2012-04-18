@@ -19,7 +19,6 @@
   .thirdPartyLogin {
     margin: 3em 0;
     position: relative;
-    text-align: center;
     aside {
       float: right;
       position: absolute;
@@ -134,6 +133,9 @@
     padding:8px;
     h2 {
       margin:10px 0;
+    }
+    li {
+      list-style-type: none;
     }
   }
 }

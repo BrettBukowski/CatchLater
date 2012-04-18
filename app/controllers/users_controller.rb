@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   # Creates a new user from params.
-  # Responds to HTML, JS
+  # Responds to HTML
   def create
     @user = User.new(params[:user])
     respond_to do |format|
@@ -23,13 +23,7 @@ class UsersController < ApplicationController
         self.current_user = @user
         format.html { redirect_to videos_url, notice: 'Welcome!' }
       else
-        format.html do
-          render 'sessions/new'
-          # flash[:error] = @user.errors
-          # redirect_to new_session_url
-          
-        end
-        format.js
+        format.html { render 'sessions/new' }
       end
     end
   end

@@ -5,6 +5,10 @@
 <div id="notice"><%= notice %></div>
 <% end %>
 
+<% if @videos.empty? %>
+<%= render partial: "shared/bookmarklet", locals: { heading: "Start saving videos while you browse the web." } %>
+<% else %>
 <section class="queue videoList">
 	<%= render @videos %>
 </section>
+<% end %>

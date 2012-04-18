@@ -105,6 +105,10 @@
       li {
         font-weight: normal;
         margin: 12px 0;
+        &:last-child {
+          background: url(/assets/instructions/capture.png) no-repeat 0 76px;
+          height: 470px;
+        }
       }
       &#chrome {
         li {

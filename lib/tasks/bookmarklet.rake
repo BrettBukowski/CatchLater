@@ -18,5 +18,7 @@ namespace :assets do
     app = app.result(binding)
     # Minify and write out the whole thing
     IO.write(javascript_path + 'app.min.js', Uglifier.compile(app))
+    # Also write out a debug version
+    IO.write(javascript_path + 'app.debug.js', app)
   end
 end

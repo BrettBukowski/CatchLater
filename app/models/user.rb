@@ -13,7 +13,9 @@ class User
   key :resetPasswordCodeExpires,  Time
   key :thirdPartyAuthServices,    Hash
   key :feedKey,                   String
-  
+
+  timestamps!
+
   # Relationships
   has_many :videos, dependent: :destroy
   

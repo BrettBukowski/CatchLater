@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   # Required DELETE params: user
   # Responds to HTML
   def destroy
-    @user = User.first(params[:user])
+    @user = User.find(params[:id])
     if @user == current_user
       sign_out_and_kill_session!
       @user.destroy

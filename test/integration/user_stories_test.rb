@@ -142,7 +142,21 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
   end
   
   test "deleting a video" do
+    user = create(:user_with_videos, videos_count: 3)
+
+    visit "/signin"
+    within "form[action='#{session_path}']" do
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Sign In'
+    end
     
+    video = user.videos.last
+    assert_difference 'Video.count', -1 do
+      within "##{video.id}" do
+        click_link 'Delete'
+      end
+    end
   end
   
   test "changing password" do
@@ -187,11 +201,12 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
       click_button 'Sign In'
     end
     
-    video = user.videos.last
-    assert_difference 'Video.count', -1 do
-      within "##{video.id}" do
-        click_link 'Delete'
-      end
+    click_link user.email
+    
+    assert_equal edit_user_path(user.id), current_path
+    
+    assert_difference 'User.count', -1 do
+      click_link 'Delete your account'
     end
   end
 end

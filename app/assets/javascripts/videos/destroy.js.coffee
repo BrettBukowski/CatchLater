@@ -7,7 +7,7 @@ $ ->
         draggable: false,
         resizable: false,
         modal: true,
-        title: 'Delete this video',
+        title: if $(document.body).hasClass('.videos') then 'Delete this video' else 'Delete your account',
         closeText: '×',
         buttons: [
           {

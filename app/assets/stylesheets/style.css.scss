@@ -7,6 +7,7 @@
 }
 html {
   background: url(/assets/grayBg.png);
+  -webkit-text-size-adjust: 100%;
 }
 body {  
   font-family:'News Cycle';
@@ -102,11 +103,6 @@ footer {
     float: left;
     list-style-type: none;
     margin-right: 0.5em;
-    &:last-child {
-      float: right;
-      font-size: 14px;
-      padding-top: 10px;
-    }
     a {
       color: #C2C2C2;
       text-decoration: none;

@@ -13,55 +13,86 @@
     letter-spacing:-3px;
     @include textShadow;
   }
-}
-#top {
-  background:url(/assets/bg.png);
-  position:relative;
-  text-shadow:none;
-  @include boxShadow(3px, 9px);
-  @include homepad(70px);
-}
-#bottom {
-  background: #FFF;
-  @include homepad;
-  min-height:400px;
-  section {
-    float:left;
-    padding:0 20px;
-    text-align:center;
-    width:370px;
-    img {
-      border:6px solid #FFF;
-      @include boxShadow;
-      @include borderRadius(10px);
-      display:block;
-      margin:26px auto 0;
+  #top {
+    background:url(/assets/bg.png);
+    position:relative;
+    text-shadow:none;
+    @include boxShadow(3px, 9px);
+    @include homepad(70px);
+  }
+  #bottom {
+    background: #FFF;
+    @include homepad;
+    min-height:400px;
+    section {
+      float:left;
+      padding:0 20px;
+      text-align:center;
+      width:33%;
+      img {
+        border:6px solid #FFF;
+        @include boxShadow;
+        @include borderRadius(10px);
+        display:block;
+        margin:26px auto 0;
+      }
     }
   }
-}
-.teaser {
-  font-size:28px;
-}
-.signup {
-  @include borderRadius(8px);
-  border:1px solid #FFF;
-  @include boxShadow;
-  @include button;
-  display:inline-block;
-  font-size:30px;
-  margin-top:20px;
-  padding:20px 34px 26px;
-  text-decoration:none;
-  @include textShadow(1px, #000);
-}
-.existingSignin {
-  position:absolute;
-  right:0;
-  top:0;
-  @include homepad;
-  a {
-    font-weight:bold;
+  .teaser {
+    font-size:28px;
+  }
+  .signup {
+    @include borderRadius(8px);
+    border:1px solid #FFF;
+    @include boxShadow;
+    @include button;
+    display:inline-block;
+    font-size:30px;
+    margin-top:20px;
+    padding:20px 34px 26px;
     text-decoration:none;
+    @include textShadow(1px, #000);
+  }
+  .existingSignin {
+    position:absolute;
+    right:0;
+    top:0;
+    @include homepad;
+    a {
+      font-weight:bold;
+      text-decoration:none;
+    }
+  }
+  .image {
+    span {
+      background: url(vids.png) no-repeat;
+      border: 6px solid #FFF;
+      box-shadow: 0 0 6px rgba(0, 0, 0, .4);
+      position: absolute;
+      -webkit-backface-visibility: hidden;
+    }
+    #video1 {
+      height: 255px;
+      right: 12%;
+      top: 188px;
+      width: 411px;
+    }
+    #video2 {
+      background-position: 0 -243px;
+      height: 244px;
+      right: 14%;
+      top: 154px;
+      width: 411px;
+      -webkit-transform: rotate(-1deg);
+    }
+    #video3 {
+      background-position: 0 -475px; 
+      height: 268px;
+      top: 214px;
+      right: 13%;
+      width: 471px;
+      -webkit-transform: rotate(1deg);
+    }
   }
 }
 /** 

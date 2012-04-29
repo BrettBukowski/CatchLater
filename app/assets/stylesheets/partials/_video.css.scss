@@ -7,6 +7,10 @@ nav {
   float:right;
   position:relative;
   top:-64px;
+  text-shadow: none;
+  a {
+    text-shadow: none;
+  }
   #tagDropdown {
     color: #000;
     text-decoration: none;
@@ -164,7 +168,8 @@ nav {
         textarea {
           border: 0;
           height: 22px;
-          width: 540px;
+          width: 100%;
+          @include videoArea;
         }
         .tip {
           font:21px 'Sue Ellen Francisco';

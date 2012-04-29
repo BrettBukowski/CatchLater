@@ -1,6 +1,9 @@
-@media only screen and (max-width: 400px),
-       only screen and (min-device-pixel-ratio: 2),
-       only screen and (-webkit-min-device-pixel-ratio: 2) {
+@mixin smallVideoArea {
+  margin: auto;
+  width: 90%;
+}
+
+@media only screen and (max-width: 400px) {
   #home {
     h1 {
       margin-left:-20px;
@@ -53,11 +56,89 @@
         }
       }
     }
+    form {
+      .inputWrapper {
+        width: 100%;
+      }
+    }
+  }
+  .videos {
+    .tagList {
+      margin:0;
+      padding:0;
+    }
+    section {
+      .video {
+        iframe {
+          height: 200px;
+          @include smallVideoArea;
+        }
+        .tags,
+        .aux {
+          @include smallVideoArea;
+          .actions .shareDropdown {
+            right: 2%;
+            ul {
+              display: block;
+              margin: 42px 0 0;
+              text-align: center;
+              width: 167px;
+              &::before {
+                left: auto;
+                right: 50px;
+              }
+              li {
+                border: 0;
+                &.source {
+                  float: none;
+                  text-align: center;
+                }
+              }
+            }
+          }
+        }
+        .tags form textarea {
+          /* TextExt requires hard width
+             or it mangles things */
+          width: 200px;
+        }
+      }
+    }
+  }
+  header {
+    height: 100px;
+    position: relative;
+    #helloAgain {
+      a.userLink {
+        background: url(/assets/user.png) no-repeat;
+        color: transparent;
+        font-size: 0;
+        height: 20px;
+        width: 20px;
+        display: block;
+        margin-top: 10px;
+      }
+      .greeting {
+        font-size: 0;
+        color: transparent;
+      }
+      a.signout {
+        position: absolute;
+        right: 10%;
+        top: 12px;
+        font-size: .8em;
+      }
+    }
+  }
+  nav {
+    position: absolute;
+    top: 50px;
+    left: 10%;
   }
   footer {
     ul {
       display: block;
-      width: 90%;
+      width: 100%;
       margin: 10px auto;
       li {
         float: none;

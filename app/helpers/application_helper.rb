@@ -8,7 +8,11 @@ module ApplicationHelper
     browser = request.user_agent.match(/Chrome|Firefox|Safari|Android|iPhone|iPad|MSIE/)
     if browser
       browser = browser[0].downcase
-      raw send(:"#{browser}_instructions")
+      if browser == 'iphone' || browser == 'ipad'
+        raw ios_instructions % bookmarklet
+      else
+        raw send(:"#{browser}_instructions")
+      end
     end
   end
   
@@ -48,16 +52,19 @@ module ApplicationHelper
   def ios_instructions
     <<-html
     To install the CatchLater button in iOS:
-    <ol id="safari">
+    <ol id="ios">
       <li>First of all: I'm sorry. This is an unwieldy process in iOS.</li>
       <li>Bookmark this page right now.</li>
       <li>
-        Next, copy these contents to the clipboard.
+        Next, copy the contents of the text box below into the clipboard.
         <ol>
           <li>Tap inside the textbox. The keyboard will pop up.</li>
           <li>Tap and hold inside the textbox so that the magnifying glass appears. Release.</li>
           <li>You should see the pop-in menu. Choose <em>Select All</em> and then <em>Copy</em>
         </ol>
+        <aside>
+        Copy these contents:
+        </aside>
         <textarea>%s</textarea>
       </li>
       <li>Now, in Safari, tap the Bookmarks item to bring up your list of bookmarks</li>
@@ -65,7 +72,7 @@ module ApplicationHelper
       <li>Select the CatchLater bookmark that you just added in Step 2.</li>
       <li>Tap the bookmark's URL and then hit the <em>x</em> to clear it out.</li>
       <li>Tap and hold inside the cleared-out space and select paste.</li>
-      <li>Hit Done--You're now done!</li>
+      <li>That's it! Go back to the Bookmarks page and hit Done twice to close.</li>
       <li>When you're on a website with videos tap the "CatchLater" bookmark to save a video for later viewing</li>
     </ol>
     html

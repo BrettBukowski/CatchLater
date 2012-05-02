@@ -28,6 +28,7 @@
       float:left;
       padding:0 20px;
       text-align:center;
+      text-shadow: none;
       width:33%;
       img {
         border:6px solid #FFF;
@@ -64,6 +65,10 @@
     }
   }
   .image {
+    float: right;
+    position: relative;
+    top: -330px;
+    width: 100%;
     span {
       background: url(vids.png) no-repeat;
       border: 6px solid #FFF;
@@ -73,23 +78,23 @@
     }
     #video1 {
       height: 255px;
-      right: 12%;
-      top: 188px;
+      right: 2%;
+      top: 34px;
       width: 411px;
     }
     #video2 {
       background-position: 0 -243px;
       height: 244px;
-      right: 14%;
-      top: 154px;
+      right: 4%;
+      top: 4px;
       width: 411px;
       -webkit-transform: rotate(-1deg);
     }
     #video3 {
-      background-position: 0 -475px; 
+      background-position: 0 -475px;
       height: 268px;
-      top: 214px;
-      right: 13%;
+      top: 60px;
+      right: 3%;
       width: 471px;
       -webkit-transform: rotate(1deg);
     }
@@ -166,6 +171,57 @@
           &:nth-child(2) {
             background-position: center -395px;
             height: 190px;
+          }
+        }
+      }
+      &#ios {
+        li {
+          background: url(/assets/instructions/ios.png) no-repeat 0 64px;
+          width: 200px;
+          &:first-child {
+            background: none;
+          }
+          &:nth-child(2) {
+            height: 230px;
+          }
+          &:nth-child(3) {
+            background: none;
+            ol {
+              margin: 0;
+              padding-left: 4px;
+              li {
+                list-style-type: lower-alpha;
+                background: url(/assets/instructions/ios.png) no-repeat -200px 100px;
+                height: 264px;
+                &:nth-child(2) {
+                  background-position: -400px 130px;
+                  height: 280px;
+                }
+                &:nth-child(3) {
+                  background-position: -599px 100px;
+                  width: 195px;
+                }
+              }
+            }
+          }
+          &:nth-child(4),
+          &:nth-child(5),
+          &:nth-child(9),
+          &:nth-child(10) {
+            background: none;
+            height: auto;
+          }
+          &:nth-child(6) {
+            background-position: -793px 100px;
+            height: 350px;
+          }
+          &:nth-child(7) {
+            background-position: -994px 100px;
+            height: 176px;
+          }
+          &:nth-child(8) {
+            background-position: -1193px 100px;
+            height: 275px;
           }
         }
       }

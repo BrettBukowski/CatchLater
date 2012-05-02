@@ -3,26 +3,38 @@
   width: 90%;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 1500px) {
+  #home {
+    .image {
+      float: none;
+      height: 200px;
+      top: -138px;
+      -webkit-transform: scale(.9);
+      -moz-transform: scale(.9);
+    }
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .videos section .video .actions .shareDropdown {
+    right: 2%;
+  }
+}
+@media only screen and (max-width: 876px) {
   #home {
     h1 {
-      margin-left:-20px;
-      font-size:54px;
-    }
-    .signup {
-      margin: auto;
-      display: block;
-      text-align: center;
-      font-size: 40px;
-    }
-    .existingSignin {
-      top:-5px;
-      padding-right:5px;
-      font-size:smaller;
+      font-size:5em;
     }
     .image {
-      display: none;
+      float: none;
+      height: 250px;
+      top: 0;
+      -webkit-transform: scale(.8);
+      -moz-transform: scale(.8);
     }
+  }
+}
+@media only screen and (max-width: 800px) {
+  #home {
     #bottom {
       section {
         float: none;
@@ -30,25 +42,80 @@
       }
     }
   }
-  .users, .sessions {
-    .fbLink,
-    .twitterLink {
-      font-size: 1em !important;
-      width: 100% !important;
-    }
-    aside {
+  header {
+    #helloAgain {
       font-size: .89em;
     }
+  }
+  .videos {
+    section {
+      .video {
+        iframe {
+          @include smallVideoArea;
+          height: 350px;
+        }
+        .tags,
+        .aux {
+          @include smallVideoArea;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 630px) {
+  header {
+    #helloAgain {
+      a {
+        &.userLink {
+          background: url(/assets/user.png) no-repeat;
+          color: transparent;
+          display: block;
+          font-size: 0;
+          height: 20px;
+          left: -20px;
+          margin-top: 10px;
+          position: relative;
+          top: -33px;
+          width: 20px;
+        }
+        &.signout {
+          position: relative;
+          top: -62px;
+        }
+      }
+      .greeting {
+        font-size: 0;
+        color: transparent;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 480px) {
+  #home {
+    h1 {
+      font-size: 4em;
+    }
+    .existingSignin {
+      font-size: smaller;
+    }
+    .image {
+      height: 260px;
+      right: -50px;
+    }
+  }
+  .users, .sessions {
     .thirdPartyLogin {
-      margin: 0 0 20px;
       aside {
-        width: 130px;
-        right: -30px;
+        width: 230px;
+        right: -40px;
         line-height: 1.1em;
+        &.arrow {
+          top: -111px;
+        }
       }
     }
     .nativeLogin {
-      margin: 0 !important;
+      margin: 0;
       form {
         width: 100%;
         input {
@@ -57,16 +124,13 @@
       }
     }
     form {
+      input,
       .inputWrapper {
         width: 100%;
       }
     }
   }
   .videos {
-    .tagList {
-      margin:0;
-      padding:0;
-    }
     section {
       .video {
         iframe {
@@ -100,8 +164,81 @@
         .tags form textarea {
           /* TextExt requires hard width
              or it mangles things */
+          width: 300px;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 320px) {
+  #home {
+    h1 {
+      margin-left:-20px;
+      font-size:54px;
+    }
+    .signup {
+      margin: auto;
+      display: block;
+      text-align: center;
+      font-size: 40px;
+    }
+    .existingSignin {
+      top:-5px;
+      padding-right:5px;
+    }
+    .image {
+      display: none;
+    }
+  }
+  .users, .sessions {
+    .fbLink,
+    .twitterLink {
+      font-size: 1em !important;
+      width: 100% !important;
+    }
+    aside {
+      font-size: .89em;
+    }
+    .thirdPartyLogin {
+      margin: 0 0 20px;
+      aside {
+        width: 130px;
+        right: -30px;
+      }
+    }
+  }
+  .videos {
+    .tagList {
+      margin:0;
+      padding:0;
+    }
+    section {
+      .video {
+        iframe {
+          height: 200px;
+          @include smallVideoArea;
+        }
+        .tags form textarea {
+          /* TextExt requires hard width
+             or it mangles things */
           width: 200px;
         }
+      }
+    }
+  }
+  .bookmarklet { 
+    .buttonArea {
+      display: none;
+    }
+    .instructions {
+      textarea, 
+      ol {
+        display: block;
+        margin: 0;
+        width: 100%;
+      }
+      textarea {
+        margin: 4px 0 30px;
       }
     }
   }
@@ -110,23 +247,12 @@
     position: relative;
     #helloAgain {
       a.userLink {
-        background: url(/assets/user.png) no-repeat;
-        color: transparent;
-        font-size: 0;
-        height: 20px;
-        width: 20px;
-        display: block;
-        margin-top: 10px;
-      }
-      .greeting {
-        font-size: 0;
-        color: transparent;
+        position: static;
       }
       a.signout {
         position: absolute;
         right: 10%;
         top: 12px;
-        font-size: .8em;
       }
     }
   }

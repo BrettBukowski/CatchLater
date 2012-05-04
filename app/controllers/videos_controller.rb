@@ -3,7 +3,9 @@ class VideosController < ApplicationController
   # #bookmark sends its own response to unauthenticated users
   # #feed provides an atom feed of videos for the user's
   # md5-ed email address
-  before_filter :login_required, :except => [:bookmark, :feed]
+  before_filter :login_required, except: [:bookmark, :feed]
+  # Ensure that the user owns the video that's being requested
+  before_filter :ensure_user_owns_video, only: [:show, :toggle_fave, :destroy, :set_tags]
   
   # New view.
   # Renders the view
@@ -27,11 +29,10 @@ class VideosController < ApplicationController
     end
   end
   
-  # Renders a video
+  # Renders a video.
   # Required GET params: id
   # Responds to HTML, JSON
   def show
-    @video = Video.find(params[:id])
     respond_to do |format|
       format.html
       format.json { render json: @video }
@@ -44,7 +45,6 @@ class VideosController < ApplicationController
   # Required POST params: id
   # Responds to HTML, JS, JSON
   def toggle_fave
-    @video = Video.find_by_id(params[:id])
     @video.favorited = !@video.favorited
     respond_to do |format|
       if @video.save
@@ -59,7 +59,6 @@ class VideosController < ApplicationController
   # Required DELETE params: id
   # Responds to HTML, JS, JSON
   def destroy
-    @video = Video.find_by_id(params[:id])
     @video.destroy
     respond_to do |format|
       format.html { redirect_to videos_path }
@@ -103,15 +102,10 @@ class VideosController < ApplicationController
   #  list of strings.
   # Responds to JSON
   def set_tags
-    if params[:id].present?
-      @video = Video.find_by_id(params[:id])
-      @video.tags = params[:tags].strip.split(',').uniq
-      @video.save
-      invalidate_tags_for_current_user
-      render json: @video.tags
-    else
-      render json: {error: 'No video specified'}
-    end
+    @video.tags = params[:tags].strip.split(',').uniq
+    @video.save
+    invalidate_tags_for_current_user
+    render json: @video.tags
   end
   
   # Renders all tags for 
@@ -154,7 +148,7 @@ class VideosController < ApplicationController
   # JSONP request made from bookmarklet.
   def bookmark
     if current_user
-      @video = Video.new(params)
+      @video = Video.new(params.slice(:videoID, :webpageUrl, :type, :source, :url))
       @video.user = current_user
       if @video.save
         render_jsonp @video.to_json
@@ -165,6 +159,13 @@ class VideosController < ApplicationController
     else
       render_jsonp Hash[login_required: true].to_json
     end
+  end
+  
+  protected
+  # Makes sure that the user owns the video
+  def ensure_user_owns_video
+    @video = Video.find(params[:id])
+    render :nothing, status: 403 if @video.user != current_user
   end
   
   private

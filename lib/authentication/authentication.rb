@@ -89,7 +89,7 @@ module Authentication
     # Called from #current_user. First attempt to sign_in by the user id stored in the session.
     def log_in_from_session
       if session[:userId]
-        self.current_user = User.find_by_id(session[:userId])
+        self.current_user = User.find(session[:userId])
       end
     end
  

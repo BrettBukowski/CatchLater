@@ -35,10 +35,6 @@ class Video
     message: "The type of video isn't supported"
   }
 
-  def self.find_by_id(id)
-    first(conditions: {id: id})
-  end
-
   def self.find_by_tag(tag)
     all(tags: ["#{tag}"])
   end

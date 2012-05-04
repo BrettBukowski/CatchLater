@@ -1,17 +1,15 @@
 class UsersController < ApplicationController
   # Require login for user-modifiable methods
-  before_filter :login_required, :except => [:new, :create, :send_password_reset, :forgot_password, :reset_password, :set_new_password]
+  before_filter :login_required, only: [:edit, :update, :destroy]
+  # redirect logged-in users away from non-logged in methods
+  before_filter :redirect_logged_in_user, only: [:new, :create, :send_password_reset, :forgot_password, :reset_password, :set_new_password]
 
   # New user.
   # Redirects to root path
   # if the user's already
   # logged in.
   def new
-    if current_user
-      redirect_to root_path
-    else
-      @user = User.new
-    end
+    @user = User.new
   end
 
   # Creates a new user from params.
@@ -37,7 +35,7 @@ class UsersController < ApplicationController
   # Required PUT params: id
   # Responds to HTML, JSON
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     respond_to do |format|
       if @user.update_attributes(allowed_params)
         format.html { redirect_to edit_user_path(@user), notice: "You've been updated!" }
@@ -53,11 +51,9 @@ class UsersController < ApplicationController
   # Required DELETE params: user
   # Responds to HTML
   def destroy
-    @user = User.find(params[:id])
-    if @user == current_user
-      sign_out_and_kill_session!
-      @user.destroy
-    end
+    @user = current_user
+    sign_out_and_kill_session!
+    @user.destroy
     redirect_to root_path
   end
   
@@ -98,6 +94,11 @@ class UsersController < ApplicationController
     else
       redirect_to signin_url, notice: "There was an error with the request"
     end
+  end
+  
+  protected
+  def redirect_logged_in_user
+    redirect_to root_path if current_user
   end
   
   private

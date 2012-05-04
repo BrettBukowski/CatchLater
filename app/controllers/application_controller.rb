@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # Before filter for users and videos.
   def login_required
     if !current_user
-      flash[:notice] = "Log in"
+      flash[:notice] = "You must log in to perform this action"
       redirect_to signin_url
     else
       return true

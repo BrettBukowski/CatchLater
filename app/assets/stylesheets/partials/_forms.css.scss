@@ -26,8 +26,8 @@
       -moz-transform: rotate(1deg);
       right: 0;
       &.arrow {
-        background: center 49px url(/assets/arrow.png) no-repeat;
-        height: 80px;      
+        background: center -310px url(/assets/icons.png) no-repeat;
+        height: 79px;
         top: -92px;
       }
     }
@@ -58,10 +58,10 @@
       }
     }
     .fbLink {
-      background: #3B5B99 url(/assets/fb.png) no-repeat;
+      background: #3B5B99 url(/assets/icons.png) 0 -93px no-repeat;
     }
     .twitterLink {
-      background: #00D7FB url(/assets/twitter.png) no-repeat;
+      background: #00D7FB url(/assets/icons.png) no-repeat;
     }
   }
   .separator {

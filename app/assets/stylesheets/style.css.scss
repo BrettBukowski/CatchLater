@@ -58,7 +58,7 @@ header {
   border-bottom:1px solid #FFF;
   border-top:4px solid #2DB6B6;
   @include boxShadow(1px, 3px 0.2);
-  background:url(demo.png) fixed;
+  background:url(greenBg.png) fixed;
   @include wrapping;
   h1 {
     display:inline;

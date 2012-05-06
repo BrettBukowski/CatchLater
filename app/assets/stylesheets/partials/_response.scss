@@ -6,11 +6,11 @@
 @media only screen and (max-width: 1500px) {
   #home {
     .image {
-      float: none;
       height: 200px;
       top: -138px;
       -webkit-transform: scale(.9);
       -moz-transform: scale(.9);
+      width: 70%;
     }
   }
 }
@@ -67,7 +67,7 @@
     #helloAgain {
       a {
         &.userLink {
-          background: url(/assets/user.png) no-repeat;
+          background: url(/assets/icons.png) -3px -290px no-repeat;
           color: transparent;
           display: block;
           font-size: 0;

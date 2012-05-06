@@ -38,7 +38,7 @@ nav {
       position:relative;
     }
     .fave {
-      background-color:#FFF;
+      background:#FFF url(/assets/icons.png) no-repeat 10px -185px;
       @include boxShadow(1px, 3px, 0.1);
       @include topRightRadius(4px);
       @include bottomRightRadius(4px);
@@ -50,11 +50,11 @@ nav {
       @include linearTransition(.2s);
       &.selected,
       &:hover, &:focus {
-        background:#FFF url(/assets/fave.png) no-repeat 0 1px;
+        background-position: -3px -185px;
         width:24px;
       }
       &.selected {
-        background-position:0 -24px;
+        background-position: -3px -210px;
       }
     }
     .aux {
@@ -84,7 +84,7 @@ nav {
           color:transparent;
           display:block;
           width:32px;
-          height:32px;
+          height:26px;
           float:left;
           @include linearTransition(.3s);
           &:focus,
@@ -93,11 +93,11 @@ nav {
           }
         }
         .share {
-          background:url(/assets/action.png) no-repeat;
+          background:url(/assets/icons.png) no-repeat 0 -234px;
           opacity:.1;
         }
         .delete {
-          background:url(/assets/trash.png) no-repeat 0 2px;
+          background:url(/assets/icons.png) no-repeat 0 -261px;
           opacity:.13;
         }
         .shareDropdown {

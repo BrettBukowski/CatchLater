@@ -30,12 +30,29 @@
       text-align:center;
       text-shadow: none;
       width:33%;
-      img {
+      div {
         border:6px solid #FFF;
-        @include boxShadow;
+        @include boxShadow(0, 8px);
         @include borderRadius(10px);
-        display:block;
+        height: 90px;
         margin:26px auto 0;
+        position: relative;
+        width: 214px;
+        img {
+          position: absolute;
+          &.sample-1 {
+            clip: rect(84px, 200px, 168px, 0);
+            left: 0;
+            top: -86px;
+          }
+          &.sample-2 {
+            clip: rect(0, 200px, 84px, 0);
+          }
+          &.sample-3 {
+            clip: rect(168px, 200px, 252px, 0);
+            top: -170px;
+          }
+        }
       }
     }
   }

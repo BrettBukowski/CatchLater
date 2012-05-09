@@ -1238,7 +1238,7 @@ snack.wrap.defineEngine(function (selector, context){
           zIndex: 1
         });
         link.target = '_blank';
-        link.href = 'http://0.0.0.0:3000/signin';
+        link.href = 'http://catchlater.com/signin';
         link.innerHTML = 'Log in real quick \u2192';
         this.addText('Oops... You aren\'t logged in');
         this.add.parentNode.insertBefore(link, this.add);
@@ -1294,7 +1294,7 @@ snack.wrap.defineEngine(function (selector, context){
           webpageUrl: window.top.location.href
         };
         snack.JSONP({
-          url: 'http://0.0.0.0:3000/videos/bookmark/',
+          url: 'http://catchlater.com/videos/bookmark/',
           key: 'callback',
           data: request
         }, function(resp) {

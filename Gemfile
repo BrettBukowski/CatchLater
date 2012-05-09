@@ -25,3 +25,7 @@ group :test do
   gem 'factory_girl_rails', '~> 3.0.0'
   gem 'database_cleaner', '~> 0.7.2'
 end
+
+group :development do
+  gem 'capistrano', '~> 2.12.0'
+end

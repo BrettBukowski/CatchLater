@@ -5,10 +5,7 @@ set :scm, 'git'
 set :repository, 'git://github.com/BrettBukowski/CatchLater.git'
 set :branch, "master"
 
-server 'catchlater.com', :app, :db, :primary => true
-
-ssh_options[:forward_agent] = true
-ssh_options[:keys] = "/Users/brettbukowski/.ssh/id_rsa"
+server 'catchlater.com', :app, :web, :db, :primary => true
 
 set :user, 'brett'
 set :deploy_to, '/var/catchlater'
@@ -41,12 +38,13 @@ namespace :files do
   end
 end
 
-namespace :rake do
+# Don't use `rake` as a namespace... https://github.com/capistrano/capistrano/pull/97
+namespace :rake_tasks do
   desc "Build the bookmarklet app"
   task :build_js do
     run "cd #{deploy_to}/current; /usr/bin/env rake assets:bookmarklet"
   end
 end
 
-after "deploy:create_symlink", "files:upload_config_files", "files:upload_core_js", "rake:build_js"
+after "deploy:create_symlink", "files:upload_config_files", "files:upload_core_js", "rake_tasks:build_js"
 after "deploy:restart", "deploy:cleanup"

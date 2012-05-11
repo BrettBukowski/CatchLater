@@ -4,7 +4,9 @@ namespace :assets do
     require 'erb'
     require 'uglifier'
     
+    env = ENV['RAILS_ENV'] || 'development'
     javascript_path = File.expand_path('app/assets/javascripts') + '/'
+    write_to = (env == 'development') ? javascript_path : (File.expand_path('public/assets') + '/')
     
     # Minify the bookmarklet loader
     IO.write(javascript_path + 'bookmarklet.min.js', 
@@ -16,9 +18,12 @@ namespace :assets do
     # Insert Snack into the bookmarklet app's source
     snack = IO.read(File.expand_path('vendor/assets/javascripts/externals/snack/builds/snack-qwery.js'))
     app = app.result(binding)
+
     # Minify and write out the whole thing
-    IO.write(javascript_path + 'app.min.js', Uglifier.compile(app))
-    # Also write out a debug version
-    IO.write(javascript_path + 'app.debug.js', app)
+    IO.write(write_to + 'app.min.js', Uglifier.compile(app))
+
+    if env == 'development'
+      IO.write(javascript_path + 'app.debug.js', app)
+    end
   end
 end

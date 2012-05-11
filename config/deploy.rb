@@ -42,7 +42,7 @@ end
 namespace :rake_tasks do
   desc "Build the bookmarklet app"
   task :build_js do
-    run "cd #{deploy_to}/current; /usr/bin/env rake assets:bookmarklet"
+    run "cd #{deploy_to}/current; bundle exec rake RAILS_ENV=production assets:bookmarklet"
   end
 end
 

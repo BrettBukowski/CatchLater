@@ -138,7 +138,7 @@ class VideosController < ApplicationController
     
     @videos = Video.all(conditions: {user_id: @user.id}) || []
     logger.debug @videos.inspect
-    @title = "Videos for #{@user.email}"
+    @title = "CatchLater: videos for #{@user.email}"
     
     respond_to do |format|
       format.atom

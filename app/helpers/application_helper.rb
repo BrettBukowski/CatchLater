@@ -42,7 +42,7 @@ module ApplicationHelper
     <<-html
     To install the CatchLater button in Firefox:
     <ol id="safari">
-      <li>Display your Bookmarks bar by clicking <em>Wrench icon > Bookmarks > Show Bookmarks Bar</em></li>
+      <li>Display your Bookmarks bar by clicking <em>View > Toolbars > Bookmarks Bar</em></li>
       <li>Drag the CatchLater button up into your Bookmarks bar</li>
       <li>When you're on a website with videos click "CatchLater" to save a video for later viewing</li>
     </ol>
@@ -86,11 +86,11 @@ module ApplicationHelper
   
   def msie_instructions
     <<-html
-    To install the CatchLater button in Safari:
-    <ol id="safari">
-      <li>Display your Bookmarks bar by clicking <em>Wrench icon > Bookmarks > Show Bookmarks Bar</em></li>
-      <li>Right-click the button and select <em>Add to Favorites...</em></li>
-      <li>When you're on a website with videos click "CatchLater" to save a video for later viewing</li>
+    To install the CatchLater button in Internet Explorer:
+    <ol id="ie">
+      <li class="first-step">Right-click the button and select <em>Add to favorites...</em></li>
+      <li class="second-step">Select where you'd like to save the bookmark</li>
+      <li class="third-step">When you're on a website with videos click the "CatchLater" bookmark to save a video for later viewing</li>
     </ol>
     html
   end

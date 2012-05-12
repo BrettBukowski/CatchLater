@@ -164,6 +164,24 @@
           height: 470px;
         }
       }
+      &#ie {
+        li {
+          background: url(/assets/instructions/ie.png) no-repeat 0 60px;
+          &.first-step {
+            height: 385px;
+            width: 370px;
+          }
+          &.second-step {
+            background-position: -382px 60px;
+            height: 400px;
+            width: 500px;
+          }
+          &.third-step {
+            background: url(/assets/instructions/capture.png) no-repeat 0 76px;
+            height: 470px;          
+          }
+        }
+      }
       &#chrome {
         li {
           &:first-child,

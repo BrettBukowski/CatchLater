@@ -41,7 +41,7 @@ module ApplicationHelper
   def firefox_instructions
     <<-html
     To install the CatchLater button in Firefox:
-    <ol id="safari">
+    <ol id="ff">
       <li>Display your Bookmarks bar by clicking <em>View > Toolbars > Bookmarks Bar</em></li>
       <li>Drag the CatchLater button up into your Bookmarks bar</li>
       <li>When you're on a website with videos click "CatchLater" to save a video for later viewing</li>

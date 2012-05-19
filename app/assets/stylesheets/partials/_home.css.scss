@@ -178,8 +178,22 @@
           }
           &.third-step {
             background: url(/assets/instructions/capture.png) no-repeat 0 76px;
-            height: 470px;          
+            height: 470px;
           }
+        }
+      }
+      &#ff {
+        li {
+          &:first-child,
+          &:nth-child(2) {
+            background: url(/assets/instructions/ff.png) no-repeat 0 76px;
+            height: 330px;
+            width: 502px;
+          }
+          &:nth-child(2) {
+            background-position: -502px 72px;
+            height: 224px;
+          }          
         }
       }
       &#chrome {

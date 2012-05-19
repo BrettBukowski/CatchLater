@@ -1076,7 +1076,7 @@ snack.wrap.defineEngine(function (selector, context){
         if (sources.hasOwnProperty(i)) {
           source = sources[i];
           if (sources.hasOwnProperty(i) && (match = source.src.exec(src))) {
-            return {source: i, id: el[source.attr]};
+            return {source: i, id: el.getAttribute(source.attr)};
           }
         }
       }

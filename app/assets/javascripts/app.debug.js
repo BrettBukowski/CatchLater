@@ -1006,7 +1006,8 @@ snack.wrap.defineEngine(function (selector, context){
         { name: 'gamespot', regex: /gamespot\.com\/videoembed\/([0-9]+)/ },
         { name: 'mtv', regex: /media\.mtvnservices\.com\/[a-z:.]+([0-9]+)/ },
         { name: 'dailymotion', regex: /www\.dailymotion\.com\/embed\/video\/([A-Za-z0-9\-])+/ },
-        { name: 'fora', regex: /fora\.tv\/embed\?id=([0-9]+)/ }
+        { name: 'fora', regex: /fora\.tv\/embed\?id=([0-9]+)/ },
+        { name: 'blip', regex: /blip\.tv\/play\/([a-zA-Z0-9_]+)\.html/ }
       ],
       object: {
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
@@ -1296,7 +1297,7 @@ snack.wrap.defineEngine(function (selector, context){
           webpageUrl: window.top.location.href
         };
         snack.JSONP({
-          url: 'http://0.0.0.0:3000/videos/bookmark/',
+          url: 'http://catchlater.com/videos/bookmark/',
           key: 'callback',
           data: request
         }, function(resp) {

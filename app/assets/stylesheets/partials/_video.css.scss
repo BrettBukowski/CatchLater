@@ -37,8 +37,8 @@ nav {
     .content {
       position:relative;
       &.fora iframe {
-        height: 264px;
-        width: 400px;
+        max-height: 264px;
+        max-width: 400px;
       }
     }
     .fave {

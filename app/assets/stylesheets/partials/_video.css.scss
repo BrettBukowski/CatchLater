@@ -36,6 +36,10 @@ nav {
     }
     .content {
       position:relative;
+      &.fora iframe {
+        height: 264px;
+        width: 400px;
+      }
     }
     .fave {
       background:#FFF url(/assets/icons.png) no-repeat 10px -185px;

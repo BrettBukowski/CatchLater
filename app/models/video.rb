@@ -18,7 +18,7 @@ class Video
   # Validation
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
   # OFFICIAL list of supported video sources
-  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot mtv dailymotion]
+  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot mtv dailymotion fora]
   # The type of video that's been scraped
   TYPES = %w[iframe video object embed]
 
@@ -52,6 +52,7 @@ class Video
     gamespot:    'http://www.gamespot.com/videoembed/%s/&vidSize=560',
     youtube:     'http://www.youtube.com/embed/%s',
     vimeo:       'http://player.vimeo.com/video/%s',
+    fora:        'http://fora.tv/embed?id=%s&amp;type=c',
     npr:         'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
     ted:         'http://video.ted.com/%s',
     mtv:         'http://media.mtvnservices.com/mgid:uma:video:mtv.com:%s/',

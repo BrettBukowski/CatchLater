@@ -1005,7 +1005,8 @@ snack.wrap.defineEngine(function (selector, context){
         { name: 'npr', regex: /npr\.org\/templates\/event\/embeddedVideo.php\?storyId=([0-9]+)/ },
         { name: 'gamespot', regex: /gamespot\.com\/videoembed\/([0-9]+)/ },
         { name: 'mtv', regex: /media\.mtvnservices\.com\/[a-z:.]+([0-9]+)/ },
-        { name: 'dailymotion', regex: /www\.dailymotion\.com\/embed\/video\/([A-Za-z0-9\-])+/ }
+        { name: 'dailymotion', regex: /www\.dailymotion\.com\/embed\/video\/([A-Za-z0-9\-])+/ },
+        { name: 'fora', regex: /fora\.tv\/embed\?id=([0-9]+)/ }
       ],
       object: {
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
@@ -1018,7 +1019,8 @@ snack.wrap.defineEngine(function (selector, context){
                    { src: /www\.youtube.com\/v\/([^&?\/]+)/ } ],
         vimeo: [ { src: /vimeo\.com\/[^0-9]+([0-9]+)/ } ],
         mtv: [ { src: /media\.mtvnservices\.com\/[a-z:.]+([0-9]+)/ } ],
-        dailymotion: [ { src: /dmcdn.net\/flash\/dmplayer/, id: /"videoUniqueURL":"http:\\\/\\\/www\.dailymotion\.com\\\/video\\\/([A-Za-z0-9\-_]+)/, decode: true } ]
+        dailymotion: [ { src: /dmcdn.net\/flash\/dmplayer/, id: /"videoUniqueURL":"http:\\\/\\\/www\.dailymotion\.com\\\/video\\\/([A-Za-z0-9\-_]+)/, decode: true } ],
+        fora: [ { src: /FORA_Player/, id: /clipid=([0-9]+)/ } ]
       },
       video: {
         youtube: { src: /.*\.youtube\.com/, attr: 'data-youtube-id' }
@@ -1294,7 +1296,7 @@ snack.wrap.defineEngine(function (selector, context){
           webpageUrl: window.top.location.href
         };
         snack.JSONP({
-          url: 'http://catchlater.com/videos/bookmark/',
+          url: 'http://0.0.0.0:3000/videos/bookmark/',
           key: 'callback',
           data: request
         }, function(resp) {

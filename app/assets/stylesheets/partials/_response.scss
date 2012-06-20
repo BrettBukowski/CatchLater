@@ -2,14 +2,23 @@
   margin: auto;
   width: 90%;
 }
+@mixin scale($factor) {
+  -webkit-transform: scale($factor);
+  -moz-transform: scale($factor);
+}
 
 @media only screen and (max-width: 1500px) {
   #home {
+    .teaser {
+      position: relative;
+      z-index: 10;
+    }
     .image {
-      height: 200px;
-      top: -138px;
-      -webkit-transform: scale(.9);
-      -moz-transform: scale(.9);
+      height: 100px;
+      top: -300px;
+      @include scale(.8);
+      opacity: .7;
+      right: -86px;
       width: 70%;
     }
   }
@@ -28,8 +37,7 @@
       float: none;
       height: 250px;
       top: 0;
-      -webkit-transform: scale(.8);
-      -moz-transform: scale(.8);
+      @include scale(.7);
     }
   }
 }

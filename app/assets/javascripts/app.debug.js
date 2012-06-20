@@ -1024,7 +1024,8 @@ snack.wrap.defineEngine(function (selector, context){
         fora: [ { src: /FORA_Player/, id: /clipid=([0-9]+)/ } ]
       },
       video: {
-        youtube: { src: /.*\.youtube\.com/, attr: 'data-youtube-id' }
+        youtube: { src: /.*\.youtube\.com/, attr: 'data-youtube-id' },
+        vimeo: { src: /.*player\.vimeo\.com.*clip_id=([0-9]+)/ }
       }
     },
     _checkIframeSrc = function(sources, el) {
@@ -1079,7 +1080,7 @@ snack.wrap.defineEngine(function (selector, context){
         if (sources.hasOwnProperty(i)) {
           source = sources[i];
           if (sources.hasOwnProperty(i) && (match = source.src.exec(src))) {
-            return {source: i, id: el.getAttribute(source.attr)};
+            return {source: i, id: (source.attr) ? el.getAttribute(source.attr) : match[match.length - 1]};
           }
         }
       }

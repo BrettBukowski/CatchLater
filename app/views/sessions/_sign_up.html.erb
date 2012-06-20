@@ -18,5 +18,5 @@
 		<%= form.label :password %>
 		<%= form.password_field :password %>
 	</div>
-	<%= submit_tag 'Sign Up', disable_with: 'Signing you up...' %>
+	<%= submit_tag 'Sign Up', data: { disable_with: 'Signing you up...' } %>
 <% end %>

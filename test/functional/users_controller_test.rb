@@ -86,7 +86,7 @@ class UsersControllerTest < ActionController::TestCase
     user = create(:user)
     assert_difference 'User.count', -1 do
       session[:userId] = user.id
-      delete :destroy, {user: {id: user.id}}
+      delete :destroy, {id: user.id}
     end
     assert_redirected_to root_path
   end

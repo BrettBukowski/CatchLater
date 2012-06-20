@@ -1,6 +1,6 @@
 <div class='bookmarklet'>
   <h2><%= heading ||= "Save videos for later while you browse the web." %></h2>
-  <%= link_to_function "CatchLater", "alert('Drag this button to the bookmarks bar')", href: bookmarklet, class: 'button' %>
+  <%= content_tag :a, "CatchLater", onclick: "alert('Drag this button to the bookmarks bar')", href: bookmarklet, class: 'button' %>
   <div>
     <aside><span id='hand'>☝</span> Drag this button up to your bookmarks bar</aside>
   </div>

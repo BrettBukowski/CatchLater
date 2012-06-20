@@ -23,5 +23,5 @@
 		<%= label_tag 'source', 'Source' %>
 		<%= text_field_tag :source %>
 	</div>
-	<%= submit_tag 'Add', :disable_with => 'Adding...' %>
+	<%= submit_tag 'Add', data: { disable_with: 'Adding...' } %>
 <% end %>

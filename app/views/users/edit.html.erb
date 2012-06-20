@@ -7,11 +7,11 @@
 			<%= form.label :password, 'Password' %>
 			<%= form.password_field :password %>
 		</div>
-			<%= submit_tag 'Save', :disable_with => 'Saving...' %>
+			<%= submit_tag 'Save', data: { disable_with: 'Saving...' } %>
 	<% end %>
 </section>
 
 <section>
 	<h3 class="rule">Close up shop here</h3>
-	<%= link_to "Delete your account", user_path(@user), :confirm => "Are you sure?", :method => :delete, :class => "delete" %>
+	<%= link_to "Delete your account", user_path(@user), data: { confirm: "Are you sure?" }, method: "delete", class: "delete" %>
 </section>

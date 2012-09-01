@@ -1,6 +1,6 @@
 !function(exports) {
   <%= snack %>
-  var $ = snack.wrap;  
+  var $ = snack.wrap;
   $.define({
     setStyle: function(styles) {
       return this.each(function(element) {
@@ -17,7 +17,7 @@
       });
     }
   });
-  
+
   // Modules
   var Parser, UI, Video;
   Parser = (function() {
@@ -30,7 +30,8 @@
         { name: 'mtv', regex: /media\.mtvnservices\.com\/[a-z:.]+([0-9]+)/ },
         { name: 'dailymotion', regex: /www\.dailymotion\.com\/embed\/video\/([A-Za-z0-9\-])+/ },
         { name: 'fora', regex: /fora\.tv\/embed\?id=([0-9]+)/ },
-        { name: 'blip', regex: /blip\.tv\/play\/([a-zA-Z0-9_]+)\.html/ }
+        { name: 'blip', regex: /blip\.tv\/play\/([a-zA-Z0-9_]+)\.html/ },
+        { name: 'mixergy', regex: /fast\.wistia\.com\/embed\/iframe\/([a-zA-Z0-9]+)\?/ }
       ],
       object: {
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
@@ -59,7 +60,7 @@
       }
     },
     _checkObjectData = function(sources, el) {
-      var data = el.data, 
+      var data = el.data,
           source, match, i, paramData;
       for (i in sources) {
         source = sources[i];
@@ -73,7 +74,7 @@
       }
     },
     _checkEmbedData = function(sources, el) {
-      var src = el.src, 
+      var src = el.src,
           source, match, i, j, paramData;
       for (i in sources) {
         if (sources.hasOwnProperty(i)) {
@@ -124,7 +125,7 @@
       }
     };
   })();
-  
+
   UI = (function() {
     var _padding = 0;
 
@@ -202,10 +203,10 @@
       add.href = "#";
       return add;
     }
-        
+
     function prompt(element, details) {
       var coords = _getXY((element.offsetHeight) ? element : element.parentNode);
-      
+
       this.border = _border(coords);
       this.prompt = _prompt(coords, this.border);
       this.close = _close();
@@ -216,13 +217,13 @@
         event: "click"
       }, this.bind(function(e) {
           snack.preventDefault(e);
-          this.destroy();        
+          this.destroy();
       }));
 
       document.body.appendChild(this.border);
       document.body.appendChild(this.prompt);
       this.prompt.appendChild(this.close);
-      this.prompt.appendChild(this.add);      
+      this.prompt.appendChild(this.add);
     }
     prompt.prototype = {
       destroy: function() {
@@ -278,13 +279,13 @@
         }));
       }
     };
-    
+
     return {prompt: prompt};
   })();
-  
+
   Video = (function() {
     var _videos = [];
-    
+
     function _highlightVideo() {
       var i = 0;
       $(_videos).each(function(item) {
@@ -295,13 +296,13 @@
       });
       return i;
     }
-    
+
     function _foundVideo(video, details) {
       if (video && video.tagName && details && details.id && details.source) {
         _videos.push({video: video, details: details});
       }
     }
-    
+
     return {
       findVideo: function() {
         $(Parser.selector).each(function(item, index, all) {
@@ -339,12 +340,12 @@
       }
     };
   })();
-  
+
   function run() {
     Video.findVideo();
   };
   var instance;
-  
+
   exports.CatchLater = function() {
     // Only run this bookmarklet once per page
     if (typeof instance === "undefined") {

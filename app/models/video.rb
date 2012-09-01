@@ -18,7 +18,7 @@ class Video
   # Validation
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
   # OFFICIAL list of supported video sources
-  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot mtv dailymotion fora blip]
+  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot mtv dailymotion fora blip mixergy]
   # The type of video that's been scraped
   TYPES = %w[iframe video object embed]
 
@@ -38,7 +38,7 @@ class Video
   def self.find_by_tag(tag)
     all(tags: ["#{tag}"])
   end
-  
+
   # Retrieves videos for the specified user.
   # current_user: User instance (required)
   # condition: Hash conditions (optional)
@@ -46,11 +46,12 @@ class Video
   def self.for_user(current_user, condition, page_number)
     self.paginate(page: page_number || 1, conditions: condition.merge({user_id: current_user.id}), order: 'created_at DESC', per_page: 3)
   end
-  
+
   VIDEO_EMBEDS = {
     dailymotion: 'http://www.dailymotion.com/embed/video/%s',
     gamespot:    'http://www.gamespot.com/videoembed/%s/&vidSize=560',
     youtube:     'http://www.youtube.com/embed/%s',
+    mixergy:     'http://fast.wistia.com/embed/iframe/%s',
     vimeo:       'http://player.vimeo.com/video/%s',
     blip:        'http://blip.tv/play/%s.html',
     fora:        'http://fora.tv/embed?id=%s&amp;type=c',
@@ -64,7 +65,7 @@ class Video
   def embed_url
     VIDEO_EMBEDS[source.to_sym] % videoID
   end
-  
+
   # Retrieves the HTML for the video
   # Returns String
   def embed_element
@@ -77,7 +78,7 @@ class Video
 
     "<iframe src='#{url}' allowfullscreen></iframe>"
   end
-  
+
   VIDEO_URLS = {
     dailymotion: 'http://www.dailymotion.com/video/%s',
     youtube:     'http://www.youtube.com/watch?v=%s',
@@ -85,7 +86,7 @@ class Video
     npr:         'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
     mtv:         'http://www.mtvu.com/video/?vid=%s',
   }
-  
+
   # Retrieves a link to the video page.
   # If one isn't known, returns the URL
   # of the source web page where the video

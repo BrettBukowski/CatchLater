@@ -4,4 +4,4 @@ log/*.log
 tmp/
 config/initializers/omniauth.rb
 config/initializers/secret_token.rb
-
+app/assets/javascripts/app.debug.js

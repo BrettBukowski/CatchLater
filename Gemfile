@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.6'
+gem 'rails', '~> 3.2.8'
 gem 'mongo', '~> 1.6.1'
 gem 'bson_ext', '~> 1.6.1'
 gem 'mongo_mapper', '~> 0.11.1'
@@ -22,7 +22,7 @@ group :test do
   gem 'turn', :require => false
   gem 'minitest', '~> 2.11.4'
   gem 'capybara', '~> 1.1.2'
-  gem 'factory_girl_rails', '~> 3.0.0'
+  gem 'factory_girl_rails', '~> 4.1.0'
   gem 'database_cleaner', '~> 0.7.2'
 end
 

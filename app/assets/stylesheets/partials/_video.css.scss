@@ -25,7 +25,7 @@ nav {
     padding:100px 0 50px;
     &:first-child { border-top:0; }
     video {
-      @include boxShadow(0, 5px, 0.9);    
+      @include boxShadow(0, 5px, 0.9);
     }
     iframe {
       border: 0;
@@ -39,6 +39,10 @@ nav {
       &.fora iframe {
         max-height: 264px;
         max-width: 400px;
+      }
+      &.videobam iframe {
+        max-height: 270px;
+        max-width: 480px;
       }
     }
     .fave {

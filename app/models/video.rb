@@ -18,7 +18,7 @@ class Video
   # Validation
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
   # OFFICIAL list of supported video sources
-  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot mtv dailymotion fora blip mixergy]
+  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot mtv dailymotion fora blip mixergy videobam]
   # The type of video that's been scraped
   TYPES = %w[iframe video object embed]
 
@@ -50,6 +50,7 @@ class Video
   VIDEO_EMBEDS = {
     dailymotion: 'http://www.dailymotion.com/embed/video/%s',
     gamespot:    'http://www.gamespot.com/videoembed/%s/&vidSize=560',
+    videobam:    'http://videobam.com/widget/%s',
     youtube:     'http://www.youtube.com/embed/%s',
     mixergy:     'http://fast.wistia.com/embed/iframe/%s',
     vimeo:       'http://player.vimeo.com/video/%s',
@@ -81,6 +82,7 @@ class Video
 
   VIDEO_URLS = {
     dailymotion: 'http://www.dailymotion.com/video/%s',
+    videobam:    'http://videobam.com/widget/%s',
     youtube:     'http://www.youtube.com/watch?v=%s',
     vimeo:       'http://vimeo.com/%s',
     npr:         'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',

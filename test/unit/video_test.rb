@@ -23,7 +23,7 @@ class VideoTest < ActiveSupport::TestCase
     video = Video.new(videoID: '123', type: 'iframe', source: 'i', webpageUrl: 'http://sdfe.ds')
     assert video.invalid?
     assert video.errors[:source].any?
-    ['youtube', 'vimeo', 'ted', 'npr', 'gamespot', 'blip', 'mixergy', 'fora', 'dailymotion', 'mtv'].each do |src|
+    ['youtube', 'vimeo', 'ted', 'npr', 'gamespot', 'blip', 'mixergy', 'fora', 'dailymotion', 'mtv', 'nbc', 'videobam'].each do |src|
       video = build(:video, source: src)
       assert video.valid?
     end

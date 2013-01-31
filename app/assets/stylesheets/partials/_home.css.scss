@@ -39,10 +39,10 @@
         position: relative;
         width: 214px;
         img {
+          left: 0;
           position: absolute;
           &.sample-1 {
             clip: rect(84px, 200px, 168px, 0);
-            left: 0;
             top: -86px;
           }
           &.sample-2 {
@@ -117,8 +117,8 @@
     }
   }
 }
-/** 
- * Bookmarklet page 
+/**
+ * Bookmarklet page
  */
 .bookmarklet {
   clear: both;
@@ -193,7 +193,7 @@
           &:nth-child(2) {
             background-position: -502px 72px;
             height: 224px;
-          }          
+          }
         }
       }
       &#chrome {

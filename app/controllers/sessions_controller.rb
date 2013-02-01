@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
+  force_ssl
   layout 'session'
-  
+
   # New session.
   # Redirects to root path if the user's
   # already logged in.
@@ -11,7 +12,7 @@ class SessionsController < ApplicationController
       @user = User.new
     end
   end
-  
+
   # Creates a new session.
   # Required POST params: email, password
   # Responds to HTML
@@ -25,7 +26,7 @@ class SessionsController < ApplicationController
       render 'sessions/new'
     end
   end
-  
+
   # Callback for OmniAuth middleware.
   # Deals with the quirks involved if the user's
   # email isn't supplied
@@ -50,21 +51,21 @@ class SessionsController < ApplicationController
       redirect_to signin_url
     end
   end
-  
+
   # User provides an email address to attach the third-party account
   # with any native email+password account
   def provide_email
     process_user_email(params[:user])
   end
-  
+
   # Kills the session
   def destroy
     sign_out_and_kill_session!
     redirect_to signin_url
   end
-  
+
   private
-  
+
   # Sets the session variable and
   # performs the response to logging in
   def log_in(user)
@@ -74,8 +75,8 @@ class SessionsController < ApplicationController
       format.js { render 'redirect' }
     end
   end
-  
-  # Deals with the email supplied by the 
+
+  # Deals with the email supplied by the
   # user of a third-party-account.
   # Either creates or retrieves a user
   # for the given email.
@@ -88,7 +89,7 @@ class SessionsController < ApplicationController
     email = user_info[:email]
     user_id = user_info[:id]
     provider = user_info[:provider]
-    
+
     if !email.empty? && !user_id.empty? && !provider.empty?
       email.downcase!
       email.strip!

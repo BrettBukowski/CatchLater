@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  force_ssl
   # Require login for user-modifiable methods
   before_filter :login_required, only: [:edit, :update, :destroy]
   # redirect logged-in users away from non-logged in methods
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
   def edit
     @user = current_user
   end
-  
+
   # Updates the user with the supplied params.
   # Required PUT params: id
   # Responds to HTML, JSON
@@ -56,7 +57,7 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to root_path
   end
-  
+
   # Sends password reset.
   # Required POST params: email
   # Responds to HTML, JS
@@ -80,7 +81,7 @@ class UsersController < ApplicationController
     end
     redirect_to(forgot_password_users_url, notice: error) if error
   end
-  
+
   # Sets a new password for the user
   # filling out the form on #reset_password.
   # Required POST params: token, id
@@ -95,12 +96,12 @@ class UsersController < ApplicationController
       redirect_to signin_url, notice: "There was an error with the request"
     end
   end
-  
+
   protected
   def redirect_logged_in_user
     redirect_to root_path if current_user
   end
-  
+
   private
   # Allowable params to set via
   # #update mass-assignment.

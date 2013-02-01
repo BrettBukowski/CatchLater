@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+  force_ssl except: [:feed]
   # Ensure the user's logged in
   # #bookmark sends its own response to unauthenticated users
   # #feed provides an atom feed of videos for the user's
@@ -6,13 +7,13 @@ class VideosController < ApplicationController
   before_filter :login_required, except: [:bookmark, :feed]
   # Ensure that the user owns the video that's being requested
   before_filter :ensure_user_owns_video, only: [:show, :toggle_fave, :destroy, :set_tags]
-  
+
   # New view.
   # Renders the view
   def new
     @video = Video.new
   end
-  
+
   # Creates a new view from the supplied post params.
   # Responds to HTML, JSON
   def create
@@ -28,7 +29,7 @@ class VideosController < ApplicationController
       end
     end
   end
-  
+
   # Renders a video.
   # Required GET params: id
   # Responds to HTML, JSON
@@ -38,7 +39,7 @@ class VideosController < ApplicationController
       format.json { render json: @video }
     end
   end
-  
+
   # Toggles the specified video's 'favorited'
   # field. Flips its current state rather than
   # accepting a state to set.
@@ -54,7 +55,7 @@ class VideosController < ApplicationController
       end
     end
   end
-  
+
   # Destroys the specified video.
   # Required DELETE params: id
   # Responds to HTML, JS, JSON
@@ -66,7 +67,7 @@ class VideosController < ApplicationController
       format.json { head :ok }
     end
   end
-  
+
   # Renders all non-favorited videos.
   # Optional GET params: page
   # Responds to HTML, JS
@@ -79,20 +80,20 @@ class VideosController < ApplicationController
       format.html
     end
   end
-  
+
   # Renders all favorited videos.
   # Optional GET params: page
   # Responds to HTML, JS
   def faves
     @page = (params[:page] || 1).to_i
     @videos = Video.for_user(current_user, {favorited: true}, @page)
-    get_tags_for_current_user 
+    get_tags_for_current_user
     respond_to do |format|
       format.js
       format.html
     end
   end
-  
+
   # Sets tags on the specified video.
   # Tags are simply set, rather than
   # appended, so all tags should always
@@ -107,13 +108,13 @@ class VideosController < ApplicationController
     invalidate_tags_for_current_user
     render json: @video.tags
   end
-  
-  # Renders all tags for 
+
+  # Renders all tags for
   # the user's videos.
   def tags
     get_tags_for_current_user
   end
-  
+
   # Renders all videos tagged with the
   # given string.
   # Required GET params: with
@@ -129,22 +130,22 @@ class VideosController < ApplicationController
       format.html
     end
   end
-  
+
   # Renders all videos as an atom feed.
   # Required GET params: key
   def feed
     @user = User.first(conditions: {feedKey: params[:key]})
     raise ActionController::RoutingError.new('Not Found') if !@user
-    
+
     @videos = Video.all(conditions: {user_id: @user.id}) || []
     logger.debug @videos.inspect
     @title = "CatchLater: videos for #{@user.email}"
-    
+
     respond_to do |format|
       format.atom
     end
   end
-  
+
   # JSONP request made from bookmarklet.
   def bookmark
     if current_user
@@ -160,16 +161,16 @@ class VideosController < ApplicationController
       render_jsonp Hash[login_required: true].to_json
     end
   end
-  
+
   protected
   # Makes sure that the user owns the video
   def ensure_user_owns_video
     @video = Video.find(params[:id])
     render :nothing, status: 403 if @video.user != current_user
   end
-  
+
   private
-  
+
   # Retrieves the tags for all of the user's videos
   # and sets it as an instance variable.
   # Checks for view fragment caching.
@@ -180,7 +181,7 @@ class VideosController < ApplicationController
       @tags = UserVideoTags.get(current_user.id)
     end
   end
-  
+
   # Expires the tag view fragment cache.
   def invalidate_tags_for_current_user
     expire_fragment("#{current_user.id}:tags")

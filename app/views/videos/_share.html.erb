@@ -2,7 +2,6 @@
 	<ul>
 		<li><%= window_open "Facebook", "http://www.facebook.com/sharer.php?u=" + url_encode(videoUrl), title: "Share on Facebook" %></li>
 		<li><%= window_open "Twitter", "http://twitter.com/home?status=" + url_encode(videoUrl), title: "Share on Twitter" %></li>
-		<li><%= window_open "Google+", "https://m.google.com/app/plus/x/?v=compose&content=" + url_encode(videoUrl), title: "Share on Google+" %></li>
 		<li><%= window_open "Tumblr", "http://www.tumblr.com/share?v=3&u=" + url_encode(videoUrl), title: "Share on Tumblr" %></li>
 		<li><%= mail_to "", "Email", subject: "Shared Video", body: "\n\n" + videoUrl, title: "Email a link" %></li>
 		<li class="source"><%= link_to truncate(videoUrl, length: 20), videoUrl, title: videoUrl, target: "_blank" %></li>

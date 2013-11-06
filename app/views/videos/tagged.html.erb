@@ -1,4 +1,4 @@
-<%= render partial: "heading", locals: { 
+<%= render partial: "heading", locals: {
       heading: @tag,
       emptyMessage: "No tags",
       empty: @videos.empty?
@@ -7,7 +7,7 @@
 <%= render partial: "nav", locals: { tags: @tags } %>
 
 <% if notice %>
-  <div id="notice"><%= notice %></div>
+  <div class="notice"><%= notice %></div>
 <% end %>
 
 <section class="queue videoList">

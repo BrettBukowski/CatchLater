@@ -1,0 +1,7 @@
+language: ruby
+rvm:
+  - 2.0.0-p247
+services:
+  - mongodb
+before_script:
+  - echo Catchlater::Application.config.secret_key_base = \'bananas\' > config/initializers/secret_token.rb

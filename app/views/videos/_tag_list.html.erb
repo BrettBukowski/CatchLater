@@ -3,13 +3,13 @@
 <% else %>
 <ul class="tagList hide">
 <% end %>
-<% cache("#{@current_user.id}:tags") do %>
+<% cache "#{@current_user.id}/tags", skip_digest: true do %>
   <% tags.each do |tag| %>
     <li class="tag">
       <a href="<%= tagged_videos_path %>?with=<%= tag[:name] %>">
         <span class="name"><%= tag[:name] %></span>
-  		<span class="count">(<%= tag[:count].to_i %>)</span>
-  	</a>
+      <span class="count">(<%= tag[:count].to_i %>)</span>
+    </a>
     </li>
   <% end %>
 <% end %>

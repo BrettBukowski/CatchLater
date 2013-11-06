@@ -91,6 +91,7 @@ class UsersController < ApplicationController
     if @user && params[:token].present? && params[:token] == @user.resetPasswordCode
       @user.password = params[:password]
       @user.save
+      session[:userId] = @user.id
       redirect_to root_path, notice: "Your new password has been saved"
     else
       redirect_to signin_url, notice: "There was an error with the request"

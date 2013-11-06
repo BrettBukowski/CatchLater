@@ -1,6 +1,6 @@
 Catchlater::Application.routes.draw do
   get "home/index"
-  match "bookmarklet" => "home#bookmarklet"
+  get "bookmarklet" => "home#bookmarklet"
   root to: "home#index"
   resources :videos do
     post "toggle_fave", on: :member
@@ -16,11 +16,11 @@ Catchlater::Application.routes.draw do
     post "send_password_reset", on: :collection, via: :post
     post "set_new_password", on: :member, via: :post
   end
-  match "reset_password" => "users#reset_password", via: :get
+  get "reset_password" => "users#reset_password"
   resource :session
-  match "signin" => "sessions#new", as: :signin
-  match "signout" => "sessions#destroy", as: :signout
-  match "auth/:provider/callback" => "sessions#create_using_third_party_auth"
-  match "auth/failure" => "sessions#new"
-  match "sessions/provide_email" => "sessions#provide_email", via: :post
+  match "signin" => "sessions#new", as: :signin, via: :get
+  match "signout" => "sessions#destroy", as: :signout, via: :get
+  get "auth/:provider/callback" => "sessions#create_using_third_party_auth"
+  get "auth/failure" => "sessions#new"
+  post "sessions/provide_email" => "sessions#provide_email"
 end

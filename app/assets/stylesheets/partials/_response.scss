@@ -75,15 +75,11 @@
     #helloAgain {
       a {
         &.userLink {
-          background: url(/assets/icons.png) -3px -290px no-repeat;
-          color: transparent;
+          left: -100px;
           display: block;
-          font-size: 0;
           height: 20px;
-          left: -20px;
           margin-top: 10px;
           position: relative;
-          top: -33px;
           width: 20px;
         }
         &.signout {
@@ -92,13 +88,31 @@
         }
       }
       .greeting {
-        font-size: 0;
         color: transparent;
       }
     }
   }
 }
 @media only screen and (max-width: 480px) {
+  header {
+    #helloAgain {
+      a {
+        &.userLink {
+          left: 60px;
+          color: transparent;
+          &:before {
+            color: #222;
+            content: '\e805';
+            font-family: "fontello";
+          }
+          &:focus,
+          &:hover {
+            color: transparent;
+          }
+        }
+      }
+    }
+  }
   #home {
     h1 {
       font-size: 4em;
@@ -181,14 +195,18 @@
 @media only screen and (max-width: 320px) {
   #home {
     h1 {
-      margin-left:-20px;
       font-size:54px;
+      margin-top:18px;
+      text-align: center;
+    }
+    .teaser {
+      font-size: 1.1em;
     }
     .signup {
       margin: auto;
       display: block;
       text-align: center;
-      font-size: 40px;
+      font-size: 30px;
     }
     .existingSignin {
       top:-5px;

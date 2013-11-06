@@ -73,7 +73,7 @@ class VideosController < ApplicationController
   # Responds to HTML, JS
   def index
     @page = (params[:page] || 1).to_i
-    @videos = Video.for_user(current_user, {favorited: false}, @page)
+    @videos = VideoDecorator.decorate_collection(Video.for_user(current_user, {favorited: false}, @page))
     get_tags_for_current_user
     respond_to do |format|
       format.js
@@ -86,7 +86,7 @@ class VideosController < ApplicationController
   # Responds to HTML, JS
   def faves
     @page = (params[:page] || 1).to_i
-    @videos = Video.for_user(current_user, {favorited: true}, @page)
+    @videos = VideoDecorator.decorate_collection(Video.for_user(current_user, {favorited: true}, @page))
     get_tags_for_current_user
     respond_to do |format|
       format.js
@@ -123,7 +123,7 @@ class VideosController < ApplicationController
   def tagged
     @tag = params[:with]
     @page = (params[:page] || 1).to_i
-    @videos = Video.for_user(current_user, {tags: @tag}, @page)
+    @videos = VideoDecorator.decorate_collection(Video.for_user(current_user, {tags: @tag}, @page))
     get_tags_for_current_user
     respond_to do |format|
       format.js
@@ -137,8 +137,7 @@ class VideosController < ApplicationController
     @user = User.first(conditions: {feedKey: params[:key]})
     raise ActionController::RoutingError.new('Not Found') if !@user
 
-    @videos = Video.all(conditions: {user_id: @user.id}) || []
-    logger.debug @videos.inspect
+    @videos = VideoDecorator.decorate_collection(Video.all(conditions: {user_id: @user.id})) || []
     @title = "CatchLater: videos for #{@user.email}"
 
     respond_to do |format|
@@ -166,7 +165,7 @@ class VideosController < ApplicationController
   # Makes sure that the user owns the video
   def ensure_user_owns_video
     @video = Video.find(params[:id])
-    render :nothing, status: 403 if @video.user != current_user
+    render :error, status: 403 if @video.user != current_user
   end
 
   private
@@ -176,14 +175,13 @@ class VideosController < ApplicationController
   # Checks for view fragment caching.
   # TK - replace with Redis
   def get_tags_for_current_user
-    unless fragment_exist?("#{current_user.id}:tags")
-      require 'user_video_tags'
+    unless fragment_exist?("#{current_user.id}/tags")
       @tags = UserVideoTags.get(current_user.id)
     end
   end
 
   # Expires the tag view fragment cache.
   def invalidate_tags_for_current_user
-    expire_fragment("#{current_user.id}:tags")
+    expire_fragment("#{current_user.id}/tags")
   end
 end

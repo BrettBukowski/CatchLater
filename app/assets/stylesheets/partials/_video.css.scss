@@ -25,7 +25,32 @@ nav {
     padding:100px 0 50px;
     &:first-child { border-top:0; }
     video {
+      max-width: 640px;
       @include boxShadow(0, 5px, 0.9);
+
+      &:-ms-full-screen,
+      &:-moz-full-screen,
+      &:-webkit-full-screen {
+        max-width: none;
+      }
+
+      &::-ms-media-controls-timeline,
+      &::-ms-media-controls-volume-slider,
+      &::-ms-media-controls-fullscreen-button,
+      &::-ms-media-controls-play-button,
+      &::-ms-media-controls-mute-button,
+      &::-moz-media-controls-timeline,
+      &::-moz-media-controls-volume-slider,
+      &::-moz-media-controls-fullscreen-button,
+      &::-moz-media-controls-play-button,
+      &::-moz-media-controls-mute-button,
+      &::-webkit-media-controls-timeline,
+      &::-webkit-media-controls-volume-slider,
+      &::-webkit-media-controls-fullscreen-button,
+      &::-webkit-media-controls-play-button,
+      &::-webkit-media-controls-mute-button {
+        cursor: pointer;
+      }
     }
     iframe {
       border: 0;
@@ -45,28 +70,36 @@ nav {
         max-width: 480px;
       }
       &.gamespot iframe {
-        max-height: 360px;
+        max-height: 400px;
       }
     }
     .fave {
-      background:#FFF url(/assets/icons.png) no-repeat 10px -185px;
       border: 1px solid #D0D0D0;
-      @include boxShadow(1px, 3px, 0.1);
+      @include boxShadow(1px, 3px, .1);
       @include topRightRadius(4px);
       @include bottomRightRadius(4px);
+      @include linearTransition(.2s);
       font-size:0;
       height: 22px;
       position: absolute;
-      width: 7px;
-      @include linearTransition(.2s);
       text-align: right;
+      text-decoration: none;
+      width: 7px;
+      &:before {
+        color: #222;
+        content: '\e802';
+        font-family: "fontello";
+        position: relative;
+        top: -5px;
+        left: -2px;
+      }
+      &.selected:before {
+        content:'\e801';
+      }
       &.selected,
       &:hover, &:focus {
-        background-position: -3px -185px;
+        font-size:.9em;
         width:24px;
-      }
-      &.selected {
-        background-position: -3px -210px;
       }
     }
     .aux {
@@ -92,25 +125,21 @@ nav {
         margin-top:5px;
         .delete,
         .share {
-          font-size:0;
-          color:transparent;
+          color:#000;
           display:block;
           width:32px;
-          height:26px;
+          height:28px;
           float:left;
+          text-decoration:none;
           @include linearTransition(.3s);
           &:focus,
           &:hover {
             opacity:1;
           }
         }
-        .share {
-          background:url(/assets/icons.png) no-repeat 0 -234px;
-          opacity:.1;
-        }
+        .share,
         .delete {
-          background:url(/assets/icons.png) no-repeat 0 -261px;
-          opacity:.13;
+          opacity:.12;
         }
         .shareDropdown {
           position:absolute;

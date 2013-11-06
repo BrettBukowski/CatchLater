@@ -1,5 +1,9 @@
 <h2>Your Account</h2>
 
+<% if notice %>
+<div class="notice"><%= notice %></div>
+<% end %>
+
 <section>
 	<h3 class="rule">Change your password</h3>
 	<%= form_for @user do |form| %>
@@ -7,7 +11,7 @@
 			<%= form.label :password, 'Password' %>
 			<%= form.password_field :password %>
 		</div>
-			<%= submit_tag 'Save', data: { disable_with: 'Saving...' } %>
+			<%= submit_tag 'Save', data: { disable_with: 'Saving…' } %>
 	<% end %>
 </section>
 

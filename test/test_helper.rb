@@ -8,15 +8,22 @@ DatabaseCleaner.strategy = :truncation
 
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
-  
+
   def setup
+    DatabaseCleaner.clean
+  end
+end
+
+class ActionController::TestCase
+  def setup
+    @request.env['HTTPS'] = 'on'
     DatabaseCleaner.clean
   end
 end
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
-  
+
   teardown do
     Capybara.reset_sessions!
     Capybara.use_default_driver

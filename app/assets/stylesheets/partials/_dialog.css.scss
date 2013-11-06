@@ -1,14 +1,14 @@
-.ui-widget-overlay { 
+.ui-widget-overlay {
   background-color: #CCC;
   position: absolute;
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 100%; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   opacity: .5;
   filter:Alpha(Opacity=50);
 }
-.ui-widget-shadow { 
+.ui-widget-shadow {
   margin: -8px 0 0 -8px;
   padding: 8px;
   background: #AAA;
@@ -16,7 +16,7 @@
   filter:Alpha(Opacity=30);
   @include borderRadius(8px);
 }
-.ui-dialog { 
+.ui-dialog {
   @include boxShadow;
   background:#EDEDED;
   @include borderRadius;
@@ -36,17 +36,20 @@
     position: relative;
     overflow: hidden;
   }
-  .ui-dialog-title { 
-    float: left; 
+  .ui-dialog-title {
+    float: left;
     font-size: 17px;
+    font-weight: bold;
     margin: .1em 14px .1em 0;
     overflow: hidden;
-  } 
-  .ui-dialog-titlebar-close { 
-    position: absolute; 
-    right: .3em; 
-    top: -8px;
-    font-size: 30px;
+    text-shadow: none;
+  }
+  .ui-dialog-titlebar-close {
+    background: none;
+    border: 0;
+    font-size: smaller;
+    position: absolute;
+    right: .3em;
     text-decoration: none;
   }
   .ui-dialog-content {
@@ -74,7 +77,7 @@
       box-shadow: 0 0.9px 5px rgba(0,0,0,0.1);
       &:hover, &:focus {
         background: #EFEFEF;
-        box-shadow: 0 0.9px 5px rgba(0,0,0,0.2);        
+        box-shadow: 0 0.9px 5px rgba(0,0,0,0.2);
       }
       margin: .5em .4em .5em 0;
       cursor: pointer;

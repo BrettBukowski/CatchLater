@@ -62,14 +62,14 @@
   .signup {
     @include borderRadius(8px);
     border:1px solid #FFF;
-    @include boxShadow;
     @include button;
     display:inline-block;
     font-size:30px;
+    font-weight: bold;
     margin-top:20px;
-    padding:20px 34px 26px;
+    padding:10px 34px 16px;
     text-decoration:none;
-    @include textShadow(1px, #000);
+    @include textShadow(1px, rgba(0, 0, 0, .2));
   }
   .existingSignin {
     position:absolute;

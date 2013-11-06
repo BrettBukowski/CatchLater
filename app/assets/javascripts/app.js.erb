@@ -26,7 +26,7 @@
         { name: 'youtube', regex: /www\.youtube(-nocookie)?\.com\/embed\/([^&?\/]+)/ },
         { name: 'vimeo', regex: /player\.vimeo\.com\/video\/([0-9]+)/ },
         { name: 'npr', regex: /npr\.org\/templates\/event\/embeddedVideo.php\?storyId=([0-9]+)/ },
-        { name: 'gamespot', regex: /gamespot\.com\/videoembed\/([0-9]+)/ },
+        { name: 'gamespot', regex: /gamespot\.com\/videos\/embed\/([0-9]+)/ },
         { name: 'mtv', regex: /media\.mtvnservices\.com\/[a-z:.]+([0-9]+)/ },
         { name: 'dailymotion', regex: /www\.dailymotion\.com\/embed\/video\/([A-Za-z0-9\-])+/ },
         { name: 'fora', regex: /fora\.tv\/embed\?id=([0-9]+)/ },
@@ -39,7 +39,7 @@
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
         ted: { data: /video\.ted\.com/, id: /mp4:([^.]+\.mp4)/, decode: true },
         npr: { data: /media\.npr\.org/, id: /\?storyId=([0-9]+)/, decode: true },
-        gamespot: { data: /image\.com\.com\/gamespot\/images/, id: /\?id=([0-9]+)/, decode: true },
+        gamespot: { data: /static\.gamespot\.com/, id: /id=([0-9]+)/, decode: true },
         videobam: { data: /videobam\.com/, id: /videobam.com\/([0-9a-zA-Z]+)/, decode: true },
         nbc: { data: /video\.nbcuni\.com/, id: /&vcmsMedia=([0-9]+)/, decode: true }
       },

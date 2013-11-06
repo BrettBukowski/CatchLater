@@ -26,7 +26,7 @@
       -moz-transform: rotate(1deg);
       right: 0;
       &.arrow {
-        background: center -310px url(/assets/icons.png) no-repeat;
+        background: center 38px url(/assets/icons.png) no-repeat;
         height: 79px;
         top: -92px;
       }
@@ -45,23 +45,29 @@
       display: block;
       font-size:1.5em;
       height: 90px;
+      line-height: 1.3em;
       margin: 10px auto;
       padding: 0.7em;
-      padding-left: 110px;
       text-decoration: none;
       text-shadow: none;
       width: 380px;
       @include linearTransition();
       &:hover,
       &:focus {
-        @include boxShadow(0, 8px, 0.8);
+        @include boxShadow(0, 5px, .5);
+      }
+      &:active {
+        @include boxShadow(1px, 5px, .3, inset);
+      }
+      i {
+        margin-right: .6em;
       }
     }
     .fbLink {
-      background: #3B5B99 url(/assets/icons.png) 0 -93px no-repeat;
+      background: #3B5B99;
     }
     .twitterLink {
-      background: #00D7FB url(/assets/icons.png) no-repeat;
+      background: #00D7FB;
     }
   }
   .separator {
@@ -101,7 +107,7 @@
       box-shadow:0 1px 2px rgba(0, 0, 0, .1) inset;
       outline:none;
       @include linearTransition();
-      &:focus { 
+      &:focus {
         background:#FFF;
         box-shadow:0 1px 3px rgba(0, 0, 0, .3) inset;
         border-color:#AAA;
@@ -128,7 +134,7 @@
     background:rgba(255, 255, 194, .8);
     border:1px solid #FFF;
     @include borderRadius(6px);
-    @include boxShadow(1px, 6px, 0.2);
+    @include boxShadow(1px, 6px, .2);
     margin:20px auto 20px;
     max-width:700px;
     padding:8px;
@@ -138,5 +144,13 @@
     li {
       list-style-type: none;
     }
+  }
+  .notice {
+    background: #d9edf7;
+    border:1px solid #A8D4EB;
+    @include textShadow(0);
+    @include borderRadius(6px);
+    @include boxShadow(1px, 6px, .1);
+    padding:8px 8px 11px;
   }
 }

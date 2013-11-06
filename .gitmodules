@@ -1,4 +1,4 @@
 
 [submodule "vendor/assets/javascripts/externals/snack"]
 	path = vendor/assets/javascripts/externals/snack
-	url = git@github.com:BrettBukowski/snack.git
+	url = https://github.com/BrettBukowski/snack.git

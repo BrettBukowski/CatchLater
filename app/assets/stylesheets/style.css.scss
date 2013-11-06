@@ -9,7 +9,7 @@ html {
   background: url(/assets/grayBg.png);
   -webkit-text-size-adjust: 100%;
 }
-body {  
+body {
   font-family:'News Cycle';
   font-size:20px;
   -webkit-font-smoothing: antialiased;
@@ -26,7 +26,6 @@ h1 {
   letter-spacing:.5px;
   @include nomargin;
   @include textShadow(1px, rgba(255, 255, 255, 0.6));
-  width:80%;
 }
 h2 {
   color:#469B98;
@@ -60,11 +59,14 @@ header {
   @include boxShadow(1px, 3px 0.2);
   background:url(greenBg.png) fixed;
   @include wrapping;
+  overflow: hidden;
   h1 {
-    display:inline;
+    float: left;
+    width: 20%;
     a {
       color:#a6734b;
       text-decoration:none;
+      letter-spacing: -2px;
       @include textShadow(1px, rgba(255, 255, 255, 0.2));
       &:active {
         @include textShadow(1px, rgba(255, 255, 255, 0.6));
@@ -135,6 +137,7 @@ footer {
   min-height:79%;
 }
 html, body { height: 100% }
+@import "partials/fonts";
 @import "partials/home";
 @import "partials/forms";
 @import "partials/video";

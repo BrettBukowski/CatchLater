@@ -2,7 +2,7 @@
 <%= form_for @user do |form| %>
   <% if @user.errors.any? %>
 		<div class="error">
-			<h3>Whoops... There were <%= pluralize(@user.errors.count, "error") %>.</h3>
+			<h3>Whoops... There's <%= pluralize(@user.errors.count, "error") %>.</h3>
 			<ul>
 				<% @user.errors.full_messages.each do |msg| %>
 				<li><%= msg %></li>
@@ -18,5 +18,5 @@
 		<%= form.label :password %>
 		<%= form.password_field :password %>
 	</div>
-	<%= submit_tag 'Sign Up', data: { disable_with: 'Signing you up...' } %>
+	<%= submit_tag 'Sign Up', data: { disable_with: 'Signing up…' } %>
 <% end %>

@@ -1,7 +1,14 @@
 <section class="thirdPartyLogin">
   <aside class="arrow">Sign in (or sign up) with an account you already have</aside>
-  <%= link_to "Login with Facebook", "/auth/facebook", class: "fbLink" %>
-  <%= link_to "Login with Twitter", "/auth/twitter", class: "twitterLink" %>
+
+  <%= link_to "/auth/facebook", class: "fbLink" do %>
+    <i class="icon-facebook" aria-hidden="true" role="presentation"></i> Login with Facebook
+  <% end %>
+
+  <%= link_to "/auth/twitter", class: "twitterLink" do %>
+    <i class="icon-twitter-bird" aria-hidden="true" role="presentation"></i> Login with Twitter
+  <% end %>
+
   <small>(Used solely for login purposes. We'll never post on your behalf.)</small>
 </section>
 

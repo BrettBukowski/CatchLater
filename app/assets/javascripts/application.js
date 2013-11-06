@@ -5,7 +5,7 @@
 // the compiled file.
 //
 // = require jquery
-// = require jquery-ui
+// = require jquery.ui.dialog
 // = require jquery_ujs
 // = require externals
 // = require videos/up

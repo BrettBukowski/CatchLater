@@ -5,3 +5,4 @@ services:
   - mongodb
 before_script:
   - echo Catchlater::Application.config.secret_key_base = \'bananas\' > config/initializers/secret_token.rb
+  - echo "Rails.application.config.middleware.use OmniAuth::Builder do provider :twitter, 'a', 'b';provider :facebook, 'a', 'b' end" > config/initializers/omniauth.rb

@@ -20,7 +20,6 @@ gem 'debugger', group: [:development, :test]
 
 group :test do
   gem 'turn', :require => false
-  gem 'minitest', '~> 4.2'
   gem 'capybara', '~> 2.1'
   gem 'factory_girl_rails', '~> 4.3'
   gem 'database_cleaner', '~> 1.2'
@@ -28,7 +27,8 @@ end
 
 group :development do
   gem 'meta_request'
-  gem 'capistrano', '~> 3.0.1'
+  gem 'capistrano', '~> 3.0'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
+  gem 'capistrano-chruby', github: 'capistrano/chruby'
 end

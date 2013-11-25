@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/capistrano/chruby.git
+  revision: cffa4147003041e07cb58e06e3a217a0cce41603
+  specs:
+    capistrano-chruby (0.0.1)
+      capistrano
+
+GIT
   remote: git://github.com/mongomapper/mongomapper.git
   revision: 9b87dee507802a8cb96f2d316802c9fd241448c8
   tag: v0.13.0.beta2
@@ -210,6 +217,7 @@ DEPENDENCIES
   bson_ext (~> 1.9.2)
   capistrano (~> 3.0.1)
   capistrano-bundler
+  capistrano-chruby!
   capistrano-rails
   capybara (~> 2.1)
   coffee-rails (~> 4.0.1)
@@ -220,7 +228,6 @@ DEPENDENCIES
   jquery-rails (~> 3.0.4)
   jquery-ui-rails (~> 4.1.0)
   meta_request
-  minitest (~> 4.2)
   mongo (~> 1.9.2)
   mongo_mapper!
   omniauth-facebook (~> 1.5)

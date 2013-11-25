@@ -17,11 +17,33 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
   end
 
   test "creating an account using twitter" do
-    skip("TK - Use mocking library")
+    user = build(:user)
+    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+      provider: 'twitter',
+      uid: '11123',
+      info: {}
+    })
+
+    assert_no_difference 'User.count' do
+      get_via_redirect "/auth/twitter"
+      assert_equal signin_path, path
+    end
   end
 
   test "creating an account using facebook" do
-    skip("TK - Use mocking library")
+    user = build(:user)
+    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+      provider: 'facebook',
+      uid: '11232123',
+      info: {
+        email: user.email
+      }
+    })
+
+    assert_difference 'User.count', 1 do
+      get_via_redirect "/auth/facebook"
+      assert_equal videos_path, path
+    end
   end
 
   test "logging in natively" do
@@ -39,11 +61,36 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
   end
 
   test "logging in using twitter" do
-    skip("TK - Use mocking library")
+    user_id = '11232123'
+    user = create(:user, {thirdPartyAuthServices: {twitter: user_id}})
+
+    OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
+      provider: 'twitter',
+      uid: user_id,
+      info: {}
+    })
+
+    assert_no_difference 'User.count' do
+      get_via_redirect "/auth/twitter"
+      assert_equal videos_path, path
+    end
   end
 
   test "logging in using facebook" do
-    skip("TK - Use mocking library")
+    user_id = '11232123'
+    user = create(:user, {thirdPartyAuthServices: {facebook: user_id}})
+    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+      provider: 'facebook',
+      uid: user_id,
+      info: {
+        email: user.email
+      }
+    })
+
+    assert_no_difference 'User.count' do
+      get_via_redirect "/auth/facebook"
+      assert_equal videos_path, path
+    end
   end
 
   test "logging out" do

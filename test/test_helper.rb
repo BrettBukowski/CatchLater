@@ -5,6 +5,7 @@ require 'database_cleaner'
 require 'capybara/rails'
 
 DatabaseCleaner.strategy = :truncation
+OmniAuth.config.test_mode = true
 
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods

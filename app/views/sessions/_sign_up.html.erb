@@ -2,7 +2,7 @@
 <%= form_for @user do |form| %>
   <% if @user.errors.any? %>
 		<div class="error">
-			<h3>Whoops... There's <%= pluralize(@user.errors.count, "error") %>.</h3>
+			<h3>Whoops… There's <%= pluralize(@user.errors.count, "error") %>.</h3>
 			<ul>
 				<% @user.errors.full_messages.each do |msg| %>
 				<li><%= msg %></li>

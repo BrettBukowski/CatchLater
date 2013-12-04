@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 ruby '2.0.0'
 
-gem 'rails', '~> 4.0.1'
+gem 'rails', '~> 4.0.2'
 gem 'mongo', '~> 1.9.2'
 gem 'bson_ext', '~> 1.9.2'
 gem 'mongo_mapper', git: 'git://github.com/mongomapper/mongomapper.git', tag: 'v0.13.0.beta2'

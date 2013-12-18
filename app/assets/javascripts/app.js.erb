@@ -127,6 +127,14 @@
       },
       video: function(el) {
         return _checkVideoData(_sources.video, el);
+      },
+      fallback: function(el, type) {
+        if (window.location.host == 'vimeo.com' && type == 'video') {
+          var idMatch = window.location.pathname.match(/^\/(m\/)?([0-9]{6,})/);
+          if (idMatch) {
+            return { source: 'vimeo', id: idMatch[2] };
+          }
+        }
       }
     };
   })();
@@ -310,8 +318,9 @@
 
     return {
       findVideo: function() {
-        $(Parser.selector).each(function(item, index, all) {
-          _foundVideo(item, Parser[item.tagName.toLowerCase()](item));
+        $(Parser.selector).each(function(item) {
+          var type = item.tagName.toLowerCase();
+          _foundVideo(item, Parser[type](item) || Parser.fallback(item, type));
         });
         if (!_highlightVideo()) {
           alert("no supported video found :(");

@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.0'
 
 gem 'rails', '~> 4.0.2'
 gem 'mongo', '~> 1.9.2'
@@ -8,15 +8,14 @@ gem 'bson_ext', '~> 1.9.2'
 gem 'mongo_mapper', git: 'git://github.com/mongomapper/mongomapper.git', tag: 'v0.13.0.beta2'
 gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'jquery-rails', '~> 3.0.4'
-gem 'jquery-ui-rails', '~> 4.1.0'
+gem 'jquery-ui-rails', '~> 4.1'
 gem 'omniauth-twitter', '~> 1.0'
-gem 'omniauth-facebook', '~> 1.5'
+gem 'omniauth-facebook', '~> 1.6'
 gem 'sass-rails', '~> 4.0.1'
 gem 'coffee-rails', '~> 4.0.1'
-gem 'uglifier', '~> 2.3'
+gem 'uglifier', '~> 2.4'
 gem 'draper', '~> 1.3'
-gem 'turbolinks', '~> 1.3'
-gem 'debugger', group: [:development, :test]
+gem 'turbolinks', '~> 2'
 
 group :test do
   gem 'turn', :require => false

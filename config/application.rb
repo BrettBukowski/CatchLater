@@ -12,5 +12,6 @@ module Catchlater
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/lib/authentication #{config.root}/lib)
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.i18n.enforce_available_locales = false
   end
 end

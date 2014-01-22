@@ -1,6 +1,7 @@
 set :application, 'catchlater'
 set :repo_url, 'git@github.com:BrettBukowski/CatchLater.git'
 
+set :user, 'brett'
 set :deploy_to, '/var/catchlater'
 set :scm, :git
 
@@ -8,11 +9,12 @@ set :format, :pretty
 set :log_level, :debug
 set :pty, true
 
-# set :linked_files, %w{config/database.yml}
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, %w{config/mongo.yml}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :keep_releases, 5
+
+set :chruby_ruby, 'ruby-2.1.0'
 
 namespace :deploy do
 
@@ -42,6 +44,6 @@ namespace :deploy do
   end
 
   after :publishing, "deploy:upload_config_files", "deploy:upload_core_js", "deploy:build_js"
+  after :finishing, "deploy:restart"
   after :finishing, 'deploy:cleanup'
-
 end

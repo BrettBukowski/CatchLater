@@ -27,23 +27,37 @@ namespace :deploy do
 
   desc "Upload config files outside of git"
   task :upload_config_files do
-    upload "config/initializers/omniauth.rb", "#{deploy_to}/current/config/initializers/omniauth.rb"
-    upload "config/initializers/secret_token.rb", "#{deploy_to}/current/config/initializers/secret_token.rb"
+    on roles(:app) do
+      upload! "config/initializers/omniauth.rb", "#{deploy_to}/current/config/initializers/omniauth.rb"
+      upload! "config/initializers/secret_token.rb", "#{deploy_to}/current/config/initializers/secret_token.rb"
+    end
   end
 
   desc "Upload built snack+qwery code"
   task :upload_core_js do
-    run "cd #{deploy_to}/current/vendor/assets/javascripts/externals; mkdir -p snack/builds"
-    upload "vendor/assets/javascripts/externals/snack/builds/snack-qwery.js",
-    "#{deploy_to}/current/vendor/assets/javascripts/externals/snack/builds/snack-qwery.js"
+    on roles(:app) do
+      path = "vendor/assets/javascripts/externals/snack/builds"
+
+      within release_path do
+        execute :mkdir, "-p #{path}"
+      end
+
+      upload! "#{path}/snack-qwery.js", "#{deploy_to}/current/#{path}/snack-qwery.js"
+    end
   end
 
   desc "Build the bookmarklet app"
   task :build_js do
-    run "cd #{deploy_to}/current; bundle exec rake RAILS_ENV=production assets:bookmarklet"
+    on roles(:app) do
+      within release_path do
+        execute :bundle, "exec rake RAILS_ENV=production assets:bookmarklet"
+      end
+    end
   end
 
-  after :publishing, "deploy:upload_config_files", "deploy:upload_core_js", "deploy:build_js"
+  after :publishing, "deploy:upload_config_files"
+  after :publishing, "deploy:upload_core_js"
+  after :publishing, "deploy:build_js"
   after :finishing, "deploy:restart"
   after :finishing, 'deploy:cleanup'
 end

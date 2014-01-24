@@ -26,8 +26,9 @@ end
 
 group :development do
   gem 'meta_request'
+  gem 'sshkit', '~> 1.3'
   gem 'capistrano', '~> 3.0'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
-  gem 'capistrano-chruby', github: 'capistrano/chruby'
+  gem 'capistrano-chruby', github: 'davekaro/chruby'
 end

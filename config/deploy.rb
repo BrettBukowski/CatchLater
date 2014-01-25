@@ -46,18 +46,19 @@ namespace :deploy do
     end
   end
 
-  desc "Build the bookmarklet app"
-  task :build_js do
+  desc "Build static assets"
+  task :build_statics do
     on roles(:app) do
       within release_path do
         execute :bundle, "exec rake RAILS_ENV=production assets:bookmarklet"
+        execute :bundle, "exec rake RAILS_ENV=production assets:static_pages"
       end
     end
   end
 
   after :publishing, "deploy:upload_config_files"
   after :publishing, "deploy:upload_core_js"
-  after :publishing, "deploy:build_js"
+  after :publishing, "deploy:build_statics"
   after :finishing, "deploy:restart"
-  after :finishing, 'deploy:cleanup'
+  after :finishing, "deploy:cleanup"
 end

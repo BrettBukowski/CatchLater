@@ -7,27 +7,18 @@
     <meta id="viewport" name="viewport" content="initial-scale=1.0,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
   	<link href='/favicon.ico' rel='icon' type='image/x-icon'>
-    <link href="/assets/application.css" rel="stylesheet" type="text/css"/>
+    <link href="<%= asset_path('application.css') %>" rel="stylesheet" type="text/css"/>
     <link href="http://fonts.googleapis.com/css?family=Molengo:regular|News+Cycle|Sue+Ellen+Francisco" rel="stylesheet" type="text/css">
-    <title>CatchLater - About</title>
+    <title>404</title>
   </head>
   <body>
     <header>
 	    <h1><a href="/">CatchLater</a></h1>
     </header>
     <div id="main">
-      <h2 id="about">About</h2>
-        <p>
-          CatchLater is a completely free, completely simple, online video save-for-later, itch-scratching service made by me—<a href="http://brettbukowski.com">Brett Bukowski</a> © 2013.
-        </p>
+      <h2>The page you're trying to visit doesn't exist.</h2>
+      <aside>So you're seeing a vintage camera instead.</aside><br>
+      <img src="<%= asset_path('cam.png') %>" alt=""/>
     </div>
-    <footer>
-      <ul>
-        <li><a href='/faq'>FAQ</a></li>
-        <li><a href='/privacy'>Privacy</a></li>
-        <li><a href='/about'>About</a></li>
-        <li><a href='/bookmarklet'>Bookmarklet</a></li>
-      </ul>
-    </footer>
   </body>
 </html>

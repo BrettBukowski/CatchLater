@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 html {
-  background: url(/assets/grayBg.png);
+  background: url(<%= asset_path('grayBg.png') %>);
   -webkit-text-size-adjust: 100%;
 }
 body {
@@ -57,7 +57,7 @@ header {
   border-bottom:1px solid #FFF;
   border-top:4px solid #2DB6B6;
   @include boxShadow(1px, 3px 0.2);
-  background:url(greenBg.png) fixed;
+  background:url(<%= asset_path('greenBg.png') %>) fixed;
   @include wrapping;
   overflow: hidden;
   h1 {
@@ -75,7 +75,7 @@ header {
   }
   #helloAgain {
     float: right;
-    padding-top: 15px;
+    padding-top: 12px;
     text-shadow: none;
     a {
       text-decoration:none;

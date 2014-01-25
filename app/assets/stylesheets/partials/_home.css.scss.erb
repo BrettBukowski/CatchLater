@@ -14,7 +14,7 @@
     @include textShadow;
   }
   #top {
-    background:url(/assets/bg.png);
+    background:url(<%= asset_path("bg.png") %>);
     position:relative;
     text-shadow:none;
     @include boxShadow(3px, 9px);
@@ -87,7 +87,7 @@
     top: -330px;
     width: 100%;
     span {
-      background: url(vids.png) no-repeat;
+      background: url(<%= asset_path("vids.png") %>) no-repeat;
       border: 6px solid #FFF;
       box-shadow: 0 0 6px rgba(0, 0, 0, .4);
       position: absolute;
@@ -145,7 +145,7 @@
     margin: 20px;
     padding: 10px 40px 16px;
     text-decoration: none;
-    cursor: url(/assets/grab.cur), default !important;
+    cursor: url(<%= asset_path("grab.cur") %>), default !important;
   }
   .instructions {
     border-top:1px dashed #CCC;
@@ -160,13 +160,13 @@
         font-weight: normal;
         margin: 12px 0;
         &:last-child {
-          background: url(/assets/instructions/capture.png) no-repeat 0 76px;
+          background: url(<%= asset_path("instructions/capture.png") %>) no-repeat 0 76px;
           height: 470px;
         }
       }
       &#ie {
         li {
-          background: url(/assets/instructions/ie.png) no-repeat 0 60px;
+          background: url(<%= asset_path("instructions/ie.png") %>) no-repeat 0 60px;
           &.first-step {
             height: 385px;
             width: 370px;
@@ -177,7 +177,7 @@
             width: 500px;
           }
           &.third-step {
-            background: url(/assets/instructions/capture.png) no-repeat 0 76px;
+            background: url(<%= asset_path("instructions/capture.png") %>) no-repeat 0 76px;
             height: 470px;
           }
         }
@@ -186,7 +186,7 @@
         li {
           &:first-child,
           &:nth-child(2) {
-            background: url(/assets/instructions/ff.png) no-repeat 0 76px;
+            background: url(<%= asset_path("instructions/ff.png") %>) no-repeat 0 76px;
             height: 330px;
             width: 502px;
           }
@@ -200,7 +200,7 @@
         li {
           &:first-child,
           &:nth-child(2) {
-            background: url(/assets/instructions/chrome.png) no-repeat 0 60px;
+            background: url(<%= asset_path("instructions/chrome.png") %>) no-repeat 0 60px;
             height: 214px;
             width: 621px;
           }
@@ -214,7 +214,7 @@
         li {
           &:first-child,
           &:nth-child(2) {
-            background: url(/assets/instructions/safari.png) no-repeat center 50px;
+            background: url(<%= asset_path("instructions/safari.png") %>) no-repeat center 50px;
             height: 214px;
           }
           &:nth-child(2) {
@@ -225,7 +225,7 @@
       }
       &#ios {
         li {
-          background: url(/assets/instructions/ios.png) no-repeat 0 64px;
+          background: url(<%= asset_path("instructions/ios.png") %>) no-repeat 0 64px;
           width: 200px;
           &:first-child {
             background: none;
@@ -240,7 +240,7 @@
               padding-left: 4px;
               li {
                 list-style-type: lower-alpha;
-                background: url(/assets/instructions/ios.png) no-repeat -200px 100px;
+                background: url(<%= asset_path("instructions/ios.png") %>) no-repeat -200px 100px;
                 height: 264px;
                 &:nth-child(2) {
                   background-position: -400px 130px;

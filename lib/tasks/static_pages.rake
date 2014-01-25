@@ -1,5 +1,4 @@
 require 'fileutils'
-require 'sprockets'
 
 namespace :assets do
   desc 'Moves static, compiled html pages from /public/assets to /public'

@@ -27,6 +27,14 @@
   .videos section .video .actions .shareDropdown {
     right: 2%;
   }
+  #home {
+    #bottom {
+      section {
+        float: none;
+        width: 100%;
+      }
+    }
+  }
 }
 @media only screen and (max-width: 876px) {
   #home {
@@ -42,14 +50,6 @@
   }
 }
 @media only screen and (max-width: 800px) {
-  #home {
-    #bottom {
-      section {
-        float: none;
-        width: 100%;
-      }
-    }
-  }
   header {
     #helloAgain {
       font-size: .89em;

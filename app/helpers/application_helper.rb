@@ -1,8 +1,12 @@
 module ApplicationHelper
+  def rss_path
+    videos_path + "/feed.atom?key=#{current_user.feedKey}"
+  end
+
   def bookmarklet
     'javascript:' + IO.read(File.expand_path('app/assets/javascripts/bookmarklet.min.js'))
   end
-  
+
   def bookmarklet_instructions
     return unless request.user_agent
     browser = request.user_agent.match(/Chrome|Firefox|Safari|Android|iPhone|iPad|MSIE/)
@@ -15,7 +19,7 @@ module ApplicationHelper
       end
     end
   end
-  
+
   def chrome_instructions
     <<-html
     To install the CatchLater button in Chrome:
@@ -26,7 +30,7 @@ module ApplicationHelper
     </ol>
     html
   end
-  
+
   def safari_instructions
     <<-html
     To install the CatchLater button in Safari:
@@ -37,7 +41,7 @@ module ApplicationHelper
     </ol>
     html
   end
-  
+
   def firefox_instructions
     <<-html
     To install the CatchLater button in Firefox:
@@ -48,7 +52,7 @@ module ApplicationHelper
     </ol>
     html
   end
-  
+
   def ios_instructions
     <<-html
     To install the CatchLater button in iOS:
@@ -79,11 +83,11 @@ module ApplicationHelper
   end
   alias :iphone_instructions :ios_instructions
   alias :ipad_instructions :ios_instructions
-  
+
   def android_instructions
-    
+
   end
-  
+
   def msie_instructions
     <<-html
     To install the CatchLater button in Internet Explorer:

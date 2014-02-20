@@ -9,7 +9,5 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
   <link href="//fonts.googleapis.com/css?family=Molengo:regular|News+Cycle|Sue+Ellen+Francisco" rel="stylesheet" type="text/css">
   <%= csrf_meta_tag %>
-  <% if controller.controller_name == 'videos' && current_user %>
-  <%= auto_discovery_link_tag :atom, '/videos/feed.atom?key=' + current_user.feedKey %>
-  <% end %>
+  <%= yield :rss %>
 </head>

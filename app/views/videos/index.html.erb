@@ -1,4 +1,8 @@
-<%= render partial: "heading", locals: { empty: @videos.empty? } %>
+<% content_for :rss do %>
+  <%= auto_discovery_link_tag :atom, rss_path %>
+<% end %>
+
+<%= render partial: "heading", locals: { empty: @videos.empty?, rss: true } %>
 <%= render partial: "nav", locals: { tags: @tags } %>
 
 <% if notice %>

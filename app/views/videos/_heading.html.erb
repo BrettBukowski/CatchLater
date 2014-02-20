@@ -1,4 +1,9 @@
-<h2><%= heading ||= "Your list" %></h2>
+<h2>
+  <%= heading ||= "Your list" %>
+  <% if defined? rss %>
+  <a class='icon-rss' href="<%= rss_path %>"><span class='screenReaderOnly'>RSS Feed</span></a>
+  <% end %>
+</h2>
 <% if empty %>
 <% emptyMessage = "Videos will appear here" if current_user.created_at > 2.days.ago %>
 <h3><%= emptyMessage ||= "There's nothing here :-|" %></h3>

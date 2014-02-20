@@ -3,6 +3,13 @@
   width: 640px;
 }
 
+.videos h2 {
+  a {
+    font-size: .6em;
+    text-decoration: none;
+  }
+}
+
 nav {
   float:right;
   position:relative;
@@ -87,14 +94,14 @@ nav {
       width: 7px;
       &:before {
         color: #222;
-        content: '\e802';
+        content: '\e801';
         font-family: "fontello";
         position: relative;
         top: -5px;
         left: -2px;
       }
       &.selected:before {
-        content:'\e801';
+        content:'\e804';
       }
       &.selected,
       &:hover, &:focus {

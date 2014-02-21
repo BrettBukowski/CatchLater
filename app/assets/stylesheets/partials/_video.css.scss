@@ -4,6 +4,8 @@
 }
 
 .videos h2 {
+  float: left;
+  width: 50%;
   a {
     font-size: .6em;
     text-decoration: none;
@@ -12,8 +14,9 @@
 
 nav {
   float:right;
-  position:relative;
-  top:-64px;
+  margin-top: 2em;
+  text-align: right;
+  width: 50%;
   text-shadow: none;
   a {
     text-shadow: none;
@@ -25,6 +28,7 @@ nav {
 }
 
 .videos section {
+  clear: both;
   text-align:center;
   .video {
     border-bottom:1px solid #E2E2E2;
@@ -130,23 +134,21 @@ nav {
       .actions {
         float:right;
         margin-top:5px;
-        .delete,
-        .share {
+        .action {
           color:#000;
           display:block;
-          width:32px;
-          height:28px;
           float:left;
+          height:28px;
+          opacity:.12;
           text-decoration:none;
+          width:32px;
+
           @include linearTransition(.3s);
+
           &:focus,
           &:hover {
             opacity:1;
           }
-        }
-        .share,
-        .delete {
-          opacity:.12;
         }
         .shareDropdown {
           position:absolute;

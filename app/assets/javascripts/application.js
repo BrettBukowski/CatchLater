@@ -13,4 +13,5 @@
 // = require videos/destroy
 // = require videos/dropdown
 // = require videos/tags
+// = require videos/pip
 // = require videos/shortcuts

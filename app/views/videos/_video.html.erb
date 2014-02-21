@@ -16,8 +16,9 @@
 	<span class="aux">
 		<span class="date"><%= created_date(video.created_at) %></span>
 		<span class="actions">
-			<%= link_to "Delete", video_path(video), class: "delete icon-trash", title: "Delete", data: { confirm: "Are you sure?" }, method: :delete, remote: true %>
-			<%= link_to "Share", "javascript:void(0)", class: "share icon-export", title: "Share" %>
+			<%= link_to "Delete", video_path(video), class: "action delete icon-trash", title: "Delete", data: { confirm: "Are you sure?" }, method: :delete, remote: true %>
+			<%= link_to "PIP", video_path(video), class: "action pip icon-popup", title: "Open in a new window" %>
+			<%= link_to "Share", "javascript:void(0)", class: "action share icon-export", title: "Share" %>
 			<%= render partial: "share", locals: { videoUrl: video.link(), sourceUrl: video.webpageUrl } %>
 		</span>
 	</span>

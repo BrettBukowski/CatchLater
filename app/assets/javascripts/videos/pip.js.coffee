@@ -3,4 +3,4 @@ $ ->
     e.preventDefault()
     popup = window.open($(this).attr('href'), 'pipWindow', 'height=400,width=600,location=no')
     popup.addEventListener 'DOMContentLoaded', ()->
-      popup.scrollTo(40, 180);
+      popup.scrollTo(40, 200);

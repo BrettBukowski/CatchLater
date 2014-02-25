@@ -164,8 +164,10 @@ class VideosController < ApplicationController
   protected
   # Makes sure that the user owns the video
   def ensure_user_owns_video
-    @video = VideoDecorator.decorate(Video.find(params[:id]))
-    render :error, status: 403 if @video.user != current_user
+    @video = Video.find(params[:id])
+    return render :error, status: 404 if @video.nil?
+    return render :error, status: 403 if @video.user != current_user
+    @video = VideoDecorator.decorate(@video)
   end
 
   private

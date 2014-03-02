@@ -7,19 +7,11 @@
   -moz-transform: scale($factor);
 }
 
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 1200px) {
   #home {
-    .teaser {
-      position: relative;
-      z-index: 10;
-    }
-    .image {
-      height: 100px;
-      top: -300px;
-      @include scale(.8);
-      opacity: .7;
-      right: -86px;
-      width: 70%;
+    #bottom {
+      padding-left: 5%;
+      padding-right: 5%;
     }
   }
 }
@@ -40,12 +32,6 @@
   #home {
     h1 {
       font-size:5em;
-    }
-    .image {
-      float: none;
-      height: 250px;
-      top: 0;
-      @include scale(.7);
     }
   }
 }
@@ -119,10 +105,6 @@
     }
     .existingSignin {
       font-size: smaller;
-    }
-    .image {
-      height: 260px;
-      right: -134px;
     }
   }
   .users, .sessions {
@@ -198,6 +180,7 @@
       font-size:54px;
       margin-top:18px;
       text-align: center;
+      @include textShadow(1px);
     }
     .teaser {
       font-size: 1.1em;
@@ -209,11 +192,8 @@
       font-size: 30px;
     }
     .existingSignin {
-      top:-5px;
+      top:-30px;
       padding-right:5px;
-    }
-    .image {
-      display: none;
     }
   }
   .users, .sessions {
@@ -291,6 +271,7 @@
     ul {
       display: block;
       width: 100%;
+      padding: 0;
       margin: 10px auto;
       li {
         float: none;

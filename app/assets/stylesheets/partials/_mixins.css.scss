@@ -44,8 +44,8 @@
   text-shadow:0 $down 0 $color;
 }
 @mixin linearTransition($duration: 0.5s) {
-  -webkit-transition: all $duration linear;
-  -moz-transition: all $duration linear;
+  // -webkit-transition: all $duration linear;
+  // -moz-transition: all $duration linear;
 }
 @mixin button {
   color:#FFF;
@@ -53,8 +53,8 @@
   background: #5adcd3;
   @include borderRadius(5px);
   border:1px solid #BBB;
-  -moz-transition:all .6s, .6s, .6s;
-  -webkit-transition:all .6s, .6s, .6s;
+  // -moz-transition:all .6s, .6s, .6s;
+  // -webkit-transition:all .6s, .6s, .6s;
   &:focus,
   &:hover {
     background: #90dbd5;

@@ -9,9 +9,8 @@
   border-top:4px solid #2DB6B6;
   background:#384A6F;
   h1 {
-    font-size:148px;
-    letter-spacing:-3px;
-    @include textShadow;
+    font-size:120px;
+    letter-spacing:-4px;
   }
   #top {
     background:url(<%= asset_path("bg.png") %>);
@@ -19,11 +18,43 @@
     position:relative;
     text-shadow:none;
     @include homepad(70px);
+    .vid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      video {
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height: 100%;
+        // object-fit: cover;
+        object-fit: fill;
+        z-index: -1;
+      }
+    }
+    .screen {
+      background: url(<%= asset_path("screen.png") %>);
+      z-index:2;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+    .words {
+      position: relative;
+      z-index:3;
+    }
   }
   #bottom {
     background: #FFF;
     @include homepad;
-    min-height:400px;
+    min-height:500px;
+    position: relative;
     section {
       float:left;
       padding:0 20px;
@@ -31,32 +62,34 @@
       text-shadow: none;
       width:33%;
       div {
-        border:6px solid #FFF;
-        @include boxShadow(0, 8px);
-        @include borderRadius(10px);
-        height: 90px;
+        height: 195px;
         margin:26px auto 0;
         position: relative;
-        width: 214px;
+        width: 250px;
         img {
+          margin-top: 1em;
           left: 0;
           position: absolute;
           &.sample-1 {
-            clip: rect(84px, 200px, 168px, 0);
-            top: -86px;
+            clip: rect(0, 245px, 107px, 0);
+            top: 0;
           }
           &.sample-2 {
-            clip: rect(0, 200px, 84px, 0);
+            clip: rect(107px, 245px, 220px, 0);
+            top: -107px;
+            left: 2%;
           }
           &.sample-3 {
-            clip: rect(168px, 200px, 252px, 0);
-            top: -170px;
+            clip: rect(229px, 245px, 352px, 0);
+            top: -227px;
           }
         }
       }
     }
   }
   .teaser {
+    color: #FFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .3);
     font-size:28px;
   }
   .signup {
@@ -81,40 +114,8 @@
       text-decoration:none;
     }
   }
-  .image {
-    float: right;
+  footer {
     position: relative;
-    top: -330px;
-    width: 100%;
-    span {
-      background: url(<%= asset_path("vids.png") %>) no-repeat;
-      border: 6px solid #FFF;
-      box-shadow: 0 0 6px rgba(0, 0, 0, .4);
-      position: absolute;
-      -webkit-backface-visibility: hidden;
-    }
-    #video1 {
-      height: 255px;
-      right: 2%;
-      top: 34px;
-      width: 411px;
-    }
-    #video2 {
-      background-position: 0 -243px;
-      height: 244px;
-      right: 4%;
-      top: 4px;
-      width: 411px;
-      -webkit-transform: rotate(-1deg);
-    }
-    #video3 {
-      background-position: 0 -475px;
-      height: 268px;
-      top: 60px;
-      right: 3%;
-      width: 471px;
-      -webkit-transform: rotate(1deg);
-    }
   }
 }
 /**

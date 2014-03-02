@@ -1,38 +1,42 @@
 <div id="top">
-	<h1>CatchLater</h1>
+	<div class="screen" role="presentation"></div>
+	<div class="vid">
+		<video autoplay loop muted preload="auto" width="100%" height="100%" poster="//s3.amazonaws.com/catchlater/poster.jpg">
+			<source src="//s3.amazonaws.com/catchlater/park.webm" type="video/webm">
+			<source src="//s3.amazonaws.com/catchlater/park.mp4" type="video/mp4">
+			<source src="//s3.amazonaws.com/catchlater/park.ogg" type="video/ogg">
+		</video>
+	</div>
+	<div class="words">
+		<h1>CatchLater</h1>
 
-	<section class="existingSignin">Already a user? <%= link_to "Sign in", signin_path %></section>
+		<section class="existingSignin">Already a user? <%= link_to "Sign in", signin_path %></section>
 
-	<section class="teaser">
-		<p>Save videos from around the web in a single queue.</p>
-		<p>It's totally free. It's totally awesome.</p>
-	</section>
+		<section class="teaser">
+			<p>Save videos from around the web in a single queue.</p>
+			<p>It's totally free. It's totally awesome.</p>
+		</section>
 
-	<%= link_to "Sign up!", signin_path, :class => "signup" %>
-
-  <div class="image" role="presentation" aria-hidden="true">
-    <span id="video3"></span>
-    <span id="video2"></span>
-    <span id="video1"></span>
-  </div>
+		<%= link_to "Sign up!", signin_path, class: "signup" %>
+	</div>
 </div>
 
 <div id="bottom">
 	<section>
 		<h2><em>See</em> a video</h2>
 		<caption>Looks good, but you don't have time or aren't in the mood.</caption>
-		<div><img class="sample-1" src="<%= asset_path('sample.png') %>" alt="Long video that's inconvenient to watch just now"></div>
+		<div><img class="sample-1" src="<%= asset_path('sample.jpg') %>" alt="Long video that's inconvenient to watch just now"></div>
 	</section>
 
 	<section>
 		<h2><em>Save</em> for later</h2>
 		<caption>Just click a handy bookmarklet. And now it's saved for later viewing right here.</caption>
-		<div><img class="sample-2" src="<%= asset_path('sample.png') %>" alt="Click a bookmarklet"></div>
+		<div><img class="sample-2" src="<%= asset_path('sample.jpg') %>" alt="Click a bookmarklet"></div>
 	</section>
 
 	<section>
 		<h2><em>Popcorn</em> time</h2>
-		<caption>Watch the video when you have time. Works great on your phone or tablet!</caption>
-		<div><img class="sample-3" src="<%= asset_path('sample.png') %>" alt="Watch the video later"></div>
+		<caption>Watch that video when you have time. Works great on your phone or tablet!</caption>
+		<div><img class="sample-3" src="<%= asset_path('sample.jpg') %>" alt="Watch the video later"></div>
 	</section>
 </div>

@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 html {
-  background: url(<%= asset_path('grayBg.png') %>);
+  background: image-url('grayBg.png');
   -webkit-text-size-adjust: 100%;
   height: 100%;
 }
@@ -60,7 +60,7 @@ header {
   border-bottom:1px solid #FFF;
   border-top:4px solid #2DB6B6;
   @include boxShadow(1px, 3px 0.2);
-  background:url(<%= asset_path('greenBg.png') %>) fixed;
+  background: image-url('greenBg.png') fixed;
   @include wrapping;
   overflow: hidden;
   h1 {

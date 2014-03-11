@@ -6,6 +6,7 @@ class VideoDecorator < Draper::Decorator
     dailymotion: 'http://www.dailymotion.com/embed/video/%s',
     gamespot:    'http://www.gamespot.com/videos/embed/%s/',
     videobam:    'http://videobam.com/widget/%s',
+    liveleak:    'http://www.liveleak.com/ll_embed?f=%s',
     youtube:     '//www.youtube.com/embed/%s',
     mixergy:     '//fast.wistia.com/embed/iframe/%s',
     vimeo:       '//player.vimeo.com/video/%s',

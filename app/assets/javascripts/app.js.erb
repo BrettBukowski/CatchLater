@@ -33,7 +33,8 @@
         { name: 'blip', regex: /blip\.tv\/play\/([a-zA-Z0-9_]+)\.html/ },
         { name: 'mixergy', regex: /fast\.wistia\.(com|net)\/embed\/iframe\/([a-zA-Z0-9]+)\?/ },
         { name: 'videobam', regex: /videobam\.com\/widget\/([a-zA-Z0-9]+)/ },
-        { name: 'nbc', regex: /www\.nbc\.com\/assets\/video\/widget\/widget\.html\?vid=([0-9]+)/ }
+        { name: 'nbc', regex: /www\.nbc\.com\/assets\/video\/widget\/widget\.html\?vid=([0-9]+)/ },
+        { name: 'liveleak', regex: /www\.liveleak.com\/ll_embed?f=([0-9a-zA-Z]+)/ }
       ],
       object: {
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
@@ -41,7 +42,8 @@
         npr: { data: /media\.npr\.org/, id: /\?storyId=([0-9]+)/, decode: true },
         gamespot: { data: /static\.gamespot\.com/, id: /id=([0-9]+)/, decode: true },
         videobam: { data: /videobam\.com/, id: /videobam.com\/([0-9a-zA-Z]+)/, decode: true },
-        nbc: { data: /video\.nbcuni\.com/, id: /&vcmsMedia=([0-9]+)/, decode: true }
+        nbc: { data: /video\.nbcuni\.com/, id: /&vcmsMedia=([0-9]+)/, decode: true },
+        liveleak: { data: /liveleak\.com/, id: /&file_token=([0-9a-zA-Z]+)/, decode: true }
       },
       embed: {
         youtube: [ { src: /ytimg.com/, id: /&video_id=([^&?]+)/ },

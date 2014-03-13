@@ -13,7 +13,7 @@ class VideoDecorator < Draper::Decorator
     blip:        'http://blip.tv/play/%s.html',
     fora:        '//fora.tv/embed?id=%s&amp;type=c',
     npr:         'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
-    ted:         'http://video.ted.com/%s',
+    ted:         'http://embed.ted.com/talks/%s.html',
     mtv:         'http://media.mtvnservices.com/mgid:uma:video:mtv.com:%s/',
     nbc:         'http://www.nbc.com/assets/video/widget/widget.html?vid=%s',
   }
@@ -24,23 +24,13 @@ class VideoDecorator < Draper::Decorator
     youtube:     'http://www.youtube.com/watch?v=%s',
     vimeo:       'http://vimeo.com/%s',
     npr:         'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
+    ted:         'https://www.ted.com/talks/%s',
     mtv:         'http://www.mtvu.com/video/?vid=%s',
     nbc:         'http://www.nbc.com/assets/video/widget/widget.html?vid=%s',
   }
 
   def embed_url
     VIDEO_EMBEDS[object.source.to_sym] % videoID
-  end
-
-  def embed_element
-    url = VIDEO_EMBEDS[object.source.to_sym] % videoID
-
-    # Yeahh... Special case for TED vids. But at least it's HTML5 ;)
-    return %{<video src='#{url}' poster='/assets/tedPoster.png' controls preload='none'>
-           Your browser doesn't support this type of video :(
-           </video>} if object.source == 'ted'
-
-    "<iframe src='#{url}' allowfullscreen></iframe>"
   end
 
   def link
@@ -54,5 +44,18 @@ class VideoDecorator < Draper::Decorator
 
   def source
     object.source
+  end
+
+  # Backwards compatibility for old-style TED videos.
+  def video_url
+    "http://video.ted.com/#{videoID}"
+  end
+
+  def embed?
+    object.source == 'ted' && videoID.end_with?('.mp4')
+  end
+
+  def poster
+    "/assets/tedPoster.png" if object.source == 'ted'
   end
 end

@@ -12,7 +12,7 @@ module VideosHelper
   end
 
   def equivalent_urls(a_url, b_url)
-    URI.split(a_url).slice(1, 8) == URI.split(b_url).slice(1, 8)
+    URI.split(a_url).slice(1, 8) == URI.split(b_url).slice(1, 8) rescue false
   end
 
   def source_url(url, truncate_size = 20)

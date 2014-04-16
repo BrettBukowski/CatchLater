@@ -3,28 +3,16 @@ $ ->
     message = element.data('confirm')
     fire = $.rails.fire
     if message and fire(element, 'confirm')
-      $('<div/>').html(message).dialog({
-        draggable: false,
-        resizable: false,
-        modal: true,
-        title: if $(document.body).hasClass('videos') then 'Delete this video' else 'Delete your account',
-        closeText: '×',
-        buttons: [
-          {
-            text: 'Yes, kill it',
-            click: () -> 
-              $(this).dialog('close')
-              callback = fire(element, 'confirm:complete', [true])
-              if (callback)
-                allowActionOrig = $.rails.allowAction
-                $.rails.allowAction = () -> true
-                element.trigger('click')
-                $.rails.allowAction = allowActionOrig
-          },
-          {
-            text: 'Cancel',
-            click: () -> $(this).dialog('close')
-          }
-        ]
-      })
+      title = if $(document.body).hasClass('videos') then 'Delete this video' else 'Delete your account'
+      dialog = new Dialog(title, message, confirmLabel: '<i class="icon-trash" role="presentation" aria-hidden="true"></i>Yes')
+      dialog.onConfirm () ->
+        callback = fire(element, 'confirm:complete', [true])
+        if (callback)
+          allowActionOrig = $.rails.allowAction
+          $.rails.allowAction = () -> true
+          element.trigger('click')
+          $.rails.allowAction = allowActionOrig
+      dialog.onClose () ->
+        element.focus()
+      dialog.show()
     not message or false

@@ -7,21 +7,21 @@
   </ul>
 <% end %>
 <%= form_for @video do %>
-	<div class="inputWrapper">
-		<%= label_tag 'videoID', 'Video ID' %>
-		<%= text_field_tag :videoID %>
+	<div>
+		<%= label_tag 'videoID', 'Video ID', class: 'screenReaderOnly' %>
+		<%= text_field_tag :videoID, nil, placeholder: 'Video id' %>
 	</div>
-	<div class="inputWrapper">
-		<%= label_tag 'webpageUrl', 'Website page URL' %>
-		<%= url_field_tag :webpageUrl %>
+	<div>
+		<%= label_tag 'webpageUrl', 'Website page URL', class: 'screenReaderOnly' %>
+		<%= url_field_tag :webpageUrl, nil, placeholder: 'Webpage URL' %>
 	</div>
-	<div class="inputWrapper">
-		<%= label_tag 'type', 'Type' %>
-		<%= text_field_tag :type %>
+	<div>
+		<%= label_tag 'type', 'Type', class: 'screenReaderOnly' %>
+		<%= text_field_tag :type, nil, placeholder: 'Type' %>
 	</div>
-	<div class="inputWrapper">
-		<%= label_tag 'source', 'Source' %>
-		<%= text_field_tag :source %>
+	<div>
+		<%= label_tag 'source', 'Source', class: 'screenReaderOnly' %>
+		<%= text_field_tag :source, nil, placeholder: 'Source' %>
 	</div>
 	<%= submit_tag 'Add', data: { disable_with: 'Adding…' } %>
 <% end %>

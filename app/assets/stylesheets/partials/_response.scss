@@ -2,10 +2,6 @@
   margin: auto;
   width: 90%;
 }
-@mixin scale($factor) {
-  -webkit-transform: scale($factor);
-  -moz-transform: scale($factor);
-}
 
 @media only screen and (max-width: 1200px) {
   #home {

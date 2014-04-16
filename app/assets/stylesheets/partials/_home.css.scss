@@ -16,7 +16,6 @@
     background:image-url("bg.png");
     border-bottom:1px solid #E4ECE0;
     position:relative;
-    text-shadow:none;
     @include homepad(70px);
     .vid {
       position: fixed;
@@ -59,7 +58,6 @@
       float:left;
       padding:0 20px;
       text-align:center;
-      text-shadow: none;
       width:33%;
       div {
         height: 195px;
@@ -89,11 +87,11 @@
   }
   .teaser {
     color: #FFF;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, .3);
+    @include textShadow(1px, rgba(0, 0, 0, .3));
     font-size:28px;
   }
   .signup {
-    @include borderRadius(8px);
+    border-radius: 8px;
     border:1px solid #FFF;
     @include button;
     display:inline-block;
@@ -101,7 +99,6 @@
     font-weight: bold;
     margin-top:20px;
     padding:10px 34px 16px;
-    text-decoration:none;
     @include textShadow(1px, rgba(0, 0, 0, .2));
   }
   .existingSignin {
@@ -111,7 +108,6 @@
     @include homepad;
     a {
       font-weight:bold;
-      text-decoration:none;
     }
   }
   footer {
@@ -125,8 +121,7 @@
   clear: both;
   text-align: center;
   #hand {
-    -webkit-transform: rotate(30deg);
-    -moz-transform: rotate(30deg);
+    @include transform(rotate(30deg));
     -webkit-animation-duration: 1.4s;
     -webkit-animation-name: bounce;
     -webkit-animation-iteration-count: 2;
@@ -145,7 +140,6 @@
     font-size: 2em;
     margin: 20px;
     padding: 10px 40px 16px;
-    text-decoration: none;
     cursor: image-url("grab.cur"), default !important;
   }
   .instructions {

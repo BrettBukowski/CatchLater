@@ -11,12 +11,12 @@
 		</div>
 	<% end %>
 	<div class="inputWrapper">
-		<%= form.label :email %>
-		<%= form.email_field :email, size: 40 %>
+		<%= form.label :email, class: 'screenReaderOnly' %>
+		<%= form.email_field :email, size: 40, placeholder: 'Your email' %>
 	</div>
 	<div class="inputWrapper">
-		<%= form.label :password %>
-		<%= form.password_field :password %>
+		<%= form.label :password, class: 'screenReaderOnly' %>
+		<%= form.password_field :password, placeholder: 'Choose a password' %>
 	</div>
 	<%= submit_tag 'Sign Up', data: { disable_with: 'Signing up…' } %>
 <% end %>

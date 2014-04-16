@@ -14,12 +14,12 @@
 
 <% if flash[:email_required] %>
  <div id='emailDialog' class='hide'>
- <p>Please enter your <span class='highlight'>email address</span> to finish creating your account</p>
+ <p>Please enter your email address to finish creating your account</p>
  <%= form_tag sessions_provide_email_path, method: :post, remote: true %>
     <%= hidden_field :user, :id, value: flash[:user_id] %>
     <%= hidden_field :user, :provider, value: flash[:provider] %>
     <%= label_tag 'email', 'Email address', for: 'user_email', class: 'screenReaderOnly' %>
-    <%= email_field :user, :email, required: true %>
+    <%= email_field :user, :email, required: true, placeholder: 'Email address' %>
 	  <%= submit_tag 'Sign in', data: { disable_with: 'Signing you in…' } %>
     <small><a href='/privacy.html' target='_blank'>Your email is used solely for login purposes</a></small>
   </form>

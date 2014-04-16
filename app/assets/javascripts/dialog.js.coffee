@@ -1,0 +1,69 @@
+#= depend_on_asset "dialog.html"
+
+SUBREGEX = /\{\s*([^|}]+?)\s*(?:\|([^}]*))?\s*\}/g
+
+Sub = (str, obj) ->
+  str.replace SUBREGEX, (match, key) ->
+    if key of obj then obj[key] else match
+
+
+class Dialog
+  @TEMPLATE = ''
+
+  constructor: (@title, @content, options = {}) ->
+    @defaultOptions = $.extend({
+      title: @title,
+      content: if typeof @content == 'string' then @content  else @content.html(),
+      confirmLabel: 'Yes',
+      cancelLabel: 'Close',
+    }, options)
+
+    @_fetchTemplate() if !Dialog.TEMPLATE
+
+  show: () ->
+    if !Dialog.TEMPLATE
+      @_awaitingTemplate = true
+      return this
+    @fragment ||= @_initDomFragment()
+    @fragment.first('.modal').addClass('show').focus()
+
+  destroy: () ->
+    @fragment.first('.modal').removeClass('show')
+    $(document.body).off()
+    @closeCallback() if @closeCallback
+    # Wait for CSS animation to complete before removing from the DOM.
+    setTimeout ()=>
+      @fragment.remove()
+      @fragment = null
+    , 1000
+    this
+
+  onConfirm: (@callback) ->
+
+  onClose: (@closeCallback) ->
+
+  _initDomFragment: () ->
+    fragment = $(Sub(Dialog.TEMPLATE, @defaultOptions))
+    if @defaultOptions.buttons == false
+      fragment.find('.buttons').remove()
+    $(document.body).append(fragment)
+    fragment.delegate '.close', 'click', ()=> @destroy()
+    fragment.delegate '.confirm', 'click', ()=> @callback()
+    $(document.body).on 'keyup', (e)=> @_handleKeyUp(e)
+    fragment
+
+  _handleKeyUp: (e) ->
+    if e.which == 27
+      @destroy()
+    if e.which == 9 && !$.contains(@fragment[0], document.activeElement)
+      e.preventDefault()
+      @fragment.first('.modal').focus()
+
+  _fetchTemplate: () ->
+    $.get '/assets/dialog.html', (template) =>
+      Dialog.TEMPLATE = template
+      if @_awaitingTemplate
+        @_awaitingTemplate = false
+        @show()
+
+window.Dialog = Dialog

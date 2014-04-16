@@ -60,7 +60,7 @@ class Dialog
       @fragment.first('.modal').focus()
 
   _fetchTemplate: () ->
-    $.get '/assets/dialog.html', (template) =>
+    $.get "<%= asset_path('dialog.html') %>", (template) =>
       Dialog.TEMPLATE = template
       if @_awaitingTemplate
         @_awaitingTemplate = false

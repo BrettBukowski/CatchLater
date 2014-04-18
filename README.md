@@ -24,6 +24,7 @@ Supports videos from the popular sources that provide a modern (non Flash object
 * Blip.tv (partial support)
 * Mixergy
 * Videobam
+* IGN
 
 *****
 

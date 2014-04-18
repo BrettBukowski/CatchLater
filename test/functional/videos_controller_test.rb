@@ -114,6 +114,7 @@ class VideosControllerTest < ActionController::TestCase
     assert_difference 'Video.count' do
       get :bookmark, @videoParams.merge({callback: 'banana'})
       assert_response :success
+      assert_equal response.header['Content-Type'], 'application/javascript; charset=utf-8'
       assert_match /banana\(\{/, @response.body
     end
   end
@@ -122,6 +123,7 @@ class VideosControllerTest < ActionController::TestCase
     assert_no_difference 'Video.count' do
       get :bookmark, @videoParams.merge({callback: 'banana'})
       assert_response :success
+      assert_equal response.header['Content-Type'], 'application/javascript; charset=utf-8'
       assert_match /banana\(\{/, @response.body
     end
   end

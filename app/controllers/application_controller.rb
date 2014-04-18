@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   helper :all
   protect_from_forgery
   before_filter :store_location
-  
+
   protected
-  
+
   # Before filter for users and videos.
   def login_required
     if !current_user
@@ -29,6 +29,9 @@ class ApplicationController < ActionController::Base
         json
       end
     end
-    render({:content_type => :js, :text => response}.merge(options))
+    render({
+      content_type: "application/javascript",
+      text: response,
+    }.merge(options))
   end
 end

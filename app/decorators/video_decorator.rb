@@ -16,6 +16,7 @@ class VideoDecorator < Draper::Decorator
     ted:         'http://embed.ted.com/talks/%s.html',
     mtv:         'http://media.mtvnservices.com/mgid:uma:video:mtv.com:%s/',
     nbc:         'http://www.nbc.com/assets/video/widget/widget.html?vid=%s',
+    ign:         'http://widgets.ign.com/video/embed/content.html?url=http://www.ign.com/videos/%s',
   }
   # List of canonical URLs for videos (if there is one)
   VIDEO_URLS = {
@@ -27,6 +28,7 @@ class VideoDecorator < Draper::Decorator
     ted:         'https://www.ted.com/talks/%s',
     mtv:         'http://www.mtvu.com/video/?vid=%s',
     nbc:         'http://www.nbc.com/assets/video/widget/widget.html?vid=%s',
+    ign:         'http://www.ign.com/videos/%s',
   }
 
   def embed_url

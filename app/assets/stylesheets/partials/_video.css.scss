@@ -6,13 +6,14 @@
 .videos h2 {
   float: left;
   width: 50%;
+
   a {
     font-size: .6em;
   }
 }
 
 nav {
-  float:right;
+  float: right;
   margin-top: 2em;
   text-align: right;
   width: 50%;
@@ -24,15 +25,20 @@ nav {
 
 .videos section {
   clear: both;
-  text-align:center;
+  text-align: center;
+
   .video {
-    border-bottom:1px solid #E2E2E2;
-    border-top:2px solid #FFF;
-    padding:100px 0 50px;
-    &:first-child { border-top:0; }
+    border-bottom: 1px solid #E2E2E2;
+    border-top: 2px solid #FFF;
+    padding: 100px 0 50px;
+
+    &:first-child {
+      border-top: 0;
+    }
+
     video {
-      max-width: 640px;
       @include boxShadow(0, 5px, 0.9);
+      max-width: 640px;
 
       &:-ms-full-screen,
       &:-moz-full-screen,
@@ -58,27 +64,33 @@ nav {
         cursor: pointer;
       }
     }
+
     iframe {
+      @include boxShadow(0, 5px, 0.9);
+      @include videoArea;
       border: 0;
       height: 385px;
       overflow: hidden;
-      @include boxShadow(0, 5px, 0.9);
-      @include videoArea;
     }
+
     .content {
-      position:relative;
+      position: relative;
+
       &.fora iframe {
         max-height: 264px;
         max-width: 400px;
       }
+
       &.videobam iframe {
         max-height: 270px;
         max-width: 480px;
       }
+
       &.gamespot iframe {
         max-height: 400px;
       }
     }
+
     .fave {
       @include boxShadow(1px, 3px, .1);
       border: 1px solid #D0D0D0;
@@ -89,6 +101,7 @@ nav {
       position: absolute;
       text-align: right;
       width: 7px;
+
       &:before {
         color: #222;
         content: '\e801';
@@ -97,169 +110,190 @@ nav {
         top: -5px;
         left: -2px;
       }
+
       &.selected:before {
-        content:'\e804';
+        content: '\e804';
       }
+
       &.selected,
       &:hover, &:focus {
-        font-size:.9em;
-        width:24px;
+        font-size: .9em;
+        width: 24px;
       }
     }
     .aux {
       @include videoArea;
-      display:block;
+      display: block;
       margin: auto;
-      overflow:hidden;
+      overflow: hidden;
       padding: 0 4px 6px 0;
-      text-align:right;
+      text-align: right;
 
       > a {
-        color:#000;
-        padding-left:7px;
+        color: #000;
+        padding-left: 7px;
       }
 
       .date {
-        color:#c3d6d5;
-        float:left;
+        color: #c3d6d5;
+        float: left;
+
         &:hover {
           color: #222;
         }
       }
 
       .actions {
-        float:right;
-        margin-top:5px;
+        float: right;
+        margin-top: 5px;
+
         .action {
-          color:#000;
-          display:block;
-          float:left;
-          height:28px;
-          opacity:.12;
-          width:32px;
+          color: #000;
+          display: block;
+          float: left;
+          height: 28px;
+          opacity: .12;
+          width: 32px;
 
           &:focus,
           &:hover {
-            opacity:1;
+            opacity: 1;
           }
         }
         .shareDropdown {
-          position:absolute;
-          z-index:100;
+          position: absolute;
+          z-index: 100;
+
           ul {
-            background:#FFFC17;
+            background: #FFFC17;
             border-radius: 4px;
-            box-shadow:1px 2px 3px rgba(0, 0, 0, .3);
-            margin:42px 0 0 -120px;
-            overflow:hidden;
-            padding:6px;
-            opacity:0.6;
-            z-index:101;
-            width:360px;
+            box-shadow: 1px 2px 3px rgba(0, 0, 0, .3);
+            margin: 42px 0 0 -120px;
+            overflow: hidden;
+            padding: 6px;
+            opacity: .6;
+            z-index: 101;
+            width: 360px;
+
             li {
-              float:left;
-              list-style-type:none;
-              border-bottom:1px solid #06308f;
-              padding:0 8px 4px;
+              float: left;
+              list-style-type: none;
+              border-bottom: 1px solid #06308f;
+              padding: 0 8px 4px;
+
               a {
-                display:block;
-                padding:0 6px 4px;
+                display: block;
+                padding: 0 6px 4px;
+
                 &:focus,
                 &:hover {
-                  text-shadow:0 3px 3px rgba(255, 255, 255, 1);
+                  text-shadow: 0 3px 3px #FFF;
                 }
               }
+
               &.source {
-                text-align:center;
-                border-bottom:0;
-                font-size:smaller;
-                width:50%;
+                text-align: center;
+                border-bottom: 0;
+                font-size: smaller;
+                width: 50%;
+
                 a {
-                  padding-top:4px;
+                  padding-top: 4px;
                 }
               }
+
               &.only-source {
                 overflow: hidden;
                 width: 96%;
               }
             }
-            &::before { /* nib */
-              border-bottom:10px solid #FFFC17;
-              border-left:10px solid transparent;
-              border-right:10px solid transparent;
-              content:" ";
-              height:0;
-              left:-36px;
-              position:absolute;
-              top:32px;
-              width:0;
+
+            &::before { // nib
+              border-bottom: 10px solid #FFFC17;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              content: " ";
+              height: 0;
+              left: -36px;
+              position: absolute;
+              top: 32px;
+              width: 0;
             }
           }
         }
       }
     }
+
     .tags {
-      display:block;
-      font-size:.86em;
       @include videoArea;
-      text-align:left;
+      display: block;
+      font-size: .86em;
+      text-align: left;
+
       form {
-        margin:6px 0;
+        margin: 6px 0;
+
         label {
           color: #999;
         }
+
         textarea {
+          @include videoArea;
           border: 0;
           height: 22px;
           width: 100%;
-          @include videoArea;
         }
+
         .tip {
-          font:21px 'Sue Ellen Francisco';
-          background: rgba(244, 248, 137, 0.6);
+          @include textShadow(1px);
+          background: rgba(244, 248, 137, .6);
+          font: 21px 'Sue Ellen Francisco';
           margin-top: 6px;
           position: absolute;
-          @include textShadow(1px);
         }
       }
     }
   }
-  // TextExt Overrides
-  .text-core {
-    background: rgba(251, 251, 251, .3);
-    @include boxShadow(0, 2px, 0.1);
-    border-radius: 5px;
-    margin-top: 4px;
-    .text-wrap {
-      .text-tags .text-tag .text-button {
-        border-radius: 3px;
-        a.text-remove {
-          border-radius: 8px;
-        }
-        .text-label {
-          @include textShadow(1px);
-        }
-      }
-      .text-dropdown .text-list .text-suggestion.text-selected {
-        @include textShadow(0);
-      }
+
+  // Selectize overrides
+  .selectize-input {
+    @include transition(all .4s);
+    background: none;
+    border: 1px solid rgba(0, 0, 0, .03);
+    box-shadow: none;
+
+    &.input-active {
+      background: #FFF;
+      border: 1px solid #CCC;
     }
-    &.focus {
-      background: rgba(255, 255, 255, .8);
-      box-shadow: 0 0 0 rgba(46, 119, 149, .5);
+
+    &:hover {
+      background: darken(#FFF, 1);
+      border: 1px solid #CCC;
     }
+  }
+
+  .selectize-control.multi .selectize-input > div {
+    border-width: 1px;
+    border-radius: 2px;
+    padding-bottom: 5px;
+  }
+
+  .selectize-dropdown,
+  .selectize-input,
+  .selectize-input input {
+    font-size: inherit;
   }
 }
 
 #up {
-  background: #FFF;
-  background: rgba(255, 255, 255, 0.7);
+  @include boxShadow(3px, 3px, .5);
+  background: rgba(255, 255, 255, .7);
   bottom: 10px;
   cursor: pointer;
-  font-size: 0.8em;
+  font-size: .8em;
   padding: 5px 9px 7px;
   position: fixed;
   right: 0;
   text-transform: uppercase;
-  @include boxShadow(3px, 3px, 0.5);
 }

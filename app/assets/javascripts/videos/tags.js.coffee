@@ -1,60 +1,25 @@
-suggestionList = $.map($('.tagList .name'), (i) ->
-    i.innerHTML
-)
+suggestionList = $.map $('.tagList .name'), (i) -> { name: i.innerHTML }
 
 (exports ? this).affixTags = (elements) ->
-	elements.textext(
-		plugins: 'autocomplete tags'
-		ext:
-			tags:
-				removeTag: (tag) ->
-					$.fn.textext.TextExtTags.prototype.removeTag.apply(this, arguments)
-					$.post(this.core().input().closest('form').attr('action'), { tags: this.core().hiddenInput().attr('value').replace(/["\[\]]/g, '')})
-				addTags: (tags, alreadySaved) ->
-					return unless tags
-					$.fn.textext.TextExtTags.prototype.addTags.apply(this, arguments)
-					if not alreadySaved
-						$.post(this.core().input().closest('form').attr('action'), { tags: this.core().hiddenInput().attr('value').replace(/["\[\]]/g, '')})
-  )
-	.bind 'getSuggestions', (e, data) ->
-		textext = $(e.target).textext()[0]
-		query = if data then data.query else ''
-		query or= ''
-		$(this).trigger 'setSuggestions', {
-			result: textext.itemManager().filter(suggestionList, query)
-		}
-	.bind 'isTagAllowed', (e, data) ->
-		if data.tag.indexOf(',') > -1 or $.inArray(data.tag, $(e.target).textext()[0].tags()._formData) > -1
-			data.result = false
-	.on 'focus', () ->
-		return if window.localStorage.protips > 5
-		$(this).closest('.text-core').addClass('focus').next().fadeIn()
-		window.localStorage.protips = (parseInt(window.localStorage.protips, 10) || 0) + 1
-	.on 'blur', () ->
-		$(this).closest('.text-core').removeClass('focus').next().fadeOut()
-	.each () ->
-		$(this).textext()[0].tags().addTags($(this).attr('data-tags').split(','), true)
+	select = elements.selectize(
+		plugins: ['remove_button'],
+		create: true,
+		openOnFocus: false,
+		selectOnTab: true,
+		options: suggestionList,
+		valueField: 'name',
+		labelField: 'name',
+		searchField: 'name',
+	)
+	select.on 'change', (e) ->
+		$.post($(e.target).closest('form').attr('action'), {
+			tags: $(this).val(),
+		})
 
-$ ->	
-  $('#tagDropdown').click () ->
-    $('.tagList').toggleClass('hide')
-    false
-
-	proto = $.fn.textext.TextExt.prototype
-	onKeyDown = proto.onKeyDown
-	onAnyKeyUp = proto.onAnyKeyUp
-	
-	$.fn.textext.TextExt.prototype.onKeyDown = (e) ->
-		if e.keyCode is 9
-			$(e.target).textext()[0].tags().onEnterKeyPress(e)
-			e.target.value = ''
-			e.stopPropagation()
-		onKeyDown.call(this, e)
-	$.fn.textext.TextExt.prototype.onAnyKeyUp = (e, keyCode) ->
-		if keyCode is 188
-			e.target.value = e.target.value.substr(0, e.target.value.length - 1)
-			$(e.target).textext()[0].tags().onEnterKeyPress(e)
-			e.target.value = ''
-			false
-		onAnyKeyUp.call(this, e, keyCode)
+$ ->
 	affixTags($('.tagEntry'))
+
+$ ->
+	$('#tagDropdown').click () ->
+		$('.tagList').toggleClass('hide')
+		false

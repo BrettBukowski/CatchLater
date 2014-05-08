@@ -99,7 +99,7 @@ class VideosControllerTest < ActionController::TestCase
     get :tagged, with: video.tags.first
     assert_response :success
     assert_select "div##{video.id}.video", 1
-    assert_select "textarea[data-tags='#{video.tags.join(',')}']"
+    assert_select "input[value='#{video.tags.join(',')}']"
   end
 
   test "should show feed" do

@@ -11,12 +11,13 @@ class VideoDecorator < Draper::Decorator
     mixergy:     '//fast.wistia.com/embed/iframe/%s',
     vimeo:       '//player.vimeo.com/video/%s',
     blip:        'http://blip.tv/play/%s.html',
-    fora:        '//fora.tv/embed?id=%s&amp;type=c',
     npr:         'http://www.npr.org/templates/event/embeddedVideo.php?storyId=%s',
     ted:         'http://embed.ted.com/talks/%s.html',
     mtv:         'http://media.mtvnservices.com/mgid:uma:video:mtv.com:%s/',
     nbc:         'http://www.nbc.com/assets/video/widget/widget.html?vid=%s',
     ign:         'http://widgets.ign.com/video/embed/content.html?url=http://www.ign.com/videos/%s',
+    # No longer supported
+    fora:        '//fora.tv/embed?id=%s&amp;type=c',
   }
   # List of canonical URLs for videos (if there is one)
   VIDEO_URLS = {

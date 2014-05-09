@@ -19,7 +19,6 @@ Supports videos from the popular sources that provide a modern (non Flash object
 * MTV
 * Dailymotion
 * NBC
-* FORA
 * Liveleak
 * Blip.tv (partial support)
 * Mixergy

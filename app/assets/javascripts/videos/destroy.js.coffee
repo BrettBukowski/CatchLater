@@ -12,6 +12,7 @@ $ ->
           $.rails.allowAction = () -> true
           element.trigger('click')
           $.rails.allowAction = allowActionOrig
+          dialog.destroy()
       dialog.onClose () ->
         element.focus()
       dialog.show()

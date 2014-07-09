@@ -56,7 +56,19 @@
       },
       video: {
         youtube: { src: /.*\.youtube\.com/, attr: 'data-youtube-id' },
-        vimeo: { src: /.*player\.vimeo\.com.*clip_id=([0-9]+)/ }
+        vimeo: { src: /.*player\.vimeo\.com.*clip_id=([0-9]+)/, fallback: function(){
+          if (window.location.host == 'vimeo.com') {
+            var idMatch = window.location.pathname.match(/^\/(m\/)?([0-9]{6,})/);
+            if (idMatch) {
+              return idMatch[2];
+            }
+          }
+        }},
+        npr: { fallback: function() {
+          if (window.location.host == 'www.npr.org' && 'NPR' in window && window.NPR.serverVars) {
+            return window.NPR.serverVars.storyId;
+          }
+        }}
       }
     },
     _checkIframeSrc = function(sources, el) {
@@ -116,8 +128,11 @@
       for (i in sources) {
         if (sources.hasOwnProperty(i)) {
           source = sources[i];
-          if (sources.hasOwnProperty(i) && (match = source.src.exec(src))) {
+          if ('src' in source && (match = source.src.exec(src))) {
             return {source: i, id: (source.attr) ? el.getAttribute(source.attr) : match[match.length - 1]};
+          }
+          else if ('fallback' in source && (match = source.fallback())) {
+            return {source: i, id: match };
           }
         }
       }
@@ -135,14 +150,6 @@
       },
       video: function(el) {
         return _checkVideoData(_sources.video, el);
-      },
-      fallback: function(el, type) {
-        if (window.location.host == 'vimeo.com' && type == 'video') {
-          var idMatch = window.location.pathname.match(/^\/(m\/)?([0-9]{6,})/);
-          if (idMatch) {
-            return { source: 'vimeo', id: idMatch[2] };
-          }
-        }
       }
     };
   })();
@@ -328,7 +335,7 @@
       findVideo: function() {
         $(Parser.selector).each(function(item) {
           var type = item.tagName.toLowerCase();
-          _foundVideo(item, Parser[type](item) || Parser.fallback(item, type));
+          _foundVideo(item, Parser[type](item));
         });
         if (!_highlightVideo()) {
           alert("no supported video found :(");

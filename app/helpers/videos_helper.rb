@@ -3,6 +3,10 @@ module VideosHelper
     link_to body, url, attrs.merge({onclick: "window.open('#{url}'); return false;"})
   end
 
+  def full_date(date)
+    date.strftime("%B %e %Y, %l:%M %p %Z")
+  end
+
   def created_date(date)
     if (date < 5.days.ago)
       date.strftime("%b %e")

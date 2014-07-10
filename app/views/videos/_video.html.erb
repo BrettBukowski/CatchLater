@@ -20,7 +20,7 @@
 		<% end %>
 	</div>
 	<span class="aux">
-		<span class="date"><%= created_date(video.created_at) %></span>
+		<span class="date" title="<%= full_date(video.created_at) %>"><%= created_date(video.created_at) %></span>
 		<span class="actions">
 			<%= link_to video_path(video), class: "action delete icon-trash", title: "Delete", data: { confirm: "Are you sure?" }, method: :delete, remote: true do %>
 				<span class="screenReaderOnly">Delete</span>

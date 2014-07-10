@@ -7,7 +7,7 @@
 
 *****
 
-Save videos—from a variety of different websites—for later viewing.
+Web application to save videos—from a variety of different websites—for later viewing.
 
 Supports videos from the popular sources that provide a modern (non Flash object) embed code:
 
@@ -27,11 +27,4 @@ Supports videos from the popular sources that provide a modern (non Flash object
 
 *****
 
-Cobbled together with a variety of different tools:
-
-* Rails
-* SnackJS
-* JQuery
-* TextExt
-* SASS
-* MongoDB & MongoMapper
+Built using Rails, MongoDB, and MongoMapper.

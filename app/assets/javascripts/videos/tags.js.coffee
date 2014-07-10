@@ -12,9 +12,11 @@ suggestionList = $.map $('.tagList .name'), (i) -> { name: i.innerHTML }
 		searchField: 'name',
 	)
 	select.on 'change', (e) ->
+		value = $(this).val()
 		$.post($(e.target).closest('form').attr('action'), {
-			tags: $(this).val(),
+			tags: value,
 		})
+		$(this).selectize()[0].selectize.close()
 
 $ ->
 	affixTags($('.tagEntry'))

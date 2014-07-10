@@ -273,10 +273,27 @@ nav {
     }
   }
 
-  .selectize-control.multi .selectize-input > div {
-    border-width: 1px;
-    border-radius: 2px;
-    padding-bottom: 5px;
+  .selectize-control.multi {
+    $tag-background: #F0EDFF;
+    margin-top: 4px;
+
+    .selectize-input {
+      > div {
+        background: $tag-background;
+        border-width: 1px;
+        border-radius: 3px;
+        margin-right: 5px;
+        padding-bottom: 5px;
+      }
+
+      .remove {
+        border-left: 0;
+
+        &:hover {
+          background: darken($tag-background, 3);
+        }
+      }
+    }
   }
 
   .selectize-dropdown,

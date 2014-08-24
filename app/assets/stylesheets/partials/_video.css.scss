@@ -104,7 +104,7 @@ nav {
 
       &:before {
         color: #222;
-        content: '\e801';
+        content: '\e801'; // icon-heart-empty
         font-family: "fontello";
         position: relative;
         top: -5px;
@@ -112,7 +112,7 @@ nav {
       }
 
       &.selected:before {
-        content: '\e804';
+        content: '\e804'; // icon-heart
       }
 
       &.selected,
@@ -178,8 +178,13 @@ nav {
             li {
               float: left;
               list-style-type: none;
-              border-bottom: 1px solid #06308f;
-              padding: 0 8px 4px;
+              padding: 4px 0;
+              text-align: center;
+              width: 20%;
+
+              &:first-child {
+                margin-left: 10%;
+              }
 
               a {
                 display: block;
@@ -193,7 +198,8 @@ nav {
 
               &.source {
                 text-align: center;
-                border-bottom: 0;
+                border-top: 1px solid #06308f;
+                // border-bottom: 0;
                 font-size: smaller;
                 width: 50%;
 
@@ -204,7 +210,7 @@ nav {
 
               &.only-source {
                 overflow: hidden;
-                width: 96%;
+                width: 100%;
               }
             }
 
@@ -219,6 +225,22 @@ nav {
               top: 32px;
               width: 0;
             }
+          }
+
+          .icon-facebook {
+            color: #45619d;
+          }
+
+          .icon-twitter {
+            color: #1bb2e9;
+          }
+
+          .icon-tumblr {
+            color: #2b4761;
+          }
+
+          .icon-email {
+            color: #000;
           }
         }
       }

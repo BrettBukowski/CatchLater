@@ -152,10 +152,14 @@
                 right: 50px;
               }
               li {
-                border: 0;
+                width: 25%;
                 &.source {
                   float: none;
                   text-align: center;
+                }
+
+                &:first-child {
+                  margin-left: 0;
                 }
               }
             }

@@ -1,9 +1,19 @@
 <span class="shareDropdown hide">
 	<ul>
-		<li><%= window_open "Facebook", "http://www.facebook.com/sharer.php?u=" + url_encode(videoUrl), title: "Share on Facebook" %></li>
-		<li><%= window_open "Twitter", "http://twitter.com/home?status=" + url_encode(videoUrl), title: "Share on Twitter" %></li>
-		<li><%= window_open "Tumblr", "http://www.tumblr.com/share?v=3&u=" + url_encode(videoUrl), title: "Share on Tumblr" %></li>
-		<li><%= mail_to "", "Email", subject: "Shared Video", body: "\n\n" + videoUrl, title: "Email a link" %></li>
+    <li>
+      <%= share_link 'facebook', "http://www.facebook.com/sharer.php?u=#{url_encode(videoUrl)}" %>
+    </li>
+		<li>
+      <%= share_link 'twitter', "http://twitter.com/home?status=#{url_encode(videoUrl)}" %>
+    </li>
+		<li>
+      <%= share_link 'tumblr', "http://www.tumblr.com/share?v=3&u=#{url_encode(videoUrl)}" %>
+    </li>
+		<li>
+      <%= mail_to "", subject: "Shared Video", body: "\n\n#{videoUrl}", title: "Email a link" do %>
+      <%= share_icon "email" %>
+      <% end %>
+    </li>
   <% if equivalent_urls(sourceUrl, videoUrl) %>
     <li class="source only-source"><%= link_to source_url(videoUrl, 45), videoUrl, title: videoUrl, target: "_blank" %></li>
   <% else %>

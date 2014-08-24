@@ -1,6 +1,12 @@
 module VideosHelper
-  def window_open(body, url, attrs = {})
-    link_to body, url, attrs.merge({onclick: "window.open('#{url}'); return false;"})
+  def share_link(label, url)
+    link_to url, target: "_blank", title: "Share on #{label.capitalize}" do
+      share_icon label
+    end
+  end
+
+  def share_icon(label)
+    raw "<i class='icon-#{label}' aria-hidden='true' role='presentation'></i><span class='screenReaderOnly'>#{label.capitalize}</span>"
   end
 
   def full_date(date)

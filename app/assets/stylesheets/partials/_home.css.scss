@@ -121,15 +121,23 @@
   clear: both;
   text-align: center;
   #hand {
+    font-size: larger;
     @include transform(rotate(30deg));
     -webkit-animation-duration: 1.4s;
     -webkit-animation-name: bounce;
     -webkit-animation-iteration-count: 2;
     -webkit-animation-direction: alternate;
+    -webkit-animation-delay: 1s;
     -moz-animation-duration: 1.4s;
+    -moz-animation-direction: alternate;
     -moz-animation-name: bounce;
     -moz-animation-iteration-count: 2;
-    -moz-animation-direction: alternate;
+    -moz-animation-delay: 1s;
+    animation-duration: 1.4s;
+    animation-name: bounce;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+    animation-delay: 1s;
     display: inline-block;
     position:relative;
   }
@@ -273,18 +281,17 @@
   }
 }
 @-webkit-keyframes bounce {
-  from {
-    bottom: -20px;
-  }
   to {
-    top: -20px;
+    @include transform(rotate(30deg) translateY(-20px));
   }
 }
 @-moz-keyframes bounce {
-  from {
-    bottom: -20px;
-  }
   to {
-    top: -20px;
+    @include transform(rotate(30deg) translateY(-20px));
+  }
+}
+@keyframes bounce {
+  to {
+    @include transform(rotate(30deg) translateY(-20px));
   }
 }

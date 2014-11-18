@@ -3,7 +3,7 @@ source 'https://rails-assets.org'
 
 ruby '2.1.0'
 
-gem 'rails', '~> 4.1.7'
+gem 'rails', '~> 4.1.8'
 gem 'mongo', '~> 1.10'
 gem 'bson_ext', '~> 1.10'
 gem 'mongo_mapper', git: 'git://github.com/mongomapper/mongomapper.git', tag: 'v0.13.0.beta2'

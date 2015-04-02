@@ -36,6 +36,7 @@
         { name: 'liveleak', regex: /www\.liveleak.com\/ll_embed?f=([0-9a-zA-Z]+)/ },
         { name: 'ted', regex: /embed\.ted\.com\/talks\/([a-zA-Z0-9-_]+).html/ },
         { name: 'ign', regex: /url=http:\/\/www\.ign\.com\/videos\/([0-9\/a-zA-Z-]+)/ },
+        { name: 'nytimes', regex: /nytimes\.com\/bcvideo\/1\.0\/iframe\/embed\.html\?videoId=([0-9]+)/ }
       ],
       object: {
         vimeo: { data: /\.vimeocdn\.com/, id: /clip_id=([0-9]+)/ },
@@ -45,7 +46,8 @@
         videobam: { data: /videobam\.com/, id: /videobam.com\/([0-9a-zA-Z]+)/, decodeURI: true },
         nbc: { data: /video\.nbcuni\.com/, id: /&vcmsMedia=([0-9]+)/, decodeURI: true },
         liveleak: { data: /liveleak\.com/, id: /&file_token=([0-9a-zA-Z]+)/, decodeURI: true },
-        ign: { data: /ignimgs.com/, id: /&url=http:\/\/www\.ign\.com\/videos\/([0-9\/a-zA-Z-]+)\?/ }
+        ign: { data: /ignimgs\.com/, id: /&url=http:\/\/www\.ign\.com\/videos\/([0-9\/a-zA-Z-]+)\?/ },
+        nytimes: { data: /nyt\.com/, id: /id=([0-9]+)&/ }
       },
       embed: {
         youtube: [ { src: /ytimg.com/, id: /&video_id=([^&?]+)/ },

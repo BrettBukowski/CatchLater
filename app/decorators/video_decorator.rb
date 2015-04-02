@@ -16,6 +16,7 @@ class VideoDecorator < Draper::Decorator
     mtv:         'http://media.mtvnservices.com/mgid:uma:video:mtv.com:%s/',
     nbc:         'http://www.nbc.com/assets/video/widget/widget.html?vid=%s',
     ign:         'http://widgets.ign.com/video/embed/content.html?url=http://www.ign.com/videos/%s',
+    nytimes:     'http://graphics8.nytimes.com/bcvideo/1.0/iframe/embed.html?videoId=%s&playerType=embed',
     # No longer supported
     fora:        '//fora.tv/embed?id=%s&amp;type=c',
   }

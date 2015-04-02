@@ -15,7 +15,7 @@ class Video
   belongs_to :user
 
   URL_REGEX = /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
-  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot mtv dailymotion blip mixergy videobam nbc liveleak ign]
+  SUPPORTED_SOURCES = %w[youtube vimeo ted npr gamespot mtv dailymotion blip mixergy videobam nbc liveleak ign nytimes]
   TYPES = %w[iframe video object embed]
 
   validates :webpageUrl, format: {

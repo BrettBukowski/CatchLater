@@ -57,7 +57,15 @@
         dailymotion: [ { src: /dmcdn.net\/flash\/dmplayer/, id: /"videoUniqueURL":"http:\\\/\\\/www\.dailymotion\.com\\\/video\\\/([A-Za-z0-9\-_]+)/, decode: true } ]
       },
       video: {
-        youtube: { src: /.*\.youtube\.com/, attr: 'data-youtube-id' },
+        youtube: { src: /.*\.youtube\.com/, attr: 'data-youtube-id', fallback: function(){
+          if (window.location.host.indexOf('youtube.com') > -1) {
+            var url = document.head.querySelector('link[rel="canonical"]').href,
+                idMatch = url.match(/v=([0-9A-Za-z]+)/);
+            if (idMatch) {
+              return idMatch[1];
+            }
+          }
+        }},
         vimeo: { src: /.*player\.vimeo\.com.*clip_id=([0-9]+)/, fallback: function(){
           if (window.location.host == 'vimeo.com') {
             var idMatch = window.location.pathname.match(/^\/(m\/)?([0-9]{6,})/);
@@ -126,12 +134,13 @@
       }
     },
     _checkVideoData = function(sources, el) {
-      var src = el.src, source, i, match;
+      var src = el.src, source, i, match, id;
       for (i in sources) {
         if (sources.hasOwnProperty(i)) {
           source = sources[i];
-          if ('src' in source && (match = source.src.exec(src))) {
-            return {source: i, id: (source.attr) ? el.getAttribute(source.attr) : match[match.length - 1]};
+          if ('src' in source && (match = source.src.exec(src)) &&
+            (id = (source.attr) ? el.getAttribute(source.attr) : match[match.length - 1])) {
+            return {source: i, id: id};
           }
           else if ('fallback' in source && (match = source.fallback())) {
             return {source: i, id: match };

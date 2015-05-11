@@ -59,8 +59,18 @@
       video: {
         youtube: { src: /.*\.youtube\.com/, attr: 'data-youtube-id', fallback: function(){
           if (window.location.host.indexOf('youtube.com') > -1) {
-            var url = document.head.querySelector('link[rel="canonical"]').href,
-                idMatch = url.match(/v=([0-9A-Za-z]+)/);
+            var url, idMatch;
+
+            if (ytplayer && ytplayer.config && ytplayer.config.args && ytplayer.config.args.loaderUrl) {
+              url = ytplayer.config.args.loaderUrl;
+            }
+            else {
+              url = document.head.querySelector('link[rel="canonical"]');
+              url = url ? url.href : '';
+            }
+
+            idMatch = url.match(/v=([0-9A-Za-z]+)/);
+
             if (idMatch) {
               return idMatch[1];
             }

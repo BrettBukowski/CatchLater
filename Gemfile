@@ -3,7 +3,7 @@ source 'https://rails-assets.org'
 
 ruby '2.1.0'
 
-gem 'rails', '~> 4.1.8'
+gem 'rails', '~> 4.1.11'
 gem 'mongo', '~> 1.10'
 gem 'bson_ext', '~> 1.10'
 gem 'mongo_mapper', git: 'git://github.com/mongomapper/mongomapper.git', tag: 'v0.13.0.beta2'
@@ -14,7 +14,7 @@ gem 'draper', '~> 1.3'
 gem 'turbolinks', '~> 2.2'
 
 # Assets
-gem 'jquery-rails', '~> 3.1.0'
+gem 'jquery-rails', '~> 3.1.3'
 gem 'sass-rails', '~> 4.0.3'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'uglifier', '~> 2.5'
